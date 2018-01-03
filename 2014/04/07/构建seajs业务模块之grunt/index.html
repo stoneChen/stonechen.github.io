@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>构建seajs业务模块之grunt VS spm build</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在最开始,我并不知道grunt可以构建CMD模块.(以下spm指代spm build) 当时正困惑于如何用spm方便的构建业务模块,后来看到@&amp;gt;twinstony (感谢@twinstony的分享)使用grunt-cmd-xxx插件构建了CMD模块,跟着demo自己做了测试,的确可以构建,但是有一个问题: grunt 方式不能把依赖的外部css(比如非项目中的jquery插件css)打包进来">
+<meta name="keywords" content="seajs,spm,grunt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建seajs业务模块之grunt VS spm build">
+<meta property="og:url" content="http://cloudstone.space/2014/04/07/构建seajs业务模块之grunt/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="在最开始,我并不知道grunt可以构建CMD模块.(以下spm指代spm build) 当时正困惑于如何用spm方便的构建业务模块,后来看到@&amp;gt;twinstony (感谢@twinstony的分享)使用grunt-cmd-xxx插件构建了CMD模块,跟着demo自己做了测试,的确可以构建,但是有一个问题: grunt 方式不能把依赖的外部css(比如非项目中的jquery插件css)打包进来">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071405295439977.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071406328722331.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071407043259921.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071407484812831.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071411117624094.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071411393259573.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071412038407585.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071412271535595.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071412494347021.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071413196841313.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/i/445138/201404/071413373564014.jpg">
+<meta property="og:updated_time" content="2016-02-27T01:13:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="构建seajs业务模块之grunt VS spm build">
+<meta name="twitter:description" content="在最开始,我并不知道grunt可以构建CMD模块.(以下spm指代spm build) 当时正困惑于如何用spm方便的构建业务模块,后来看到@&amp;gt;twinstony (感谢@twinstony的分享)使用grunt-cmd-xxx插件构建了CMD模块,跟着demo自己做了测试,的确可以构建,但是有一个问题: grunt 方式不能把依赖的外部css(比如非项目中的jquery插件css)打包进来">
+<meta name="twitter:image" content="http://images.cnitblog.com/i/445138/201404/071405295439977.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-构建seajs业务模块之grunt" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/04/07/构建seajs业务模块之grunt/" class="article-date">
+  	<time datetime="2014-04-07T06:14:52.000Z" itemprop="datePublished">2014-04-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      构建seajs业务模块之grunt VS spm build
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grunt/">grunt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seajs/">seajs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spm/">spm</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Grunt/">Grunt</a><a class="article-category-link" href="/categories/Grunt/javascript/">javascript</a><a class="article-category-link" href="/categories/Grunt/javascript/nodejs/">nodejs</a><a class="article-category-link" href="/categories/Grunt/javascript/nodejs/seajs/">seajs</a><a class="article-category-link" href="/categories/Grunt/javascript/nodejs/seajs/SPM/">SPM</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在最开始,我并不知道grunt可以构建CMD模块.(以下spm指代spm build)</p>
+<p>当时正困惑于如何用spm方便的构建业务模块,后来看到@<a href="https://github.com/twinstony" target="_blank" rel="external">&gt;<strong>twinstony</strong></a><strong> (感谢</strong>@<a href="https://github.com/twinstony" target="_blank" rel="external"><strong>twinstony</strong></a><strong>的分享)</strong>使用grunt-cmd-xxx插件构建了CMD模块,跟着demo自己做了测试,的确可以构建,但是有一个问题:</p>
+<p>grunt 方式不能把依赖的外部css(比如非项目中的jquery插件css)打包进来,而spm可以.</p>
+<p>其原因是,spm会根据别名配置依次(./sea-mpdules -&gt; ~/.spm/cache -&gt; -&gt; 源)查找并下载依赖,最后将依赖的css依赖打包进来(通过seajs.imporStyle).</p>
+<p>而grunt并没有做这件事情,也许可以通过另一个grunt插件完成.</p>
+<p>另,include这个参数是针对js模块的,对于css 而言则是”all”</p>
+<p>还有一个不是问题的问题:</p>
+<p>用grunt方式构建,参数配置项太多了,有时候找问题不太好找.或者说是过于灵活了,有时使开发者们无所适从.</p>
+<p>而spm把很多东西都封装好了,只需配置简单几个参数即可,符合seajs简单一致的设计原则.</p>
+<p>其实spm底层也是调用了grunt-cmd-transport以及其他模块,但把一些繁杂的配置帮我们处理好了</p>
+<p>之前对于spm的困惑是:</p>
+<p>1.打包出的模块id只能是family/version/name么?  –通常业务模块并不需要这类命名</p>
+<p>2.打包出的模块路径只能是直接输出到dist目录下? –不能像grunt那样,构建出来的目录结构与源文件的目录结构一致么?</p>
+<p>3.输出目录不能指定么,只能是dist么? –如果可以指定,就可以直接省略掉部署环节(本地部署)</p>
+<p>经过摸索与咨询,得出一个可行的解决方案,感谢@<a href="https://github.com/popomore" target="_blank" rel="external"><strong>popomore</strong></a><strong> 的指点</strong></p>
+<p><strong>示例代码下载链接:</strong></p>
+<p> <a href="https://github.com/stoneChen/seajs-backbone-test/tree/master" target="_blank" rel="external">https://github.com/stoneChen/seajs-backbone-test/tree/master</a></p>
+<p>(以下所有spm命令均在sea-modules的上一层目录下,即js下执行,package.json设置在这里)</p>
+<p>A.所有模块部署在项目中.</p>
+<p>以下以一个简单的示例(需要对backbone有一定了解)演示.</p>
+<p> <img src="http://images.cnitblog.com/i/445138/201404/071405295439977.jpg" alt=""></p>
+<p>上图是目录结构.</p>
+<p>sea-modules是spm默认的模块安装目录名.</p>
+<p>为了开发方便,不必每次查看效果都要spm build一番,在开发阶段不使用spm打包代码,除源上的已成熟的组件外(可通过spm install安装都本地),均使用匿名模块查看页面效果.</p>
+<p> <img src="http://images.cnitblog.com/i/445138/201404/071406328722331.jpg" alt=""></p>
+<p>上图是我把seajs结合backbone做的一个demo.</p>
+<p>等所有功能开发完毕后,现在页面引入模块文件是这样的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">seajs.use(<span class="string">'start.js'</span>);</div></pre></td></tr></table></figure>
+<p>接着,进入打包阶段.<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="attr">"family"</span>: <span class="string">"test"</span>,</div><div class="line"></div><div class="line">    <span class="attr">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line"></div><div class="line">    <span class="attr">"name"</span>: <span class="string">"spmTest"</span>,</div><div class="line"></div><div class="line">    <span class="attr">"spm"</span>: &#123;</div><div class="line"></div><div class="line">        <span class="attr">"idleading"</span>: <span class="string">"_output/"</span>,</div><div class="line"></div><div class="line">        <span class="attr">"source"</span>: <span class="string">"sea-modules"</span>,</div><div class="line"></div><div class="line">        <span class="attr">"output"</span>: [</div><div class="line"></div><div class="line">            <span class="string">"start.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"app/gettingStart.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"app/index.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"app/userlist.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"collection/C_userlist.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"model/M_gettingStart.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"model/M_index.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"model/M_user.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"view/V_gettingStart.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"view/V_index.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"view/V_user.js"</span>,</div><div class="line"></div><div class="line">            <span class="string">"view/V_userlist.js"</span></div><div class="line"></div><div class="line">        ],</div><div class="line"></div><div class="line">        <span class="attr">"alias"</span>: &#123;</div><div class="line"></div><div class="line">            <span class="attr">"$"</span>: <span class="string">"jquery/jquery/1.7.2/jquery"</span>,</div><div class="line"></div><div class="line">            <span class="attr">"$-debug"</span>: <span class="string">"jquery/jquery/1.7.2/jquery-debug"</span>,</div><div class="line"></div><div class="line">            <span class="attr">"jquery"</span>: <span class="string">"jquery/jquery/1.7.2/jquery"</span>,</div><div class="line"></div><div class="line">            <span class="attr">"jquery-debug"</span>: <span class="string">"jquery/jquery/1.7.2/jquery-debug"</span>,</div><div class="line"></div><div class="line">            <span class="attr">"select2"</span>: <span class="string">"jquery/select2/3.4.5/select2-zh-cn"</span>,</div><div class="line"></div><div class="line">            <span class="attr">"select2-css"</span>: <span class="string">"jquery/select2/3.4.5/select2.css"</span>,</div><div class="line"></div><div class="line">            <span class="attr">"select2-css-debug"</span>:<span class="string">"jquery/select2/3.4.5/select2-debug.css"</span>,</div><div class="line"></div><div class="line">            <span class="attr">"underscore"</span>: <span class="string">"gallery/underscore/1.5.2/underscore"</span>,</div><div class="line"></div><div class="line">            <span class="attr">"backbone"</span>: <span class="string">"gallery/backbone/1.1.0/backbone"</span></div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>以上为package.json配置.</strong></p>
+<p><strong>然后终端执行</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spm build -O sea-modules/_output</div></pre></td></tr></table></figure></p>
+<p> <img src="http://images.cnitblog.com/i/445138/201404/071407043259921.jpg" alt=""></p>
+<p><strong>如上图,然后_output目录就会被创建,相应目录结构的模块就会依次生成好.</strong></p>
+<p><strong>然后改变页面上引入模块的路径,只需添加一个前缀即可:</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">seajs.use(<span class="string">'_output/start.js'</span>);  <span class="comment">//开发阶段是seajs.use('start.js');</span></div></pre></td></tr></table></figure></p>
+<p>&nbsp;</p>
+<p>之前开发好的功能,现在一样能够跑通,而且执行效率会更高.</p>
+<p>下面,讲一下其中的注意点</p>
+<p><strong>package.json重点是idleading,source,output的配置</strong><br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">"idleading": "_output/",</div><div class="line"></div><div class="line">        "source": "sea-modules",</div><div class="line"></div><div class="line">        "output": [</div><div class="line"></div><div class="line">            "start.js",</div><div class="line"></div><div class="line">            "app/gettingStart.js",</div><div class="line"></div><div class="line">            "app/index.js",</div><div class="line"></div><div class="line">            "app/userlist.js",</div><div class="line"></div><div class="line">            "collection/C_userlist.js",</div><div class="line"></div><div class="line">            "model/M_gettingStart.js",</div><div class="line"></div><div class="line">            "model/M_index.js",</div><div class="line"></div><div class="line">            "model/M_user.js",</div><div class="line"></div><div class="line">            "view/V_gettingStart.js",</div><div class="line"></div><div class="line">            "view/V_index.js",</div><div class="line"></div><div class="line">            "view/V_user.js",</div><div class="line"></div><div class="line">            <span class="string">"view/V_userlist.js"</span></div><div class="line"></div><div class="line">        ],</div></pre></td></tr></table></figure></p>
+<p><strong>1.idleading如果不配置,那么生成出来的id就是family/version/name这种形式,这个值怎么配,需要与source,output配合,最终达到的效果就是最终加载这个模块的路径(require或use的参数)与生成的id值要一致,至于为什么,请参考</strong><a href="https://github.com/seajs/seajs/issues/930" target="_blank" rel="external">https://github.com/seajs/seajs/issues/930</a></p>
+<p><strong>2.source指定从当前目录下的哪个目录”查找”需要被构建的模块,这个官方文档有说明</strong></p>
+<p><strong>3.output指定具体要被构建的模块,这里很重要,数组里的每个路径怎么写,生成出来的目录结构就是怎么样的.我曾经试过,将他们写成</strong><br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">"output": [</div><div class="line"></div><div class="line">            "start.js",</div><div class="line"></div><div class="line">            "app/*.js",</div><div class="line"></div><div class="line">            "collection/*.js",</div><div class="line"></div><div class="line">            "model/*.js",</div><div class="line"></div><div class="line">            <span class="string">"view/*.js"</span></div><div class="line"></div><div class="line">        ]</div></pre></td></tr></table></figure></p>
+<p>&nbsp;</p>
+<p><strong>但是前面提到那个css打包问题又出现了,而且模板文件也不打包了,好像是合并操作都失效了的感觉.这个就不知为何了,曾经提过issue,说是不支持这种写法.</strong></p>
+<p><strong>4.执行build命令时指定 -O 的值,指定输出目录, 这个除了这种方式,不知道怎么在配置文件中解决,也提过issue,貌似需要自己实现.</strong></p>
+<p><strong>5.还有一个奇怪的警告:</strong></p>
+<p><img src="http://images.cnitblog.com/i/445138/201404/071407484812831.jpg" alt=""></p>
+<p>为啥会去找sea-debug?(后补:transport任务会转换source下所有文件,而sea-debug当然不是cmd模块,但是压缩版的sea.js也不是啊,怎么不警告?)</p>
+<p>还有一点,下面那个152 files,貌似是对souce下的所有文件都进行transport了,但目标并不是全部,也就是说,实际上output的配置在transport后才起作用,是不是有些不太合理?</p>
+<p>这样打包好后,结合seajs-debug,seajs-debug用于测试环境,线上调试,以及map控制时间戳,就能很好的管理所有模块了</p>
+<p>ps:关于seajs的默认base,还有这种情况在:</p>
+<p><img src="http://images.cnitblog.com/i/445138/201404/071411117624094.jpg" alt=""></p>
+<p>本demo中即属于这种情况.</p>
+<p>构建输出目录在sea-modules/_output下</p>
+<p>访问backbobe-test.html查看最终效果</p>
+<p>个人建议将工程代码在webstorm(@7.0+)中打开,webstorm会自动启动一个web服务,或者其他能够启动web服务的方式.</p>
+<p>以<a href="https://github.com/stoneChen/seajs-backbone-test/tree/master/seajs-backbone" target="_blank" rel="external">seajs-backbone</a>作为根目录</p>
+<p>B.业务模块部署在项目中,其他模块包括seajs本身及其插件部署在静态资源服务器见附件,构建时,只需将idleading做适当转换即可,总之要保证require或use时的路径和id一致</p>
+<p>构建输出目录在sea-modules/_output2下</p>
+<p>访问backbobe-test-outer.html查看最终效果</p>
+<p><strong>这种情况下需要启动两个web服务,一个webstorm的,一个静态资源服务器的,个人建议使用nodejs的anywhere启动.</strong></p>
+<p><strong>接下来附上几幅效果图</strong></p>
+<p><strong>A1.开发阶段:</strong></p>
+<p><img src="http://images.cnitblog.com/i/445138/201404/071411393259573.jpg" alt=""></p>
+<p>A2.构建好后:</p>
+<p> <img src="http://images.cnitblog.com/i/445138/201404/071412038407585.jpg" alt=""></p>
+<p>A3.构建好后,使用seajs-debug调试:</p>
+<p> <img src="http://images.cnitblog.com/i/445138/201404/071412271535595.jpg" alt=""></p>
+<p>B1.公用模块外部部署,开发阶段:</p>
+<p> <img src="http://images.cnitblog.com/i/445138/201404/071412494347021.jpg" alt=""></p>
+<p>B2.公用模块外部部署,构建好后:</p>
+<p><img src="http://images.cnitblog.com/i/445138/201404/071413196841313.jpg" alt=""></p>
+<p>B3.公用模块外部部署,构建好后调试:</p>
+<p> <img src="http://images.cnitblog.com/i/445138/201404/071413373564014.jpg" alt=""></p>
+<p>代码下载地址:</p>
+<p> <a href="https://github.com/stoneChen/seajs-backbone-test/tree/master" target="_blank" rel="external">https://github.com/stoneChen/seajs-backbone-test/tree/master</a></p>
+<p>欢迎大家指出不正确或不合理的地方~</p>
+<p>–从cnblogs搬来，写于2014-04-07 14:14</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/04/21/seajs之seajs-debug坑/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          seajs之seajs-debug坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/04/02/seajs+spm之再研究/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">seajs+spm之再研究</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="构建seajs业务模块之grunt" data-title="构建seajs业务模块之grunt VS spm build" data-url="http://cloudstone.space/2014/04/07/构建seajs业务模块之grunt/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

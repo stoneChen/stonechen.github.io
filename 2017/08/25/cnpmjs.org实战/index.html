@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>cnpmjs.org实战</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对Nodejs有一定了解的童鞋都应该知道，国内访问官方源 (https://registry.npmjs.com )需要漂洋过海，对模块的安装速度影响很大。 cnpm的诞生为国内Nodejs从业者带来了福音，向cnpm开发团队致敬~ 此前，同事在公司内部搭建了一个cnpmjs.org@2.12.2, 部署方式基于源码克隆 + MySql(以下称『旧cnpm』)。 近日，由于某种原因，需要在另一台服">
+<meta name="keywords" content="nodejs npm cnpm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cnpmjs.org实战">
+<meta property="og:url" content="http://cloudstone.space/2017/08/25/cnpmjs.org实战/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="对Nodejs有一定了解的童鞋都应该知道，国内访问官方源 (https://registry.npmjs.com )需要漂洋过海，对模块的安装速度影响很大。 cnpm的诞生为国内Nodejs从业者带来了福音，向cnpm开发团队致敬~ 此前，同事在公司内部搭建了一个cnpmjs.org@2.12.2, 部署方式基于源码克隆 + MySql(以下称『旧cnpm』)。 近日，由于某种原因，需要在另一台服">
+<meta property="og:updated_time" content="2017-10-22T15:06:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cnpmjs.org实战">
+<meta name="twitter:description" content="对Nodejs有一定了解的童鞋都应该知道，国内访问官方源 (https://registry.npmjs.com )需要漂洋过海，对模块的安装速度影响很大。 cnpm的诞生为国内Nodejs从业者带来了福音，向cnpm开发团队致敬~ 此前，同事在公司内部搭建了一个cnpmjs.org@2.12.2, 部署方式基于源码克隆 + MySql(以下称『旧cnpm』)。 近日，由于某种原因，需要在另一台服">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-cnpmjs.org实战" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/25/cnpmjs.org实战/" class="article-date">
+  	<time datetime="2017-08-25T09:39:47.000Z" itemprop="datePublished">2017-08-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      cnpmjs.org实战
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs-npm-cnpm/">nodejs npm cnpm</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对Nodejs有一定了解的童鞋都应该知道，国内访问官方源 (<a href="https://registry.npmjs.com" target="_blank" rel="external">https://registry.npmjs.com</a> )需要漂洋过海，对模块的安装速度影响很大。</p>
+<p><a href="https://github.com/cnpm/cnpmjs.org" target="_blank" rel="external">cnpm</a>的诞生为国内Nodejs从业者带来了福音，向cnpm开发团队致敬~</p>
+<p>此前，同事在公司内部搭建了一个cnpmjs.org@2.12.2, 部署方式基于源码克隆 + MySql(以下称『旧cnpm』)。</p>
+<p>近日，由于某种原因，需要在另一台服务器(ubuntu16.04)重新搭建一个cnpmjs.org实例(以下称『新cnpm』)。</p>
+<a id="more"></a>
+<p>如果你只想以最快的速度知道最简单的步骤，请跳过『踩坑之旅』，直接往下看 <a href="#推荐部署方案">推荐部署方案</a> 即可，前提是你的环境与我类似。</p>
+<h2 id="踩坑之旅"><a href="#踩坑之旅" class="headerlink" title="踩坑之旅"></a>踩坑之旅</h2><p>从官方文档上看，注意到有这么两个链接：</p>
+<ul>
+<li><a href="https://github.com/cnpm/cnpmjs.org/wiki/Deploy-a-private-npm-registry-in-5-minutes" target="_blank" rel="external">Deploy a private npm registry in 5 minutes</a></li>
+<li><a href="https://github.com/cnpm/cnpmjs.org/wiki/Deploy" target="_blank" rel="external">How to deploy cnpmjs.org</a></li>
+</ul>
+<p>当时我是懵逼的，后来两个链接都进去看一番才大致明白，这应该是两种部署方式，简单概括翻译一下，即：</p>
+<ol>
+<li>5分钟简易式部署</li>
+<li>克隆源码式部署</li>
+</ol>
+<p>我们来一一解读文档：</p>
+<h3 id="5分钟简易式部署"><a href="#5分钟简易式部署" class="headerlink" title="5分钟简易式部署"></a>5分钟简易式部署</h3><p>文档地址：<a href="https://github.com/cnpm/cnpmjs.org/wiki/Deploy-a-private-npm-registry-in-5-minutes" target="_blank" rel="external">https://github.com/cnpm/cnpmjs.org/wiki/Deploy-a-private-npm-registry-in-5-minutes</a></p>
+<h4 id="1-通过npm安装全局依赖"><a href="#1-通过npm安装全局依赖" class="headerlink" title="1. 通过npm安装全局依赖"></a>1. 通过npm安装全局依赖</h4><p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g --build-from-source \</div><div class="line">  --registry=https://registry.npm.taobao.org \</div><div class="line">  --disturl=https://npm.taobao.org/mirrors/node \</div><div class="line">  cnpmjs.org cnpm sqlite3</div></pre></td></tr></table></figure></p>
+<p>可以看到，这条命令，为了照顾国内用户，指定了从淘宝源安装<code>cnpmjs.org</code>,<code>cnpm</code>,<code>sqlite3</code>三个模块，并且从源码构建。<br>我这台机器的node是通过apt-get安装的，所以必须通过sudo安装全局模块<br>build期间会调用到<code>gcc</code>,<code>g++</code>,<code>make</code>等命令，可能需要额外安装。<br>但是！！！<br>在ubuntu16.04下居然报这个错(Centos 6也有类似问题)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">gyp WARN EACCES user &quot;root&quot; does not have permission to access the dev dir &quot;/home/fe/.node-gyp/7.10.1&quot;</div><div class="line">gyp WARN EACCES attempting to reinstall using temporary dev dir &quot;/usr/lib/node_modules/sqlite3/.node-gyp&quot;</div><div class="line">make: Entering directory &apos;/usr/lib/node_modules/sqlite3/build&apos;</div><div class="line">make: *** No rule to make target &apos;../.node-gyp/7.10.1/include/node/common.gypi&apos;, needed by &apos;Makefile&apos;.  Stop.</div><div class="line">make: Leaving directory &apos;/usr/lib/node_modules/sqlite3/build&apos;</div><div class="line">gyp ERR! build error</div><div class="line">gyp ERR! stack Error: `make` failed with exit code: 2</div><div class="line">gyp ERR! stack     at ChildProcess.onExit (/usr/lib/node_modules/node-gyp/lib/build.js:258:23)</div><div class="line">gyp ERR! stack     at emitTwo (events.js:106:13)</div><div class="line">gyp ERR! stack     at ChildProcess.emit (events.js:194:7)</div><div class="line">gyp ERR! stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:12)</div><div class="line">gyp ERR! System Linux 4.4.0-89-generic</div><div class="line">gyp ERR! command &quot;/usr/bin/nodejs&quot; &quot;/usr/lib/node_modules/node-gyp/bin/node-gyp.js&quot; &quot;build&quot; &quot;--fallback-to-build&quot; &quot;--module=/usr/lib/node_modules/sqlite3/lib/binding/node-v51-linux-x64/node_sqlite3.node&quot; &quot;--module_name=node_sqlite3&quot; &quot;--module_path=/usr/lib/node_modules/sqlite3/lib/binding/node-v51-linux-x64&quot;</div><div class="line">gyp ERR! cwd /usr/lib/node_modules/sqlite3</div><div class="line">gyp ERR! node -v v7.10.1</div><div class="line">gyp ERR! node-gyp -v v3.6.2</div><div class="line">gyp ERR! not ok</div></pre></td></tr></table></figure></p>
+<p>我这台服务器安装的node是7.10.1版本，而且<code>/home/fe/.node-gyp/7.10.1</code>这个目录是不存在的, 很懵逼。。。<br>经过一番google，发现加上<code>--unsafe-perm</code>参数即可解决问题，即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g --build-from-source --unsafe-perm \</div><div class="line">  --registry=https://registry.npm.taobao.org \</div><div class="line">  --disturl=https://npm.taobao.org/mirrors/node \</div><div class="line">  cnpmjs.org cnpm sqlite3</div></pre></td></tr></table></figure></p>
+<p>想起来这个问题，跟bower有些类似，都是不建议通过root来执行，通过添加类似『允许root』的参数来解决问题。<br>后来做实验确认了下：<br>如果你是通过Linux的包管理器(比如ubuntu的<code>apt-get</code>,centos的<code>yum</code>)来安装nodejs，nodejs会被安装到<code>/usr/bin/node</code>, npm全局模块会被安装到<code>/usr/lib/node_modules</code>, 而这个这个目录是需要root权限才能写入的，所以安装全局模块需要加<code>sudo</code>，这就与上述的编译过程矛盾了, 加上<code>--unsafe-perm</code>才可解决问题。</p>
+<p>如果你是通过诸如 <a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a> 这种工具安装nodejs的话，就不会有此问题，一切按照官网的步骤来就行了。</p>
+<p>步骤小结：<br>此步骤安装了<code>cnpmjs.org</code>, <code>cnpm</code>, <code>sqlite3</code>三个全局模块，分别用于：<br><code>cnpmjs.org</code>： 部署cnpm服务，同时安装了一个同名全局命令<br><code>sqlite3</code>：cnpm服务的轻量级数据库<br><code>cnpm</code>：cnpm客户端</p>
+<h4 id="2-启动服务"><a href="#2-启动服务" class="headerlink" title="2. 启动服务"></a>2. 启动服务</h4><p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nohup cnpmjs.org start --admins=&apos;myname,othername&apos; \</div><div class="line">  --scopes=&apos;@my-company-name,@other-name&apos; &amp;</div></pre></td></tr></table></figure></p>
+<p>此句命令就『在后台』启动了cnpm服务，并且设置了<code>myname</code>,<code>othername</code>这两个用户为管理员，<code>@my-company-name</code>,<code>@other-name</code>这两个scope前缀。<br>管理员的权限见这里 <a href="https://github.com/cnpm/cnpmjs.org/wiki/User-permissions#admin-users" target="_blank" rel="external">https://github.com/cnpm/cnpmjs.org/wiki/User-permissions#admin-users</a></p>
+<p>此时可以通过<code>curl http://localhost:7001</code>和<code>curl http://localhost:7002</code>测试cnpm服务，但是别的客户端无法访问，因为cnpm内部绑定了<code>127.0.0.1</code>，可以通过修改配置让别的客户端访问，但还是建议通过nginx反向代理来访问，而且最好通过域名(解析到局域网)代理，方便记忆。<br>至于如何设置反向代理，请自行google~</p>
+<p>关于『后台运行』这里我踩到了一个坑。我在服务器上使用的是<code>zsh</code>(通过<a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">oh-my-zh</a>管理)，而<code>zsh</code>对<code>nohup</code>命令做了一个『贴心』的功能：<br>当tty登出的时候，会把所有通过<code>nohup</code>启动的进程都杀掉，所以cnpmjs.org服务也一起退出进程了。</p>
+<p>解决方案很简单，只需要在上述的命令后追加一个叹号即可(方案之一)，即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nohup cnpmjs.org start --admins=&apos;myname,othername&apos; \</div><div class="line">  --scopes=&apos;@my-company-name,@other-name&apos; &amp;!</div></pre></td></tr></table></figure></p>
+<p>停服命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpmjs.org stop</div></pre></td></tr></table></figure></p>
+<p>该命令会读取『<code>cnpmjs.org start</code>的时候，写到<code>~/.cnpmjs.org/pid</code>』中的进程id，然后通过<code>kill -15</code>杀掉进程。<br>但是这个pid文件不稳定，有时候起服务并不会生成pid文件，导致无法通过<code>cnpmjs.org stop</code>停止服务，经排查已确认为bug，已提<a href="https://github.com/cnpm/cnpmjs.org/pull/1220" target="_blank" rel="external">PR</a>.</p>
+<p>步骤小结：<br>此步骤启动了cnpmjs.org服务。</p>
+<h4 id="3-设置客户端源"><a href="#3-设置客户端源" class="headerlink" title="3. 设置客户端源"></a>3. 设置客户端源</h4><p>在『本地』机器执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm set registry http://your.cnpmjs.registry.domain</div></pre></td></tr></table></figure></p>
+<p>然后就可以通过<code>cnpm</code>类似操作官方源那样使用私有源了。</p>
+<p><em>5分钟简易式部署小结：</em><br>优点：</p>
+<ol>
+<li>简洁优雅</li>
+<li>无侵入式<br>缺点：</li>
+<li>通过命令行启动只能传入<code>admins</code>，<code>scopes</code>，<code>dataDir</code>三个参数，可配置性较低。</li>
+<li>sqlite性能过低，当时整个源的包数量好像10个不到，一个<code>/total</code>请求，居然要20多秒（当初没有截图）才返回，简直不能忍。。。或许我哪里姿势不对？如果你的sqlite方式请求很快，请告诉我- -</li>
+</ol>
+<h3 id="克隆源码式部署"><a href="#克隆源码式部署" class="headerlink" title="克隆源码式部署"></a>克隆源码式部署</h3><p>文档地址： <a href="https://github.com/cnpm/cnpmjs.org/wiki/Deploy" target="_blank" rel="external">https://github.com/cnpm/cnpmjs.org/wiki/Deploy</a><br>这里的文档又是让人懵逼：</p>
+<ol>
+<li>文档首页说支持这些数据库: MySQL, MariaDB, SQLite or PostgreSQL，但是到这里的Dependencies里就只剩Mysql了，其他数据库只字未提</li>
+<li>Mysql不是必须的，可使用内置的sqlite3，只是性能比较差</li>
+<li>云存储不是必须的，使用内置的<code>fs-cnpm</code>也没什么问题，速度挺快的，局域网够用了</li>
+<li>有一个大标题是『Deploy With NPM Module [not recommend]』，点到那个example项目，似乎并不如预期中的『使用Npm部署』，倒是『5分钟简易式部署』才是正宗的『从Npm部署』。另外看文档的意思，这里的『从Npm部署』方式，必须使用Mysql？但从我踩坑的情况来看，无论哪种方式部署，Mysql都是可选的，但我个人是建议使用Mysql的。建议官方把Mysql初始化脚本拉到更高的级别去提供链接。</li>
+</ol>
+<p>接下来开始：</p>
+<h4 id="安装源码"><a href="#安装源码" class="headerlink" title="安装源码"></a>安装源码</h4><p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git://github.com/cnpm/cnpmjs.org.git $HOME/cnpmjs.org</div></pre></td></tr></table></figure></p>
+<p>即从github克隆整个cnpm仓库。<br>这里有个注意点，在我这个时间点，官方居然把『3.0.0-alpha.15』的alpha版本推到了master分支，这个我表示不理解，既然是alpha版本，就不是稳定的，既然不是稳定的就不应该放在master分支上。<br>所以建议在3.x出稳定版前，切到2.x版本。即<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout 2.x</div></pre></td></tr></table></figure></p>
+<p>我这里安装的是2.x最新版2.19.4。</p>
+<h4 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h4><p><em>这一步其实是可选的，但是我强烈建议，因为默认的sqlite性能简直堪忧。</em><br>下面这段shell我继续懵逼：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># create mysql tables</div><div class="line">$ mysql -u yourname -p</div><div class="line">mysql&gt; use cnpmjs;</div><div class="line">mysql&gt; source docs/db.sql</div></pre></td></tr></table></figure></p>
+<p>我服务器上的Mysql都是刚刚安装的，何来<code>cnpmjs</code>这个数据库实例？所以正确的脚本应该是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># create mysql tables</div><div class="line">$ mysql -u yourname -p</div><div class="line"># input password</div><div class="line"># 推荐使用这个数据库名</div><div class="line">mysql&gt; create database cnpmjs;</div><div class="line">mysql&gt; use cnpmjs;</div><div class="line">mysql&gt; source docs/db.sql</div></pre></td></tr></table></figure></p>
+<h4 id="添加配置文件"><a href="#添加配置文件" class="headerlink" title="添加配置文件"></a>添加配置文件</h4><p>使用vim编辑配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim config/config.js</div></pre></td></tr></table></figure></p>
+<p>内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    debug: <span class="literal">false</span>,</div><div class="line">    enableCluster: <span class="literal">true</span>, <span class="comment">// enable cluster mode</span></div><div class="line">    enablePrivate: <span class="literal">true</span>, <span class="comment">// enable private mode, only admin can publish, other use just can sync package from source npm</span></div><div class="line">    database: &#123;</div><div class="line">		db: <span class="string">'cnpmjstest'</span>,</div><div class="line">        host: <span class="string">'localhost'</span>,</div><div class="line">        port: <span class="number">3306</span>,</div><div class="line">        username: <span class="string">'cnpmjs'</span>,</div><div class="line">        password: <span class="string">'cnpmjs123'</span>  </div><div class="line">    &#125;,</div><div class="line">    admins: &#123;</div><div class="line">      admin: <span class="string">'admin@cnpmjs.org'</span>,</div><div class="line">    &#125;,</div><div class="line">    syncModel: <span class="string">'exist'</span><span class="comment">// 'none', 'all', 'exist'</span></div><div class="line">  &#125;;</div></pre></td></tr></table></figure></p>
+<p>然后保存退出(:wq或:x)<br>这里又是一个矛盾：<br>上一步，刚让人安装Mysql，这一步的配置，却是使用默认的『sqlite』数据库（通过阅读默认配置<code>config/index.js</code>可知）?<br>所以，如果要使用Mysql，与上一步对应的正确的配置应该是：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    debug: <span class="literal">false</span>,</div><div class="line">    enableCluster: <span class="literal">true</span>, <span class="comment">// enable cluster mode</span></div><div class="line">    enablePrivate: <span class="literal">true</span>, <span class="comment">// enable private mode, only admin can publish, other use just can sync package from source npm</span></div><div class="line">    database: &#123;</div><div class="line">        db: <span class="string">'cnpmjs'</span>,</div><div class="line">        username: <span class="string">'your_mysql_user'</span>,</div><div class="line">        password: <span class="string">'your_mysql_password'</span>,</div><div class="line">        dialect: <span class="string">'mysql'</span>, <span class="comment">// 这句是重点</span></div><div class="line">        host: <span class="string">'localhost'</span>,</div><div class="line">        port: <span class="number">3306</span>, <span class="comment">// mysql默认端口</span></div><div class="line">        pool: &#123; <span class="comment">// cnpm默认配置</span></div><div class="line">          maxConnections: <span class="number">10</span>,</div><div class="line">          minConnections: <span class="number">0</span>,</div><div class="line">          maxIdleTime: <span class="number">30000</span></div><div class="line">        &#125;,</div><div class="line">        logging: <span class="literal">false</span>  <span class="comment">// 不打印数据库log日志</span></div><div class="line">    &#125;,</div><div class="line">    admins: &#123;</div><div class="line">      yourAdminName: <span class="string">'yourAdminName@your.company'</span></div><div class="line">    &#125;,</div><div class="line">    syncModel: <span class="string">'exist'</span> <span class="comment">// 'none', 'all', 'exist', 推荐exist模式</span></div><div class="line">  &#125;;</div></pre></td></tr></table></figure></p>
+<h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --build-from-source --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/mirrors/node</div></pre></td></tr></table></figure></p>
+<p>这里可能会遇到与『5分钟简易式部署』同样的问题，这里不再赘述。</p>
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm start</div></pre></td></tr></table></figure></p>
+<p>同样是在『后台运行』cnpmjs.org服务，与『5分钟简易式部署』一样提供了registry与web页面。<br>停服命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run stop</div></pre></td></tr></table></figure></p>
+<p>这里的机制是，通过<code>ps ax</code>读取pid，然后kill。</p>
+<p><em>克隆源码式部署小结：</em><br>优点：</p>
+<ol>
+<li>有一个配置文件，可以自定义多种配置</li>
+<li>由于克隆了整个cnpm仓库，可以切换历史版本(有需要的话)，这似乎算不上优点- -<br>缺点：</li>
+<li>安装较为繁琐</li>
+<li>需要自己为其创建一个目录，然后启动/停止服务都要进入到该目录去执行npm命令，不够优雅。</li>
+</ol>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>以上均为根据官方文档的操作，然后我思考：有没有可能，将两种部署方式的有点结合起来呢？<br>经过两天的摸索，终于达到预期效果。见下一节。</p>
+<h2 id="推荐部署方案"><a href="#推荐部署方案" class="headerlink" title="推荐部署方案"></a>推荐部署方案</h2><p>让我们不看官方文档，重新来一次。<br>环境：<br>ubuntu16.04<br>shell: zsh(oh-my-zsh)<br>Nodejs(通过nvm安装, 不推荐通过包管理器安装，否则会有权限问题)<br>部署方式：<br>Npm + Mysql(性能较优)<br>客户端：<br>官方npm（cnpmjs.org兼容官方npm客户端） + .npmrc</p>
+<p>如果你的环境与我不一致，请自行变通奥~</p>
+<h3 id="安装cnpmjs-org"><a href="#安装cnpmjs-org" class="headerlink" title="安装cnpmjs.org"></a>安装cnpmjs.org</h3><p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i cnpmjs.org -g</div></pre></td></tr></table></figure></p>
+<h3 id="安装Mysql-并初始化cnpmjs数据库"><a href="#安装Mysql-并初始化cnpmjs数据库" class="headerlink" title="安装Mysql 并初始化cnpmjs数据库"></a>安装Mysql 并初始化cnpmjs数据库</h3><p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mysql-server -y</div></pre></td></tr></table></figure></p>
+<p>创建数据库实例并初始化表结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 你可以使用别的用户登陆</div><div class="line">mysql -u root -p -e  &quot;create database cnpmjs;use cnpmjs; $(cat $(npm config -g get prefix)/lib/node_modules/cnpmjs.org/docs/db.sql)&quot;</div></pre></td></tr></table></figure></p>
+<p>稍微解释一下，这句命令。<br>引号里最终其实就是一连串的mysql命令，先创建数据库实例，然后use它，接着就是建表脚本，读取cnpmjs.org这个全局Npm包里的sql脚本。最后把整个mysql脚本通过<code>-e</code>传给mysql。<br>这里有一个小风险，如果将来的cnpmjs.org Npm发布包把sql脚本删掉，那这里就会运行失败，万一发生了，你可以到 <a href="https://github.com/cnpm/cnpmjs.org/blob/master/docs/db.sql" target="_blank" rel="external">https://github.com/cnpm/cnpmjs.org/blob/master/docs/db.sql</a> 这里去复制脚本，人肉建表。</p>
+<h3 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h3><p>对，你没看错，官方文档上没有说起这个，通过看源码知道可以在这提供配置文件！！！<br>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi ~/.cnpmjs.org/config.json</div></pre></td></tr></table></figure></p>
+<p>请注意是<code>json</code>文件，如果<code>.cnpmjs.org</code>目录不存在，请自行创建<br>内容:<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"debug"</span>: <span class="literal">false</span>,</div><div class="line">  <span class="attr">"scopes"</span>: [</div><div class="line">    <span class="string">"@yourScopeName"</span></div><div class="line">  ],</div><div class="line">  <span class="attr">"enableCluster"</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">"enablePrivate"</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">"enableCompress"</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">"syncModel"</span>: <span class="string">"exist"</span>,</div><div class="line">  <span class="attr">"registryHost"</span>: <span class="string">""</span>,</div><div class="line">  <span class="attr">"database"</span>: &#123;</div><div class="line">    <span class="attr">"db"</span>: <span class="string">"cnpmjs"</span>,</div><div class="line">    <span class="attr">"username"</span>: <span class="string">"root"</span>,</div><div class="line">    <span class="attr">"password"</span>: <span class="string">"root"</span>,</div><div class="line">    <span class="attr">"dialect"</span>: <span class="string">"mysql"</span>,</div><div class="line">    <span class="attr">"host"</span>: <span class="string">"localhost"</span>,</div><div class="line">    <span class="attr">"port"</span>: <span class="number">3306</span>,</div><div class="line">    <span class="attr">"pool"</span>: &#123;</div><div class="line">      <span class="attr">"maxConnections"</span>: <span class="number">10</span>,</div><div class="line">      <span class="attr">"minConnections"</span>: <span class="number">0</span>,</div><div class="line">      <span class="attr">"maxIdleTime"</span>: <span class="number">30000</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"logging"</span>: <span class="literal">false</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"admins"</span>: &#123;</div><div class="line">    <span class="attr">"yourAdmin"</span>: <span class="string">"yourAdmin@your.company"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里需要强调一下<code>registryHost</code>这个字段，如果不设置，那么客户端安装npm包时，tarball将会从<code>r.cnpmjs.org</code>下载，显然这是不对的，将其设置为空字符串，npm客户端将自动从私有源的下载。这个问题在旧源里是没有的，是cnpmjs.org@2.16.2发生的<a href="https://github.com/cnpm/cnpmjs.org/pull/1044" target="_blank" rel="external">变更</a></p>
+<h3 id="启动服务-1"><a href="#启动服务-1" class="headerlink" title="启动服务"></a>启动服务</h3><p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup cnpmjs.org start &gt; .cnpmjs.nohup.log 2&gt;&amp;1 &amp;!</div></pre></td></tr></table></figure></p>
+<p>这就启动了7001端口的registry和7002端口的web页面<br>接下来就是设置nginx反向代理啦，请自行搞定~</p>
+<p>停服脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpmjs.org stop</div></pre></td></tr></table></figure></p>
+<h3 id="设置源"><a href="#设置源" class="headerlink" title="设置源"></a>设置源</h3><p>通常私有源是部署在公司内网的，公网无法访问。<br>我个人建议是这样的：<br>客户端继续使用官方的npm，并且设置全局源为<code>https://registry.npm.taobao.org</code>, 推荐使用<a href="https://github.com/Pana/nrm" target="_blank" rel="external">nrm</a>来管理源。<br>在公司的项目工程根目录添加<code>.npmrc</code>，设置源指向私有源（即cnpmjs.org实例）,比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">registry = http://your.cnpmjs.registry.domain/</div></pre></td></tr></table></figure></p>
+<p>如此一来，在公司的项目里安装npm包，是从私有源安装(其中可能会有一些私有包)，缺点是只能公司内可访问，或在外网通过vpn访问。<br>在另外一些开源项目中不添加.npmrc配置，或添加.npmrc配置但不指定源，即使用全局源，从淘宝源安装，这样这些开源项目在公网也可以顺利安装npm依赖，尤其是还要与公司以外的人合作的时候。</p>
+<p>到这里，如果你还有疑问的话，可以尝试回到『踩坑之旅』章节参考一些坑点。</p>
+<h2 id="如何从旧源同步"><a href="#如何从旧源同步" class="headerlink" title="如何从旧源同步"></a>如何从旧源同步</h2><p>如果你搭建的是全新的私有源，请忽略这一章节。</p>
+<p>如开头所说，我刚刚搭建的是我们公司的第二个源，在旧源已经有好多个私有包了，就涉及到这个同步私有包的问题。</p>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi ~/.cnpmjs.org/config.json</div></pre></td></tr></table></figure>
+<p>在根对象下添加<code>sourceNpmRegistry</code>字段，值为旧源。<br>把<code>scopes</code>字段的值改为空数组。<code>scopes</code>字段表示『私有包』的前缀列表，在本源里的包，如果符合这个配置中的任何一个前缀，都将『忽略』从上游同步，这也符合『私有』这个特性，可以理解为『只有我这个源里有，其他源里没有的包』，也就无需从上游同步了，因为别人没有, 所以要暂时去掉这里的scope。</p>
+<h3 id="客户端发送同步请求"><a href="#客户端发送同步请求" class="headerlink" title="客户端发送同步请求"></a>客户端发送同步请求</h3><p>我们需要『在本地客户端』执行cnpm提供的<code>sync</code>命令，安装cnpm：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i cnpm -g</div></pre></td></tr></table></figure></p>
+<p>然后列出所有需要同步的私有包，执行<code>cnpm sync</code>，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm sync @yourScope/package1 @yourScope/package2 @yourScope/package3</div></pre></td></tr></table></figure></p>
+<p>这个过程需要一些时间，也会在客户端打印比较多的日志，请耐心等待。<br>同步完毕后，再把配置改回来，全部项目都切换到新源。</p>
+<h2 id="关于发布包"><a href="#关于发布包" class="headerlink" title="关于发布包"></a>关于发布包</h2><p>发布包的时候，工程里的<code>.npmrc</code>配置<code>registry</code>字段，仍然有效。它指向哪个源，就发布到哪个源。</p>
+<p>如果你希望只有少数人才能发布私有包，那么就将<code>enablePrivate</code>设置为<code>true</code>，即只有管理员才能发布包，记得把管理员们的账号名配置在<code>admins</code>字段下(值为对应账号的邮箱，其实无所谓)，需要不定期维护这些管理员。<br>但是这里有一个问题：2.12.2版本强制所有用户都只能发布带scope的包，而2.19.4版本，管理员却允许发布不带scope的包，可能会带来同步操作的重名风险。</p>
+<p>如果你希望省事一点，并且避免重名风险，那么就将<code>enablePrivate</code>设置为<code>false</code>。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>cnpmjs.org总体上讲，对社区贡献还是很大的！！！<br>这个毋庸置疑，再次感谢cnpm团队，只是文档上需要进一步完善。<br>欢迎同样踩坑的你互相学习交流~</p>
+<p>——update:<br>经过一番折腾，最终由于无法忍受json『没有注释』，还是改用了源码启动方式~~~</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/22/使用vscode断点调试typescript/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          使用vscode一键断点调试typescript
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/31/ueditor之一波N折/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ueditor之一波多折</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="cnpmjs.org实战" data-title="cnpmjs.org实战" data-url="http://cloudstone.space/2017/08/25/cnpmjs.org实战/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

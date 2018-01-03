@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>DIY入门开发一个Chrome微扩展</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这个领域对于我来说，既陌生又熟悉，陌生是因为没有可实际投入使用的成果，只是涉足过，但好过零接触，熟悉是因为插件实现的原先的方式是web，这可是我们前端吃饭的家伙。 这篇文章算是纯自娱自乐，如果要看权威入门教程，请移步官网。 这个扩展的目的是，“暴力地过滤”所有网页中的iframe广告，之所以是“暴力”，是因为这个微扩展，还不足够智能，只是把页面上素有iframe删除，所以肯定会“错杀好人”。不过">
+<meta name="keywords" content="chrome">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DIY入门开发一个Chrome微扩展">
+<meta property="og:url" content="http://cloudstone.space/2015/07/12/DIY入门开发一个Chrome微扩展/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="这个领域对于我来说，既陌生又熟悉，陌生是因为没有可实际投入使用的成果，只是涉足过，但好过零接触，熟悉是因为插件实现的原先的方式是web，这可是我们前端吃饭的家伙。 这篇文章算是纯自娱自乐，如果要看权威入门教程，请移步官网。 这个扩展的目的是，“暴力地过滤”所有网页中的iframe广告，之所以是“暴力”，是因为这个微扩展，还不足够智能，只是把页面上素有iframe删除，所以肯定会“错杀好人”。不过">
+<meta property="og:image" content="http://cloudstone.space/images/chrome-ext.jpeg">
+<meta property="og:image" content="http://cloudstone.space/images/914.png">
+<meta property="og:image" content="http://cloudstone.space/images/518.png">
+<meta property="og:image" content="http://cloudstone.space/images/116.png">
+<meta property="og:image" content="http://cloudstone.space/images/632.png">
+<meta property="og:image" content="http://cloudstone.space/images/390.png">
+<meta property="og:image" content="http://cloudstone.space/images/932.png">
+<meta property="og:updated_time" content="2016-02-27T02:48:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DIY入门开发一个Chrome微扩展">
+<meta name="twitter:description" content="这个领域对于我来说，既陌生又熟悉，陌生是因为没有可实际投入使用的成果，只是涉足过，但好过零接触，熟悉是因为插件实现的原先的方式是web，这可是我们前端吃饭的家伙。 这篇文章算是纯自娱自乐，如果要看权威入门教程，请移步官网。 这个扩展的目的是，“暴力地过滤”所有网页中的iframe广告，之所以是“暴力”，是因为这个微扩展，还不足够智能，只是把页面上素有iframe删除，所以肯定会“错杀好人”。不过">
+<meta name="twitter:image" content="http://cloudstone.space/images/chrome-ext.jpeg">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-DIY入门开发一个Chrome微扩展" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/12/DIY入门开发一个Chrome微扩展/" class="article-date">
+  	<time datetime="2015-07-12T08:08:49.000Z" itemprop="datePublished">2015-07-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DIY入门开发一个Chrome微扩展
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chrome/">chrome</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/自娱自乐/">自娱自乐</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="/images/chrome-ext.jpeg"><img src="/images/chrome-ext.jpeg" alt="下载"></a></p>
+<p>这个领域对于我来说，既陌生又熟悉，陌生是因为没有可实际投入使用的成果，只是涉足过，但好过零接触，熟悉是因为插件实现的原先的方式是web，这可是我们前端吃饭的家伙。</p>
+<p>这篇文章算是纯自娱自乐，如果要看权威入门教程，请移步<a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">官网</a>。</p>
+<p>这个扩展的目的是，“暴力地过滤”所有网页中的iframe广告，之所以是“暴力”，是因为这个微扩展，还不足够智能，只是把页面上素有iframe删除，所以肯定会“错杀好人”。不过，过滤广告不是目的，体验一下开发Chrome扩展才是我们想要的。</p>
+<h2 id="创建扩展"><a href="#创建扩展" class="headerlink" title="创建扩展"></a>创建扩展</h2><p>首先，创建一个空目录比如叫iframe-filter，用于存放这个扩展的文件。</p>
+<p>然后，创建一个manifest.json，内容如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    "manifest_version": 2,//不可更改</div><div class="line">    "name": "iframe广告过滤器",//本扩展的名字</div><div class="line">    "version": "1.0",//本扩展的版本</div><div class="line">    "description": "去除页面中的iframe广告",//本扩展的描述</div><div class="line">    "browser_action": &#123;//浏览器中的配置</div><div class="line">    	"default_icon": "icon.png" //图标</div><div class="line">  	&#125;,</div><div class="line">    "content_scripts": [//脚本配置等</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"matches"</span>: [<span class="string">"http://*/*"</span>, <span class="string">"https://*/*"</span>],</div><div class="line">            <span class="attr">"js"</span>: [<span class="string">"js/jquery.min.js"</span>,<span class="string">"js/filter.js"</span>]</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复制到你的manifest.json中后，请把注释删掉奥，json是不允许注释的。</p>
+<p>然后找到一个合适的png图片作为图标（最佳尺寸是19*19），存放到与manifest.json同级。</p>
+<p>接着，是写代码了。与manifest.json同级创建一个js目录，拷贝一个jquery过来，我们要写的是filter.js，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		detect(<span class="built_in">document</span>);</div><div class="line">	&#125;,<span class="number">500</span>)<span class="comment">//由于某些iframe是动态插入的，设置一个延时，保证动态添加的iframe也能被删除</span></div><div class="line">&#125;)</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">detect</span>(<span class="params">doc</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> $iframes = $(<span class="string">'iframe'</span>,doc);</div><div class="line">    $iframes.each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> $ifr = $(<span class="keyword">this</span>);</div><div class="line">        <span class="keyword">var</span> src = $ifr.attr(<span class="string">'src'</span>) || <span class="string">''</span>;</div><div class="line">        $ifr.remove();</div><div class="line">        <span class="built_in">console</span>.warn(<span class="string">'地址为'</span>,src,<span class="string">'的iframe已清除！！！'</span>);</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="加载程序包"><a href="#加载程序包" class="headerlink" title="加载程序包"></a>加载程序包</h2><p>打开chrome的扩展管理页面，点击“加载正在开发的扩展程序”：</p>
+<p><img src="/images/914.png" alt=""></p>
+<p>选择刚才创建的iframe-filter目录，然后我们马上就能看到，我们的扩展包被加载进来了：</p>
+<p><img src="/images/518.png" alt=""></p>
+<p>在你的chrome地址栏右边也多出了，刚刚找的图标：</p>
+<p><img src="/images/116.png" alt=""></p>
+<p>不过我们这个微扩展没有添加点击图标的popup页面，点击不会有效果。</p>
+<h2 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h2><p>打开 炫电影网站 <a href="http://www.xuandy.com/" target="_blank" rel="external">http://www.xuandy.com/</a>，这是我熟悉的广告比较多的站点（ps:绝不是打广告，也不是喷它广告多）。</p>
+<p>你看到的页面差不多是这样的：</p>
+<p><a href="/images/632.png"><img src="/images/632.png" alt="632"></a></p>
+<p>&nbsp;</p>
+<p>由于扩展中的代码是页面ready后才执行的，所以在看到上面这样的画面之前，可能会有一两秒的广告时间。红色框中的都是广告，现在都被干掉了科科~世界稍微清净了一些吧。我们再回到chrome扩展管理页面，将我们添加的扩展停用，即去掉那个钩钩：</p>
+<p><img src="/images/390.png" alt=""></p>
+<p>回到炫电影的页面刷新，回到正常的状态，你就可以感受到，这个世界是多么的嘈杂了~~~囧。</p>
+<p>再次开启扩展并刷新测试页面，开启开发者工具栏，选择Sources面板，再选择左边的contents_scripts，可以看到我们的扩展代码：</p>
+<p><img src="/images/932.png" alt=""></p>
+<p>在开发过程中，我们可以在这调试我们的代码。</p>
+<p>代码已上传至 <a href="https://github.com/stoneChen/iframe-ad-filter" target="_blank" rel="external">https://github.com/stoneChen/iframe-ad-filter</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>好了，一个Chrome插件的开发，体验完了。由于只是自娱自乐，离实际可用性还差得远，所以也肯定不会发布到google商店。等以后有需求了再来深入研究这块领域。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/17/angular-touch模块与hammerjs风波/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          angular-touch模块与hammerjs风波
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/11/使用grunt-connect处理图片路径/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用grunt-connect处理图片路径</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="DIY入门开发一个Chrome微扩展" data-title="DIY入门开发一个Chrome微扩展" data-url="http://cloudstone.space/2015/07/12/DIY入门开发一个Chrome微扩展/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

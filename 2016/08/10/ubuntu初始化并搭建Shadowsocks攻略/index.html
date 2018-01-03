@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>ubuntu初始化并搭建Shadowsocks攻略</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前在用的VPS上周末到期了，于是继续买了个digital ocean（以下简称DO）的乞丐版。简单介绍下DO，DO是VPS供应商界的后起之秀，在这之前，linode一直处理霸主地位，死贵死贵的。但DO可以按小时计费，相当于月费除以30天,一点没抬价。这对于只想试验某个功能的人来说，简直是福利，试验完了，把VPS删了就不再计费了。不过我这拿来当梯子其实是有点浪费的囧，后续考虑换回搬瓦工~对了，搬瓦">
+<meta name="keywords" content="shadowsocks,ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu初始化并搭建Shadowsocks攻略">
+<meta property="og:url" content="http://cloudstone.space/2016/08/10/ubuntu初始化并搭建Shadowsocks攻略/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="之前在用的VPS上周末到期了，于是继续买了个digital ocean（以下简称DO）的乞丐版。简单介绍下DO，DO是VPS供应商界的后起之秀，在这之前，linode一直处理霸主地位，死贵死贵的。但DO可以按小时计费，相当于月费除以30天,一点没抬价。这对于只想试验某个功能的人来说，简直是福利，试验完了，把VPS删了就不再计费了。不过我这拿来当梯子其实是有点浪费的囧，后续考虑换回搬瓦工~对了，搬瓦">
+<meta property="og:updated_time" content="2016-08-14T14:30:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ubuntu初始化并搭建Shadowsocks攻略">
+<meta name="twitter:description" content="之前在用的VPS上周末到期了，于是继续买了个digital ocean（以下简称DO）的乞丐版。简单介绍下DO，DO是VPS供应商界的后起之秀，在这之前，linode一直处理霸主地位，死贵死贵的。但DO可以按小时计费，相当于月费除以30天,一点没抬价。这对于只想试验某个功能的人来说，简直是福利，试验完了，把VPS删了就不再计费了。不过我这拿来当梯子其实是有点浪费的囧，后续考虑换回搬瓦工~对了，搬瓦">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-ubuntu初始化并搭建Shadowsocks攻略" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/10/ubuntu初始化并搭建Shadowsocks攻略/" class="article-date">
+  	<time datetime="2016-08-10T13:37:31.000Z" itemprop="datePublished">2016-08-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ubuntu初始化并搭建Shadowsocks攻略
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前在用的VPS上周末到期了，于是继续买了个digital ocean（以下简称DO）的乞丐版。简单介绍下DO，DO是VPS供应商界的后起之秀，在这之前，linode一直处理霸主地位，死贵死贵的。但DO可以按小时计费，相当于月费除以30天,一点没抬价。这对于只想试验某个功能的人来说，简直是福利，试验完了，把VPS删了就不再计费了。不过我这拿来当梯子其实是有点浪费的囧，后续考虑换回搬瓦工~<br>对了，搬瓦工可以一键安装shadowsocks和openVPN，不过咱还是热衷于折腾不是~</p>
+<p>好了，进入正题。<br>由于这是我第四个VPS了，每次初始化一个ubuntu并搭建梯子服务，总要花点时间找命令，想想还是整理一下比较好，方便下次使用。<br>刚刚建立VPS后，root用户ssh登录，然后开始命令行之旅~<br><em>注：本攻略需具备一丢丢vi操作基础- -</em></p>
+<h1 id="初始化ubuntu"><a href="#初始化ubuntu" class="headerlink" title="初始化ubuntu"></a>初始化ubuntu</h1><h3 id="1-apt-get是ubuntu的包管理工具，第一步当然是更新镜像："><a href="#1-apt-get是ubuntu的包管理工具，第一步当然是更新镜像：" class="headerlink" title="1. apt-get是ubuntu的包管理工具，第一步当然是更新镜像："></a>1. apt-get是ubuntu的包管理工具，第一步当然是更新镜像：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get update</div></pre></td></tr></table></figure>
+<h3 id="2-设置locale-此时执行："><a href="#2-设置locale-此时执行：" class="headerlink" title="2. 设置locale, 此时执行："></a>2. 设置locale, 此时执行：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">locale</div></pre></td></tr></table></figure>
+<p>会有两个警告：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">locale: Cannot set LC_CTYPE to default locale: No such file or directory</div><div class="line">locale: Cannot set LC_ALL to default locale: No such file or directory</div></pre></td></tr></table></figure></p>
+<p>先安装一个工具包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get -y install language-pack-zh-hans</div></pre></td></tr></table></figure></p>
+<p>然后再检查一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">locale</div></pre></td></tr></table></figure></p>
+<p>就没有警告了</p>
+<h3 id="3-通常linux不使用root用户进行日常操作，以免权限太高，导致一些不可逆的误操作，所以新建一个相对低权限的用户-以stone为例："><a href="#3-通常linux不使用root用户进行日常操作，以免权限太高，导致一些不可逆的误操作，所以新建一个相对低权限的用户-以stone为例：" class="headerlink" title="3. 通常linux不使用root用户进行日常操作，以免权限太高，导致一些不可逆的误操作，所以新建一个相对低权限的用户, 以stone为例："></a>3. 通常linux不使用root用户进行日常操作，以免权限太高，导致一些不可逆的误操作，所以新建一个相对低权限的用户, 以stone为例：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adduser stone</div></pre></td></tr></table></figure>
+<p>然后按照提示，一步步填写信息<br>注:以下提到的stone用户，你要需要替换为自己的用户名~</p>
+<h3 id="4-给刚新建的用户设置权限，否则无法使用sudo-用vi编辑权限sudoer文件："><a href="#4-给刚新建的用户设置权限，否则无法使用sudo-用vi编辑权限sudoer文件：" class="headerlink" title="4. 给刚新建的用户设置权限，否则无法使用sudo, 用vi编辑权限sudoer文件："></a>4. 给刚新建的用户设置权限，否则无法使用sudo, 用vi编辑权限sudoer文件：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/sudoers</div></pre></td></tr></table></figure>
+<p>找到          root    ALL=(ALL:ALL) ALL<br>在下面添加一行：stone   ALL=(ALL) ALL<br>保存，这样stone这个用户就可以sudo了</p>
+<h3 id="5-切换到新用户："><a href="#5-切换到新用户：" class="headerlink" title="5. 切换到新用户："></a>5. 切换到新用户：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su stone</div></pre></td></tr></table></figure>
+<h3 id="6-安装git和zsh："><a href="#6-安装git和zsh：" class="headerlink" title="6. 安装git和zsh："></a>6. 安装git和zsh：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get -y install git zsh</div></pre></td></tr></table></figure>
+<h3 id="7-zsh是最好用的shell，通过安装oh-my-zsh来配置zsh"><a href="#7-zsh是最好用的shell，通过安装oh-my-zsh来配置zsh" class="headerlink" title="7. zsh是最好用的shell，通过安装oh-my-zsh来配置zsh:"></a>7. zsh是最好用的shell，通过安装oh-my-zsh来配置zsh:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></div></pre></td></tr></table></figure>
+<p>这里可能curl命令会不存在，需要安装一下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install curl</div></pre></td></tr></table></figure></p>
+<p>然后，再继续安装oh-my-zsh.<br>执行完毕后，如果你发现一个大大的logo：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">         __                                     __</div><div class="line">  ____  / /_     ____ ___  __  __   ____  _____/ /_</div><div class="line"> / __ \/ __ \   / __ `__ \/ / / /  /_  / / ___/ __ \</div><div class="line">/ /_/ / / / /  / / / / / / /_/ /    / /_(__  ) / / /</div><div class="line">\____/_/ /_/  /_/ /_/ /_/\__, /    /___/____/_/ /_/</div><div class="line">                        /____/                       ....is now installed!</div></pre></td></tr></table></figure></p>
+<p>同时，命令行提示符变成一个右箭头和一条波浪线了，就说明安装成功了！</p>
+<h3 id="8-设置zsh为stone用户的默认shell："><a href="#8-设置zsh为stone用户的默认shell：" class="headerlink" title="8. 设置zsh为stone用户的默认shell："></a>8. 设置zsh为stone用户的默认shell：</h3><p>这里最好先看一下zsh在哪里：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">which</span> zsh</div></pre></td></tr></table></figure></p>
+<p>如果得到的是<code>/usr/bin/zsh</code>, 那么接下来就执行 <code>chsh -s /usr/bin/zsh</code><br>如果得到的是<code>/bin/zsh</code>, 那么接下来就执行 <code>chsh -s /bin/zsh</code><br>这里我也奇怪，之前一直用池建强老师给出的<code>chsh -s /bin/zsh</code>都没问题的，后来在搬瓦工的ubuntu14.04上居然变了</p>
+<h3 id="9-设置stone用户免密登陆，创建-ssh-authorized-keys-文件并编辑"><a href="#9-设置stone用户免密登陆，创建-ssh-authorized-keys-文件并编辑" class="headerlink" title="9. 设置stone用户免密登陆，创建.ssh/authorized_keys 文件并编辑:"></a>9. 设置stone用户免密登陆，创建.ssh/authorized_keys 文件并编辑:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir ~/.ssh &amp;&amp; vi ~/.ssh/authorized_keys</div></pre></td></tr></table></figure>
+<p>把你<em>本机</em>的公钥粘贴进去，保存退出。<br><em>本地</em> 重新使用ssh登录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh stone@&lt;你的VP IP&gt;</div></pre></td></tr></table></figure></p>
+<p>如果不需要密码直接登录进去，就说明成功了!<br>ps: <em>本机</em> 生成秘钥命令： <code>ssh-keygen -t rsa -C &quot;&lt;your_email@youremail.com&gt;&quot;</code> 一路回车,然后<em>本机</em>通过<code>cat .ssh/id_rsa.pub</code> 查看公钥。</p>
+<h3 id="10-创建远程主机别名，以快速登录，-在-本机-创建文件并编辑："><a href="#10-创建远程主机别名，以快速登录，-在-本机-创建文件并编辑：" class="headerlink" title="10. 创建远程主机别名，以快速登录， 在 本机 创建文件并编辑："></a>10. 创建远程主机别名，以快速登录， 在 <em>本机</em> 创建文件并编辑：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi .ssh/config</div></pre></td></tr></table></figure>
+<p>写入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Host <span class="keyword">do</span></div><div class="line">Hostname xx.xx.xx.xx</div><div class="line">User stone</div></pre></td></tr></table></figure></p>
+<p><em>注： Host字段的值，就是个别名，可以自定义奥</em><br>保存，<em>本地</em> 重新使用ssh登录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh <span class="keyword">do</span></div></pre></td></tr></table></figure></p>
+<p>如果不需要密码,自动登录进去，就说明免密快捷登录成功了~</p>
+<p><strong> 以上，按照我的初始化服务器惯例，创建了新用户，安装了git,zsh, 创建了免密快捷登录，至此初始化ubuntu完毕 </strong></p>
+<h1 id="安装shadowsocks"><a href="#安装shadowsocks" class="headerlink" title="安装shadowsocks"></a>安装shadowsocks</h1><h3 id="1-安装shadowsocks服务端"><a href="#1-安装shadowsocks服务端" class="headerlink" title="1. 安装shadowsocks服务端"></a>1. 安装shadowsocks服务端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install -y python-pip &amp;&amp; sudo pip install shadowsocks</div></pre></td></tr></table></figure>
+<h3 id="2-创建shadow-socks配置文件："><a href="#2-创建shadow-socks配置文件：" class="headerlink" title="2. 创建shadow socks配置文件："></a>2. 创建shadow socks配置文件：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/shadowsocks.json</div></pre></td></tr></table></figure>
+<p>写入：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"><span class="attr">"server"</span>:<span class="string">"&lt;你的VPS IP&gt;"</span>,</div><div class="line"><span class="attr">"server_port"</span>: &lt;自定义shadowsocks服务端口&gt;,</div><div class="line"><span class="attr">"local_address"</span>: <span class="string">"127.0.0.1"</span>,</div><div class="line"><span class="attr">"local_port"</span>:<span class="number">1080</span>,</div><div class="line"><span class="attr">"password"</span>:<span class="string">"&lt;自定义密码&gt;"</span>,</div><div class="line"><span class="attr">"timeout"</span>:<span class="number">300</span>,</div><div class="line"><span class="attr">"method"</span>:<span class="string">"aes-256-cfb"</span>,</div><div class="line"><span class="attr">"fast_open"</span>: <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="3-启动shadowsocks："><a href="#3-启动shadowsocks：" class="headerlink" title="3. 启动shadowsocks："></a>3. 启动shadowsocks：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ssserver -c /etc/shadowsocks.json -d start</div></pre></td></tr></table></figure>
+<p>打开你的shadowsocks客户端，配置上相应的ip，端口和密码，就可以出墙啦~~~</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/14/webpack入门与实战/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          webpack入门与实战
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/12/打造高效前端mac工作环境/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">打造高效前端mac工作环境</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ubuntu初始化并搭建Shadowsocks攻略" data-title="ubuntu初始化并搭建Shadowsocks攻略" data-url="http://cloudstone.space/2016/08/10/ubuntu初始化并搭建Shadowsocks攻略/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

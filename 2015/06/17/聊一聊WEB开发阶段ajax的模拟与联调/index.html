@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>聊一聊WEB开发阶段ajax的模拟与联调</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="昨天一个前端同事问我，MAC如何连接到局域网的共享文件夹，我思索了一下，想起来Finder里有个菜单选项”前往”-&amp;gt;”连接服务器”，在弹出的对话框中，输入网络地址，比如smb://192.168.xxx.xxx，然后回车即可（顺带提一下，WINDOWS的话，在任一文件夹地址栏或WIN+R，输入 \192.168.xxx.xxx，回车即可）当然这不是本文的重点。后来了解到，是某后端同事要求刚">
+<meta name="keywords" content="grunt,联调">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊一聊WEB开发阶段ajax的模拟与联调">
+<meta property="og:url" content="http://cloudstone.space/2015/06/17/聊一聊WEB开发阶段ajax的模拟与联调/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="昨天一个前端同事问我，MAC如何连接到局域网的共享文件夹，我思索了一下，想起来Finder里有个菜单选项”前往”-&amp;gt;”连接服务器”，在弹出的对话框中，输入网络地址，比如smb://192.168.xxx.xxx，然后回车即可（顺带提一下，WINDOWS的话，在任一文件夹地址栏或WIN+R，输入 \192.168.xxx.xxx，回车即可）当然这不是本文的重点。后来了解到，是某后端同事要求刚">
+<meta property="og:updated_time" content="2016-02-27T02:34:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="聊一聊WEB开发阶段ajax的模拟与联调">
+<meta name="twitter:description" content="昨天一个前端同事问我，MAC如何连接到局域网的共享文件夹，我思索了一下，想起来Finder里有个菜单选项”前往”-&amp;gt;”连接服务器”，在弹出的对话框中，输入网络地址，比如smb://192.168.xxx.xxx，然后回车即可（顺带提一下，WINDOWS的话，在任一文件夹地址栏或WIN+R，输入 \192.168.xxx.xxx，回车即可）当然这不是本文的重点。后来了解到，是某后端同事要求刚">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-聊一聊WEB开发阶段ajax的模拟与联调" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/17/聊一聊WEB开发阶段ajax的模拟与联调/" class="article-date">
+  	<time datetime="2015-06-17T14:28:55.000Z" itemprop="datePublished">2015-06-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      聊一聊WEB开发阶段ajax的模拟与联调
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grunt/">grunt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/联调/">联调</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Essays/">Essays</a><a class="article-category-link" href="/categories/Essays/前端/">前端</a><a class="article-category-link" href="/categories/Essays/前端/调试/">调试</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>昨天一个前端同事问我，MAC如何连接到局域网的共享文件夹，我思索了一下，想起来Finder里有个菜单选项”前往”-&gt;”连接服务器”，在弹出的对话框中，输入网络地址，比如smb://192.168.xxx.xxx，然后回车即可（顺带提一下，WINDOWS的话，在任一文件夹地址栏或WIN+R，输入 \192.168.xxx.xxx，回车即可）当然这不是本文的重点。后来了解到，是某后端同事要求刚才那位前端同事以这种方式和他联调ajax，号称可以“立即看到效果”，当时我就震惊了o(╯□╰)o，遂决定聊一聊这个话题。<br>早期，互联网站点基本都是“瘦客户端”，即无异步请求，设计师（或者叫美工?）把psd变成网页后（或添加一些简单的脚本效果），交给“WEB开发攻城狮”填充数据，Done。然而，随着互联网的普及，用户体验的要求越来越高，各种异步请求被引入，后来出现了“胖客户端”甚至单页应用。起初，javascript仅用于表单校验或简单的动画效果，后来为了提升用户体验，javascript的代码量日益增长，尤其是异步请求的增多，WEB开发攻城狮的负担越来越重。</p>
+</blockquote>
+<p>后来，为了提升用户体验，越来越多的公司把WEB开发中的前端开发工作独立出来交给“前端攻城狮”(早在2001年，雅虎就诞生了世界上第一个前端工程师岗位)，让后端同学能够更加专注业务。而不像以前，从前端到数据库一个人统统搞定。那么问题来了，由于不是一个人完成某个功能，就涉及到联调（或者叫做数据对接），尤其是ajax。终于说到主题了囧。在开始开发前，通常前后端会约定好ajax请求的往返数据结构，然后各自朝着这个终点行进。通常有这几种方式：</p>
+<h2 id="一-ajax访问静态文本模拟响应"><a href="#一-ajax访问静态文本模拟响应" class="headerlink" title="一.ajax访问静态文本模拟响应"></a>一.ajax访问静态文本模拟响应</h2><p>这是最简单的方式，以jquery为例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.ajax(<span class="string">'mock/test.json'</span>).done(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="comment">//do something</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>然后，写好mock/test.json：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"greeting"</span>:<span class="string">"hello"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>触发上面的ajax即可拿到上面模拟的这个对象。</p>
+<blockquote>
+<p>如果你是以file协议打开静态页面，在chrome下是被禁止的，需要为启动程序添加参数，windows参考 <a href="http://my.oschina.net/gaollg/blog/81225" target="_blank" rel="external">这个帖子</a> 。推荐使用webstorm这个IDE,打开html默认以访问服务器的方式打开，就没有这个问题了，或者windows自带的IIS服务器。<br>优点：</p>
+</blockquote>
+<p>简单，不依赖后端</p>
+<p>缺点：</p>
+<ol>
+<li>这种方式需要写一个指向本地的url，也就是说，当你模拟ajax完成后，最后提交代码时，仍然需要修改url地址指向正式的地址</li>
+<li>自己模拟的数据与最终后端提供的数据难免有出入，集成进后端时比较可能需要继续修改代码。</li>
+</ol>
+<h2 id="二-本地页面直接访问后端服务"><a href="#二-本地页面直接访问后端服务" class="headerlink" title="二.本地页面直接访问后端服务"></a>二.本地页面直接访问后端服务</h2><p>等待后端提供好ajax接口，启动web服务，本地打开页面，发起ajax请求，拿到比较真实的数据。当然，这会产生跨域问题，可以利用html5的Allow-Control-Allow-Origin: * ，来允许跨域。如果这个web服务是启动在后端同学的电脑上，那么你就非常可能受他影响了，一旦他的服务挂了，你就无法请求数据了。如果有一台公用服务器来启动这个服务，情况会好些。</p>
+<p>优点：</p>
+<p>能够拿到比较真实的响应数据，自己调试好后，基本就不用改代码了。</p>
+<p>缺点：</p>
+<ol>
+<li>需要额外处理跨域问题，或者可以使用jsonp来避免跨域问题</li>
+<li>依赖后端的进度，受服务器影响大</li>
+<li>开发时的请求地址与最终的请求地址还是会有些许不一致，开发时的ajax地址肯定需要以协议+ip/域名为前缀</li>
+</ol>
+<h2 id="三-本地启动项目web服务"><a href="#三-本地启动项目web服务" class="headerlink" title="三.本地启动项目web服务"></a>三.本地启动项目web服务</h2><p>等待后端开发好ajax接口，更新代码，在自己电脑上启动项目的服务，比如tomcat，jetty，甚至PHP的wamp。访问本地服务的页面，发起ajax请求。</p>
+<p>优点：</p>
+<p>ajax地址即为最终的地址，取到的数据结构也是靠谱的，调试通过后，也基本不用改。</p>
+<p>缺点：</p>
+<ol>
+<li>依赖后端的进度</li>
+<li>需要在本地启动项目web服务，可能会比较占用资源，对机器性能有要求</li>
+</ol>
+<h2 id="四-ftp连接公用服务器"><a href="#四-ftp连接公用服务器" class="headerlink" title="四.ftp连接公用服务器"></a>四.ftp连接公用服务器</h2><p>等待后端开发好ajax接口，在公用服务器更新代码，部署服务并启动。使用ftp工具，将修改后的代码上传至服务器，然后访问该服务器上的服务即可看到效果。webstorm提供了remote host功能，经过适当的配置，即可映射本地代码到服务器代码，当修改完本地代码并保存，将自动上传该代码到服务器，然后回到浏览器刷新即可看到修改效果。我还见过这么干的：本地修改完代码，提交，ssh更新服务器代码，浏览器刷新。效率太过地下，就不单独列出来了。</p>
+<p>优点:</p>
+<ol>
+<li>也能取得靠谱的数据，ajax地址也是最终的</li>
+<li>由于修改的是公用服务器上的代码，可访问到这个服务的人都能立即看到效果。</li>
+<li><p>相对于上一种，不用在自己机器上起服务了，节省了机器的内存与cpu<br>缺点：</p>
+</li>
+<li><p>依赖后端的进度</p>
+</li>
+<li>有的公司前后端共用这台服务器，如果后端由于某种需要（特别是java），重启服务起，那么你将无法继续调试ajax</li>
+</ol>
+<h2 id="五-本地启动轻量级服务，动态分析ajax请求并响应"><a href="#五-本地启动轻量级服务，动态分析ajax请求并响应" class="headerlink" title="五.本地启动轻量级服务，动态分析ajax请求并响应"></a>五.本地启动轻量级服务，动态分析ajax请求并响应</h2><p>这也是我目前使用的方式，尤其是单页应用，会产生大量ajax，更加适合这种场景。</p>
+<p>通过NodeJS平台的Grunt构建工具，启动node服务（我用的是grunt-connect），拦截ajax请求，动态分析url路径，返回不同的模拟响应。ajax地址可以任意指定，只要做好相应结果的映射或动态分析。</p>
+<p>优点：</p>
+<ol>
+<li>不依赖后端，甚至不依赖局域网，本机即可搞定</li>
+<li>如果逻辑正确，调试通过的代码将不用做任何修改，包括ajax地址</li>
+<li>轻量级web服务，不会占用过多资源</li>
+<li><p>拦截ajax，动态分析，灵活度很高<br>缺点：</p>
+</li>
+<li><p>由于是模拟响应，与最终后端提供的响应可能有些许出入，数据交互逻辑上，后期集成进后端时可能需要修改</p>
+</li>
+<li>需要掌握Grunt等工具的用法，加大了复杂度<br>&nbsp;</li>
+</ol>
+<p>&nbsp;</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上的模拟/联调方式，各有优缺点，也可以结合起来使用，以提高工作效率。</p>
+<p>ps:开篇提到的那种方式，个人不建议使用，因为连版本控制都无法使用了，代码痕迹都无从保存，而且要求网络稳定，直接改别人电脑上的文件，总感觉不妥。</p>
+<p>&nbsp;</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/21/介绍两种移动设备调试方案/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          介绍两种移动设备调试方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/14/使用强大的Chrome开发者工具——移动设备模拟器篇/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用强大的Chrome开发者工具——移动设备模拟器篇</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="聊一聊WEB开发阶段ajax的模拟与联调" data-title="聊一聊WEB开发阶段ajax的模拟与联调" data-url="http://cloudstone.space/2015/06/17/聊一聊WEB开发阶段ajax的模拟与联调/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

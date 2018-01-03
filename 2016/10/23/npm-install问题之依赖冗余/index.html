@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>npm install之依赖冗余</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="首先这是一个问题，但通过标题没法很好的表述出来，而大多数童鞋应该不会遇到这样的问题，然而我还是决定记录下来。 我们知道，npm3把所有依赖模块路径拍扁了(工程目录下的node_modules出现了很多package.json中没有声明的模块)，解决了windows下路径名过长的问题，更使得公共依赖被充分共享。但如果多个模块依赖了同一个模块的不同版本，后安装的模块，为了不和别人冲突，就只能将这个依赖">
+<meta name="keywords" content="csd,npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="npm install之依赖冗余">
+<meta property="og:url" content="http://cloudstone.space/2016/10/23/npm-install问题之依赖冗余/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="首先这是一个问题，但通过标题没法很好的表述出来，而大多数童鞋应该不会遇到这样的问题，然而我还是决定记录下来。 我们知道，npm3把所有依赖模块路径拍扁了(工程目录下的node_modules出现了很多package.json中没有声明的模块)，解决了windows下路径名过长的问题，更使得公共依赖被充分共享。但如果多个模块依赖了同一个模块的不同版本，后安装的模块，为了不和别人冲突，就只能将这个依赖">
+<meta property="og:updated_time" content="2016-10-23T16:27:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="npm install之依赖冗余">
+<meta name="twitter:description" content="首先这是一个问题，但通过标题没法很好的表述出来，而大多数童鞋应该不会遇到这样的问题，然而我还是决定记录下来。 我们知道，npm3把所有依赖模块路径拍扁了(工程目录下的node_modules出现了很多package.json中没有声明的模块)，解决了windows下路径名过长的问题，更使得公共依赖被充分共享。但如果多个模块依赖了同一个模块的不同版本，后安装的模块，为了不和别人冲突，就只能将这个依赖">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-npm-install问题之依赖冗余" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/23/npm-install问题之依赖冗余/" class="article-date">
+  	<time datetime="2016-10-23T12:53:58.000Z" itemprop="datePublished">2016-10-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      npm install之依赖冗余
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/csd/">csd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先这是一个问题，但通过标题没法很好的表述出来，而大多数童鞋应该不会遇到这样的问题，然而我还是决定记录下来。</p>
+<p>我们知道，npm3把所有依赖模块路径拍扁了(工程目录下的<code>node_modules</code>出现了很多<code>package.json</code>中没有声明的模块)，解决了windows下路径名过长的问题，更使得公共依赖被充分共享。但如果多个模块依赖了同一个模块的不同版本，后安装的模块，为了不和别人冲突，就只能将这个依赖安装在自己的<code>node_modules</code>下。</p>
+<a id="more"></a>
+<blockquote>
+<p>这个问题来源于我们实际某个基于VueJS的复杂项目的某次意外，为了使广大前端更容易理解，我们使用jquery作为栗子。</p>
+</blockquote>
+<p>假设，我们用webpack开发一个小页面，需要用到jquery和一个jquery插件(假设叫jplugin)。假设这个jquery插件，遵循了ES6规范，它的<code>package.json</code>声明依赖的jquery版本是^2.0.0(即&gt;=2.0.0, &lt;3.0.0):</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"dependencies"</span>: &#123;</div><div class="line">    <span class="attr">"jquery"</span>: <span class="string">"^2.0.0"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它的主模块，应该会有类似这么几句：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">'jquery'</span></div><div class="line"></div><div class="line">$.fn.jplugin = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// 插件代码</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>而我们的项目直接依赖的jquery版本是^1.11.0(即&gt;=1.11.0, &lt;2.0.0):  </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"dependencies"</span>: &#123;</div><div class="line">    <span class="attr">"jquery"</span>: <span class="string">"^1.11.0"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>很明显，<code>^2.0.0</code>和<code>^1.11.0</code>并不能兼容。那么，在<code>npm i</code>之后，依赖目录大致是这样的(无关文件已省略)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── node_modules</div><div class="line">│   ├── jquery     // ^1.11.0， 假定安装的是1.11.0版本</div><div class="line">│   └── jplugin</div><div class="line">│       ├── node_modules</div><div class="line">│       │   └── jquery  // ^2.0.0，假定安装的是2.0.0版本</div><div class="line">│       └── package.json</div><div class="line">└── package.json</div></pre></td></tr></table></figure>
+<p>我们的主模块代码应该会有类似这么几句：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">'jquery'</span></div><div class="line"><span class="keyword">import</span> <span class="string">'jplugin'</span></div><div class="line"></div><div class="line"><span class="comment">// 其他代码</span></div><div class="line"></div><div class="line">$(<span class="string">'#someId'</span>).jplugin()</div></pre></td></tr></table></figure></p>
+<p>最终运行代码，浏览器会报错，提示<code>jplugin</code>不是一个function，也就是<code>$(&#39;#someId&#39;).jplugin()</code>这句出错。</p>
+<p>为什么呢？</p>
+<p>webpack打包依赖时，与node查找依赖的方式一致，顶级依赖写法（比如这里的<code>jquery</code>）首先从当前目录的<code>node_modules</code>下查找，如果不存在，则向上级目录的<code>node_modules</code> 下查找，如果不存在则继续向上，以此类推。</p>
+<p>在我们这个例子里，<code>jplugin</code>模块本身查找到的<code>jquery</code>版本是<code>2.0.0</code>，在这个<code>2.0.0</code>的<code>jquery</code>上才会存在<code>jplugin</code>这个扩展。而我们的主模块查找到的<code>jquery</code>版本是<code>1.11.0</code>版本，在这个<code>1.11.0</code>版本的<code>jquery</code>上调用<code>jplugin</code>就出错了。</p>
+<p>说到这里，还并没有引出本文的主题，不过也能够解释依赖版本冲突导致发生奇怪问题的现象了。</p>
+<p>继续这个例子，当我们发现版本依赖有问题时，我们要处理它。假设我们把项目直接依赖的jquery升级到2.0.0，并不会导致其他兼容问题，我们执行<code>npm i jquery@2.0.0 --save</code>. 我们看一下现在的目录结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── node_modules</div><div class="line">│   ├── jquery     // ^2.0.0，假定安装的是2.0.0版本</div><div class="line">│   └── jplugin</div><div class="line">│       ├── node_modules</div><div class="line">│       │   └── jquery  // ^2.0.0，假定安装的是2.0.0版本</div><div class="line">│       └── package.json</div><div class="line">└── package.json</div></pre></td></tr></table></figure>
+<p>上层的jquery已经升级到2.0.0了。我们很兴奋的再次运行页面，发现仍然还是报同样的错。</p>
+<p>其实问题的原因是一样的，虽然大家都是2.0.0版本的jquery，但 <strong>此jquery非彼jquery</strong>，大家拿到的并不是同一个jquery对象。</p>
+<p>其实，此时只要把根目录的<code>node_modules</code>删除，再次执行<code>npm i</code>，看看最终的目录结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── node_modules</div><div class="line">│   ├── jquery</div><div class="line">│   └── jplugin</div><div class="line">│       └── package.json</div><div class="line">└── package.json</div></pre></td></tr></table></figure></p>
+<p>如此一来，大家拿到的就是同一个jquery对象啦，最后页面运行正常了~</p>
+<p>这个问题，才是本文要说的 <strong>依赖冗余</strong> 的问题，即，曾经由于依赖冲突导致安装了同个模块的多个版本，修正依赖版本后，再次<code>npm i</code>,仍然解决不了问题，删除全部<code>node_modules</code>重新安装依赖才正常。遗憾的是，npm并没有这么聪明，或者有其他原因，并没有在安装新模块后，自动帮我们梳理依赖关系。</p>
+<p>那么，遇上这样的问题，就只能删除全部依赖彻底重新安装一次依赖吗？有没有更优雅的方式？</p>
+<p>答案是<code>npm dedupe</code>(或简写<code>npm ddp</code>).</p>
+<p>这个命令会重新计算所有依赖关系，把可以公用的依赖上升到顶级<code>node_modlues</code>,并删除底层不必要的 <em>副本</em>。注意，需要整理的模块越多，所花的时间也越长。</p>
+<p>因此，建议在你的构建过程中添加此命令，从而避免这种问题的发生。</p>
+<p>ps: <code>npm update</code>命令也同样存在此问题。</p>
+<p>ps: 在写这篇文章之前，google到 <a href="http://www.alloyteam.com/2016/03/master-npm/" target="_blank" rel="external">玩转npm</a> 这篇文章, 蛮有参考价值，建议阅读。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/31/Mac-Surge-2-初体验/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Surge for Mac 2 初体验与教程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/07/模块系统之-CommonJS-vs-ES6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">模块系统之 CommonJS vs ES6</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="npm-install问题之依赖冗余" data-title="npm install之依赖冗余" data-url="http://cloudstone.space/2016/10/23/npm-install问题之依赖冗余/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

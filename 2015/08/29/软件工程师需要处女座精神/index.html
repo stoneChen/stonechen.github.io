@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>软件工程师需要处女座精神</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言：近半年来，处女座总是被黑，一般指处女座的人经常有强迫症，与人难以相处。这次我将其“引入正道”，本文的“处女座精神”特指开发者对自己的代码有洁癖，有重构优化“强迫症”，无法容忍烂代码存在，不屑于为了完成任务就草草复制代码了事的工作态度。这又是一篇酝酿了很久的文章，用难产形容也不为过，直到此时仍不能文思如尿崩。  前段时间，看到一篇关于“程序员”与“工程师”的文章，跟这篇文章主题也有些关系。大">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件工程师需要处女座精神">
+<meta property="og:url" content="http://cloudstone.space/2015/08/29/软件工程师需要处女座精神/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="前言：近半年来，处女座总是被黑，一般指处女座的人经常有强迫症，与人难以相处。这次我将其“引入正道”，本文的“处女座精神”特指开发者对自己的代码有洁癖，有重构优化“强迫症”，无法容忍烂代码存在，不屑于为了完成任务就草草复制代码了事的工作态度。这又是一篇酝酿了很久的文章，用难产形容也不为过，直到此时仍不能文思如尿崩。  前段时间，看到一篇关于“程序员”与“工程师”的文章，跟这篇文章主题也有些关系。大">
+<meta property="og:image" content="http://cloudstone.space/images/jpg">
+<meta property="og:image" content="http://cloudstone.space/images/335.png">
+<meta property="og:image" content="http://cloudstone.space/images/6731.png">
+<meta property="og:updated_time" content="2016-02-21T08:29:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件工程师需要处女座精神">
+<meta name="twitter:description" content="前言：近半年来，处女座总是被黑，一般指处女座的人经常有强迫症，与人难以相处。这次我将其“引入正道”，本文的“处女座精神”特指开发者对自己的代码有洁癖，有重构优化“强迫症”，无法容忍烂代码存在，不屑于为了完成任务就草草复制代码了事的工作态度。这又是一篇酝酿了很久的文章，用难产形容也不为过，直到此时仍不能文思如尿崩。  前段时间，看到一篇关于“程序员”与“工程师”的文章，跟这篇文章主题也有些关系。大">
+<meta name="twitter:image" content="http://cloudstone.space/images/jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-软件工程师需要处女座精神" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/29/软件工程师需要处女座精神/" class="article-date">
+  	<time datetime="2015-08-29T04:39:59.000Z" itemprop="datePublished">2015-08-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      软件工程师需要处女座精神
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Essays/">Essays</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>前言：近半年来，处女座总是被黑，一般指处女座的人经常有强迫症，与人难以相处。这次我将其“引入正道”，本文的“处女座精神”特指开发者对自己的代码有洁癖，有重构优化“强迫症”，无法容忍烂代码存在，不屑于为了完成任务就草草复制代码了事的工作态度。<br>这又是一篇酝酿了很久的文章，用难产形容也不为过，直到此时仍不能文思如尿崩。</p>
+</blockquote>
+<p>前段时间，看到一篇关于“程序员”与“工程师”的文章，跟这篇文章主题也有些关系。大意是讲，“程序员”仅仅是coding，完成开发即可，甚至只是把编程变成当做一件糊口的事情，不会站在更高的层面上看问题，对于整个系统的生命周期，质量把控，公用模块，代码可维护性方面，则关注度不高或能力上不足以胜任这类工作，但在领导看来，只要完成开发任务就是个好员工。而“工程师”在完成开发任务的同时，会思考，有没有更好的实现方式，可扩展性如何，有没有继续优化的空间，甚至深入到底层源码去研究，进而扩大到整个系统的思考，哪些模块可以作为通用功能实现，哪些模块只能差异化实现，就像对待自己的孩子一般，深耕细作。</p>
+<p>通常，“工程师”是从“程序员”成长起来的，有的人需要1-2年，有的人需要3-5年，有的人甚至一辈子都停留在“程序员”阶段。但在国内，尤其是行外人眼里，这两个词，几乎是被化作等号的。无妨，我们做自己该做的就好，摆正态度，认证对待自己的工作，努力使自己成长为“工程师”，当有一天闪耀出光芒的时候，也是我们最自豪的时候。</p>
+<p><a href="/images/jpg"><img src="/images/jpg" alt="72a6e59bcb0311ad8dd8a327a43877ca"></a></p>
+<p>好了，回到正题。</p>
+<p>我觉得软件工程师应具备的“处女座精神”包括但不限于以下几点：</p>
+<h2 id="一、熟记编码规范"><a href="#一、熟记编码规范" class="headerlink" title="一、熟记编码规范"></a>一、熟记编码规范</h2><p>这个应该不用多说，好的编码规范，能够帮助我们避免一些难以发现的错误，同时能让合作伙伴尽可能顺利地读懂你的代码。坚决抵制“脏、丑、乱”的代码存在！作为前端开发，推荐阅读《Javascript语言精粹》、《编写可维护的Javascript》这两本书。</p>
+<h2 id="二、多读别人的代码"><a href="#二、多读别人的代码" class="headerlink" title="二、多读别人的代码"></a>二、多读别人的代码</h2><p>始终活在自己的世界，总归是不好的，好比于闭门造车，坐井观天。开源社区鼓励工程师们共享代码，互相学习交流，所以开源的技术，总是发展飞快的。Javascript占据开源榜第一，理所当然的成为了世界上最流行的语言。远的不说，我们采用就近原则，多读读日常工作中使用的开源类库/框架源码，也是大有裨益的。特别是在遇到某些棘手问题时，深入到源码进行分析，可以更加有效的找出问题所在并解决。甚至，在阅读了足够多的开源类库框架源码后，我们就能从中领悟出一些其中的精髓思想，假如有一天我们需要打造自己的框架，终究能派上用场。</p>
+<h2 id="三、多读书"><a href="#三、多读书" class="headerlink" title="三、多读书"></a>三、多读书</h2><p>虽然现在互联网很便捷，遇到问题，稍微花点时间Google或百度一下就能找到解决方案，但绝大部分是零散的知识点，没能系统地总结相关知识点。要想系统地学习，还得通过书籍来完成。即使你已经掌握了大部分基础知识，在阅读过相关书籍后，总会有一些你遗漏的角落，而好的书籍可以帮你查漏补缺，很可能有一天就需要这个被遗忘的细节来帮你解决难题。不要找借口说没时间读书，只要你想，总能抽出时间来做这样一件事。强烈推荐每天留出一点时间来读书！作为前端开发，强烈推荐《Javascript权威指南》(俗称犀牛书)，不要怕厚，这是迄今为止，我看过的介绍Javascript最细致的书籍。</p>
+<p>目前我的做法是，在公司每天中午饭后，读书20-30分钟；在家里另有一本，在睡前阅读10-20分钟。这样日积月累下来，肯定是一笔不小的财富。我经常觉得，有些事情真是冥冥中注定的，比如前几天在树上刚刚看过某个知识点，几天后就遇到这个它了，很快便解决了我的问题；又比如反过来，我前一天在一个问题上卡了很久，当时只是采用了权宜之计，过了几天在书上就找到了更好的解决方案，是不是上天安排好的呢？</p>
+<p>另外，不一定要全部都是技术类的书籍，可以是技术类与人文励志类相结合，一方面在技术上不断深入，一方面提高自己的情商。</p>
+<h2 id="四、关注名人名组织"><a href="#四、关注名人名组织" class="headerlink" title="四、关注名人名组织"></a>四、关注名人名组织</h2><p>名人之所以会成为名人，一定是在某个领域成为了专家，他们讨论的东西，应该是值得关注的。名组织则可以简单理解为名人的集合，名组织发表的文章会更频繁一些。看的多了，真的觉得世界好大，自己太渺小了，居然还有这么多神奇的东西我还没学会囧。关注名人名组织，毫无疑问会帮助我们打开眼界，跟随世界的脚步。</p>
+<p>关注名人名组织的途径，目前主要有RSS，微博，微信公众号。微博，微信也足够了，只要关注对象足够多，每天推送的文章就已经够消化了。等到有一天我们自己也有机会成为名人了，也应当为同行们分享自己的所学所感。当然，我自己显然还远达不到那种境界，想想又不犯法是不是~</p>
+<p>这里推荐几个：</p>
+<p><strong>微博：</strong></p>
+<p>react-china , InfoQ, HTML5中国 ，图灵教育 , 淘宝UED , 奇舞团</p>
+<p>司徒正美， 池建强，鬼道-徐凯 , 拔赤 , 玉伯也叫黑侠寸志 , 民工精髓V</p>
+<p>还有好多。。。</p>
+<p><strong>微信公众号：</strong></p>
+<p>InfoQ , 36氪 ， 虎嗅网 ，猎云网 ， WEB开发者 ， FEX ， 移动观察</p>
+<p>MacTalk ， 小道消息 ，探索时间 ， 道哥的黑板报</p>
+<h2 id="五、遇到陌生的字眼及时Google"><a href="#五、遇到陌生的字眼及时Google" class="headerlink" title="五、遇到陌生的字眼及时Google"></a>五、遇到陌生的字眼及时Google</h2><p>在阅读名人文章或优秀的代码时，经常会看到一些自己没见过的技术字眼，这时只要时间允许，请务必要及时Google，这都是在为自己的未来做准备，说不定哪天这个字眼能够帮助你打开一扇大门，通往光明之路~否则某些精彩将与你擦身而过，岂不遗憾终身？不过你也未必会发现当初如果Google了那个东西，现在就会如何如何厉害了，机会总是留给有准备的人，这句话总是对的。比如Angular, React, Grunt, Gulp, Promise等，这些我都是从别人的文章中初次认识，然后就是自己逐步深入研究，并慢慢拿到工作中使用。</p>
+<h2 id="六、学会做“懒人”"><a href="#六、学会做“懒人”" class="headerlink" title="六、学会做“懒人”"></a>六、学会做“懒人”</h2><p>在开发过程中，经常会遇到需要重复劳动的问题，我们不能抱怨“这个事情好繁琐啊，我不想做了”，或是让它继续浪费你的生命。就拿我最近的一个例子来说，模拟ajax返回数据，由于数据量巨大，如果我每次都通过手动修改硕大的json假数据来反复测试，那真的是要疯了。于是我想起，可以用nodejs循环造对象，造数组，最后通过JSON.stringify转换成json字符串写入json文件。这样，以后我想批量改数据，只要修改基础随机范围，重新生成json文件即可轻松切换模拟的数据，着实可以称的上“偷懒”了。</p>
+<p>再套用我先前的那句话：我们要学会做一个“懒人”，脏活累活都让程序去干吧~</p>
+<h2 id="七、经常总结"><a href="#七、经常总结" class="headerlink" title="七、经常总结"></a>七、经常总结</h2><p>写博客是一个比较有效的总结手段，即使之前你刚刚掌握了一个知识点，但只是一个“点”，通过写博客的方式，你可以更加深刻的理解它，有时写着写着你会发现原来还有一些细节被忽略了，甚至联想开去，由这个点发散成一个面的知识点，会有更加意外的收获。再举一个我最近的例子，在项目里实现了一个抛物线动画效果，但当时是用固定定位结合left和top实现的，后来在写博客时，想起来也可以用transform的translate实现，动手再次试验了一把，在移动端具有更加流畅的效果！然后，回到项目里，把原来的代码也改为translate实现，完美！</p>
+<p>目前我给自己定的任务是，无重大事情占据时间的前提下，每周至少一篇博客。通过几个月的时间下来，发现写一篇文章真不容易，尤其是技术类，为了保证给出的demo不出差错，需要反复的校对，为了验证正确性，也需要查询很多资料。一篇质量过的去的文章一般需要1.5-3个小时才能完成。</p>
+<p>现在微信公众号也异常火热，也是做总结的一个渠道，可能更加偏重于与读者互动，而博客偏重于自我沉淀。公众号主要针对移动端，博客一般在电脑上阅读，看代码也方便的多。</p>
+<h2 id="八、利用合适的工具提高效率"><a href="#八、利用合适的工具提高效率" class="headerlink" title="八、利用合适的工具提高效率"></a>八、利用合适的工具提高效率</h2><p>这里的工具主要指软件，现代化的软件开发，几乎没有人用记事本从零开始写代码，各个领域基本都有自己的专业IDE或编辑器，强大的代码提示，有的达到了“令人发指”的地步（似乎是阮一峰大大说的）。但是有了强大的代码提示，不代表你有理由不记住相应的完整代码，最近面试的几个应聘者，居然不会说CSS position的fixed和absolute两个值，只记得f开头和a开头了。。。我也是醉了。代码编辑器越来越多，鼓励大家都去尝试一下，然后选出最适合自己的。</p>
+<p>然后，说说操作系统。工具软件也是软件，是运行在操作系统之上的，在软件工程师用户里，主流操作系统无非Windows，OS X，Linux。Windows 本身就用户量巨大，在其之上从事开发工作也无可厚非。Linux比较适合做服务器，GUI软件太少，个人用户量并不大。但是OS X简直就是为软件工程师而生的，GUI与命令行的完美结合体（引卖桃君所言）。OS X上有太多适合软件工程师的功能与软件，尤其是无需常关机，空格快速预览文件，“开盖即用，关盖即走”（macbook），命令行一气呵成式的安装软件等等。知乎上有很多关于Windows和 OS X的对比分析，有兴趣的请自行翻找。</p>
+<p>工作中遇到操作系统级别不爽的操作，一定要去Google一下，很可能别人也需要类似的问题，并且有了解决方案。比如OS X 上finder里拷贝文件路径不方便，其实早就诞生了XtraFinder这样的系统插件用于解决此类问题，另外它还提供了大量其他人性化的功能。</p>
+<p>另外，使用Windows习惯了的人，希望一切软件都是免费的，甚至使用盗版。这是一种不正常的心理，同样身为软件工程师，却不支持别的软件工程师的工作成果，如何能促使软件的进一步完善？通常收费软件的质量会比同类免费软件的质量要高一些，如果一款收费软件能够真正为你带来价值，那么支持一下有何不可？这是我的常规情况状态栏：</p>
+<p><img src="/images/335.png" alt=""></p>
+<p>应该还不算多的，专业人士的状态栏上运行的常用工具早就不是一行能显示的下的了。其中第一个<a href="http://manico.im/" target="_blank" rel="external">manico</a>(国人开发)和第三个<a href="http://www.irradiatedsoftware.com/sizeup/" target="_blank" rel="external">sizeup</a>，都是我最近购买过license的，分别用于快速切换应用与快速调整窗口大小，这对于软件工程师来说真是太贴心了！</p>
+<h2 id="九、耐心帮助他人解决问题"><a href="#九、耐心帮助他人解决问题" class="headerlink" title="九、耐心帮助他人解决问题"></a>九、耐心帮助他人解决问题</h2><p>这个其实也不用多说，非特殊情况，就没有理由拒绝别人的求助，说不定你自己也能从中学到一些东西。即使是比你差的人问你你已经倒背如流的知识点，在你解释它的过程中，你也很有可能温故而知新，所谓“<em>最好的学习</em>方法<em>就是教别人</em>”，不是没道理的。帮助他人，某种程度上也是提升自己。我之前学习Angular的时候，加入了一个QQ群，当我自己渐入佳境的时候，也会经常帮助群里的初学者，甚至在某些在线共享代码平台展示我的代码。有些问题，我自己也只能说是一知半解，经过一番研究，补上了相关疏漏知识点，这是双赢的结果。</p>
+<h2 id="十、建立自己的实验室工程"><a href="#十、建立自己的实验室工程" class="headerlink" title="十、建立自己的实验室工程"></a>十、建立自己的实验室工程</h2><p>这个与前端本身的门槛低有点关系，“一个记事本，一个浏览器，就可以边写代码，边看效果”，搭建前端入门环境如此简单。所谓“实验室工程”，就是一个专门用于试验各种想法的代码工程，也可以理解为一个工程模板，每当你有一个念头一闪而过的时候，可以迅速打开这个工程进行验证，说不定一个伟大的框架就此生根发芽。试验所需的类库/框架，可以通过bower或npm安装。比如浏览器环境的试验，可以快速建立一个简单的HTML页面，里面已经引用了常用的类库/框架，你只需直接编写你想试验的代码，然后在浏览器中打开预览即可。如果是node环境的试验，简单的情况，一个js文件就够了。这两种情况，webstorm很好的满足了我的需求。由于取文件名是件麻烦事，所以我干脆就以当天的日期命名试验文件，上个图：</p>
+<p><img src="/images/6731.png" alt=""></p>
+<p>&nbsp;</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然上面提到这么多，我自己也并没有每条都做到，人性骨子里始终还是有惰性存在的（好像是在给自己找借口囧），或者说我的意志力还不够强，所以我很钦佩当过兵的人，部队里从来都是纪律严明，训练过的意志力是可以过度到学习中来的。但做总比不做好，积少成多，水滴石穿，谨以此文激励自己不断前进，也希望对看到这篇文章的读者能有一定积极的作用。</p>
+<p>从“程序员”到“工程师”，从菜鸟到大牛，需要经历很长很坎坷的路，比别人要付出几倍数十倍的努力。然而，只要我们要保持正确的心态对待我们的工作，或者说是我们的事业，最终一定可以实现工程师的自我价值。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/03/移动端touch事件无视disabled属性-探索收货/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          移动端touch事件无视disabled属性-探索收货
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/23/重温javascript的this指向/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">重温javascript的this指向</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="软件工程师需要处女座精神" data-title="软件工程师需要处女座精神" data-url="http://cloudstone.space/2015/08/29/软件工程师需要处女座精神/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

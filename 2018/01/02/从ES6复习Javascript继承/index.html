@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>从ES6复习javascript继承</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="近两年，随着ES6的普及，大家都用上了class作为javascript的继承实现，然而在浏览器端大多数情况下ES6代码是要转译到ES5甚至ES3版本的，否则可能你的目标浏览器并不能直接识别你的class语法。class写多了，可能原始的继承实现会有所遗忘，这里复习一下javascript的继承实现演变史。">
+<meta name="keywords" content="javascript,es6,ts,继承">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从ES6复习javascript继承">
+<meta property="og:url" content="http://cloudstone.space/2018/01/02/从ES6复习Javascript继承/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="近两年，随着ES6的普及，大家都用上了class作为javascript的继承实现，然而在浏览器端大多数情况下ES6代码是要转译到ES5甚至ES3版本的，否则可能你的目标浏览器并不能直接识别你的class语法。class写多了，可能原始的继承实现会有所遗忘，这里复习一下javascript的继承实现演变史。">
+<meta property="og:image" content="http://cloudstone.space/images/20180102/es3.png">
+<meta property="og:image" content="http://cloudstone.space/images/20180102/es6.png">
+<meta property="og:image" content="http://cloudstone.space/images/20180102/babel.png">
+<meta property="og:updated_time" content="2018-01-03T05:58:16.934Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从ES6复习javascript继承">
+<meta name="twitter:description" content="近两年，随着ES6的普及，大家都用上了class作为javascript的继承实现，然而在浏览器端大多数情况下ES6代码是要转译到ES5甚至ES3版本的，否则可能你的目标浏览器并不能直接识别你的class语法。class写多了，可能原始的继承实现会有所遗忘，这里复习一下javascript的继承实现演变史。">
+<meta name="twitter:image" content="http://cloudstone.space/images/20180102/es3.png">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-从ES6复习Javascript继承" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/02/从ES6复习Javascript继承/" class="article-date">
+  	<time datetime="2018-01-02T08:31:59.000Z" itemprop="datePublished">2018-01-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从ES6复习javascript继承
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ts/">ts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/继承/">继承</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>近两年，随着ES6的普及，大家都用上了<code>class</code>作为javascript的继承实现，然而在浏览器端大多数情况下ES6代码是要转译到<code>ES5</code>甚至<code>ES3</code>版本的，否则可能你的目标浏览器并不能直接识别你的<code>class</code>语法。<code>class</code>写多了，可能原始的继承实现会有所遗忘，这里复习一下javascript的继承实现演变史。</p>
+<a id="more"></a>
+<p>在ES6之前javascript并没有正式的『类』概念，通过『构造函数』结合原型链来实现继承，我们一个个来看。</p>
+<h2 id="ES3"><a href="#ES3" class="headerlink" title="ES3"></a>ES3</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">color</span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.color = color</div><div class="line">&#125;</div><div class="line"></div><div class="line">Animal.prototype.walk = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Animal in '</span> + <span class="keyword">this</span>.color + <span class="string">' is walking...'</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)</div><div class="line">  <span class="comment">// 调用父类构造函数，继承父类的初始化行为</span></div><div class="line">  Animal.apply(<span class="keyword">this</span>, args)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 通过中间函数获取父类原型，使用中间函数是为了防止通过子类意外篡改父类</span></div><div class="line"><span class="comment">// 如果在Nodejs环境中, 此函数可以使用util模块的inherits函数代替，用法一致</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">inherits</span>(<span class="params">Sub, Parent</span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Ctor</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"></div><div class="line">  Ctor.prototype = Parent.prototype</div><div class="line"></div><div class="line">  Sub.prototype = <span class="keyword">new</span> Ctor()</div><div class="line">  Sub.prototype.constructor = Sub</div><div class="line">&#125;</div><div class="line"></div><div class="line">inherits(Dog, Animal)</div><div class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog(<span class="string">'white'</span>)</div><div class="line">dog.walk()</div><div class="line"><span class="built_in">console</span>.log(dog)</div></pre></td></tr></table></figure>
+<p>输出：<br><img src="/images/20180102/es3.png" alt=""></p>
+<h2 id="ES5"><a href="#ES5" class="headerlink" title="ES5"></a>ES5</h2><p>ES5新增了<code>Object.create</code>方法，可使用给定的对象作为原型去创建一个新的对象，更适合用于继承。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">color</span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.color = color</div><div class="line">&#125;</div><div class="line"></div><div class="line">Animal.prototype.walk = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Animal in '</span> + <span class="keyword">this</span>.color + <span class="string">' is walking...'</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)</div><div class="line">  <span class="comment">// 调用父类构造函数，继承父类的初始化行为</span></div><div class="line">  Animal.apply(<span class="keyword">this</span>, args)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 使用ES5新增的Object.create方法</span></div><div class="line"><span class="comment">// 如果在Nodejs环境中, 此函数可以使用util模块的inherits函数代替，用法一致</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">inherits</span>(<span class="params">Sub, Parent</span>) </span>&#123;</div><div class="line">  Sub.prototype = <span class="built_in">Object</span>.create(Parent.prototype)</div><div class="line">  Sub.prototype.constructor = Sub</div><div class="line">&#125;</div><div class="line"></div><div class="line">inherits(Dog, Animal)</div><div class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog(<span class="string">'white'</span>)</div><div class="line">dog.walk()</div><div class="line"><span class="built_in">console</span>.log(dog)</div></pre></td></tr></table></figure></p>
+<p>输出结果与上述ES3实现方式一致</p>
+<h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><p>使用<code>class</code>实现继承，更加正统，也更简洁。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(color) &#123;</div><div class="line">    <span class="keyword">this</span>.color = color</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  walk() &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`Animal in <span class="subst">$&#123;<span class="keyword">this</span>.color&#125;</span> is walking...`</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(...args) &#123;</div><div class="line">    <span class="keyword">super</span>(...args)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> dog = <span class="keyword">new</span> Dog(<span class="string">'red'</span>)</div><div class="line">dog.walk()</div><div class="line"><span class="built_in">console</span>.log(dog)</div></pre></td></tr></table></figure></p>
+<p>输出：<br><img src="/images/20180102/es6.png" alt=""><br>这是基于chrome@63的打印结果，其已实现<code>class</code>。然而，如果你的web应用需要兼容<code>ES5</code>, 你可能需要使用<code>babel</code>来转译你的<code>ES6</code>代码。</p>
+<h2 id="babel转译class"><a href="#babel转译class" class="headerlink" title="babel转译class"></a>babel转译class</h2><p>通过<a href="https://babeljs.io/repl/" target="_blank" rel="external">https://babeljs.io/repl/</a> ,我们来看看上述代码经过<code>babel</code>转译后得到的是什么：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> _createClass = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">defineProperties</span>(<span class="params">target, props</span>) </span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; props.length; i++) &#123;</div><div class="line">      <span class="keyword">var</span> descriptor = props[i];</div><div class="line">      descriptor.enumerable = descriptor.enumerable || <span class="literal">false</span>;</div><div class="line">      descriptor.configurable = <span class="literal">true</span>;</div><div class="line">      <span class="keyword">if</span> (<span class="string">"value"</span> <span class="keyword">in</span> descriptor) descriptor.writable = <span class="literal">true</span>;</div><div class="line">      <span class="built_in">Object</span>.defineProperty(target, descriptor.key, descriptor);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">Constructor, protoProps, staticProps</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (protoProps) defineProperties(Constructor.prototype, protoProps);</div><div class="line">    <span class="keyword">if</span> (staticProps) defineProperties(Constructor, staticProps);</div><div class="line">    <span class="keyword">return</span> Constructor;</div><div class="line">  &#125;;</div><div class="line">&#125;();</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_possibleConstructorReturn</span>(<span class="params">self, call</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!self) &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">ReferenceError</span>(<span class="string">"this hasn't been initialised - super() hasn't been called"</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> call &amp;&amp; (<span class="keyword">typeof</span> call === <span class="string">"object"</span> || <span class="keyword">typeof</span> call === <span class="string">"function"</span>) ? call : self;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_inherits</span>(<span class="params">subClass, superClass</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> superClass !== <span class="string">"function"</span> &amp;&amp; superClass !== <span class="literal">null</span>) &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"Super expression must either be null or a function, not "</span> + <span class="keyword">typeof</span> superClass);</div><div class="line">  &#125;</div><div class="line">  subClass.prototype = <span class="built_in">Object</span>.create(superClass &amp;&amp; superClass.prototype, &#123;</div><div class="line">    <span class="keyword">constructor</span>: &#123;</div><div class="line">      value: subClass,</div><div class="line">      enumerable: <span class="literal">false</span>,</div><div class="line">      writable: <span class="literal">true</span>,</div><div class="line">      configurable: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">  <span class="keyword">if</span> (superClass) <span class="built_in">Object</span>.setPrototypeOf ? <span class="built_in">Object</span>.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_classCallCheck</span>(<span class="params">instance, Constructor</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!(instance <span class="keyword">instanceof</span> Constructor)) &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"Cannot call a class as a function"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> Animal = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">color</span>) </span>&#123;</div><div class="line">    _classCallCheck(<span class="keyword">this</span>, Animal);</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.color = color;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  _createClass(Animal, [&#123;</div><div class="line">    key: <span class="string">'walk'</span>,</div><div class="line">    value: <span class="function"><span class="keyword">function</span> <span class="title">walk</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'Animal in '</span> + <span class="keyword">this</span>.color + <span class="string">' is walking...'</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;]);</div><div class="line"></div><div class="line">  <span class="keyword">return</span> Animal;</div><div class="line">&#125;();</div><div class="line"></div><div class="line"><span class="keyword">var</span> Dog = <span class="function"><span class="keyword">function</span> (<span class="params">_Animal</span>) </span>&#123;</div><div class="line">  _inherits(Dog, _Animal);</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> _ref;</div><div class="line"></div><div class="line">    _classCallCheck(<span class="keyword">this</span>, Dog);</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> _len = <span class="built_in">arguments</span>.length, args = <span class="built_in">Array</span>(_len), _key = <span class="number">0</span>; _key &lt; _len; _key++) &#123;</div><div class="line">      args[_key] = <span class="built_in">arguments</span>[_key];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> _possibleConstructorReturn(<span class="keyword">this</span>, (_ref = Dog.__proto__ || <span class="built_in">Object</span>.getPrototypeOf(Dog)).call.apply(_ref, [<span class="keyword">this</span>].concat(args)));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> Dog;</div><div class="line">&#125;(Animal);</div><div class="line"></div><div class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog(<span class="string">'red'</span>);</div><div class="line">dog.walk();</div><div class="line"><span class="built_in">console</span>.log(dog);</div></pre></td></tr></table></figure></p>
+<p>乍一看略吓人，难怪经过babel转译的代码体积那么大。<br>再仔细看看，使用了很多高阶函数、偏函数，对比之前的实现，其实<code>babel</code>的转译结果是非常谨慎的，处理了多种异常情况，兼容了多种场景，让开发者更容易提早发现错误。<br>执行此转译后的代码输出：<br><img src="/images/20180102/babel.png" alt=""><br>与<code>ES5</code>版本的输出基本一致。</p>
+<h2 id="typescript转译class"><a href="#typescript转译class" class="headerlink" title="typescript转译class"></a>typescript转译class</h2><p>同样都是转译，我们看一看<code>typescript</code>是如何处理<code>class</code>的。<br>通过<a href="https://www.typescriptlang.org/play" target="_blank" rel="external">https://www.typescriptlang.org/play</a> ,得到如下结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> __extends = (<span class="keyword">this</span> &amp;&amp; <span class="keyword">this</span>.__extends) || (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> extendStatics = <span class="built_in">Object</span>.setPrototypeOf ||</div><div class="line">    (&#123;</div><div class="line">        __proto__: []</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">instanceof</span> <span class="built_in">Array</span> &amp;&amp; <span class="function"><span class="keyword">function</span> (<span class="params">d, b</span>) </span>&#123;</div><div class="line">        d.__proto__ = b;</div><div class="line">      &#125;) ||</div><div class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">d, b</span>) </span>&#123;</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">in</span> b)</div><div class="line">        <span class="keyword">if</span> (b.hasOwnProperty(p)) d[p] = b[p];</div><div class="line">    &#125;;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">d, b</span>) </span>&#123;</div><div class="line">    extendStatics(d, b);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">this</span>.constructor = d;</div><div class="line">    &#125;</div><div class="line">    d.prototype = b === <span class="literal">null</span> ? <span class="built_in">Object</span>.create(b) : (__.prototype = b.prototype, <span class="keyword">new</span> __());</div><div class="line">  &#125;;</div><div class="line">&#125;)();</div><div class="line"><span class="keyword">var</span> Animal = <span class="comment">/** @class */</span> (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">color</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.color = color;</div><div class="line">  &#125;</div><div class="line">  Animal.prototype.walk = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"Animal in "</span> + <span class="keyword">this</span>.color + <span class="string">" is walking..."</span>);</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">return</span> Animal;</div><div class="line">&#125;());</div><div class="line"><span class="keyword">var</span> Dog = <span class="comment">/** @class */</span> (<span class="function"><span class="keyword">function</span> (<span class="params">_super</span>) </span>&#123;</div><div class="line">  __extends(Dog, _super);</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> args = [];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> _i = <span class="number">0</span>; _i &lt; <span class="built_in">arguments</span>.length; _i++) &#123;</div><div class="line">      args[_i] = <span class="built_in">arguments</span>[_i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> _super.apply(<span class="keyword">this</span>, args) || <span class="keyword">this</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> Dog;</div><div class="line">&#125;(Animal));</div><div class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog(<span class="string">'red'</span>);</div><div class="line">dog.walk();</div><div class="line"><span class="built_in">console</span>.log(dog);</div></pre></td></tr></table></figure></p>
+<p>可以看到，<code>typescript</code>的版本更加贴近我们上述<code>ES5</code>的版本，而且似乎还兼容了<code>ES3</code>。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>javascript是一门很灵活的『面向对象』语言，随着<code>ECMAScript</code>的完善（<code>ES6</code>, <code>ES7</code>, <code>ES8</code>…），这门语言会变得越来越优秀，其自身的缺陷逐渐被规避，甚至屏蔽。<br>近些年<code>typescript</code>的发展也比较迅速，可以适当关注。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/26/Node-js之terminal彩色字体/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Node.js之terminal彩色字体</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="从ES6复习Javascript继承" data-title="从ES6复习javascript继承" data-url="http://cloudstone.space/2018/01/02/从ES6复习Javascript继承/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

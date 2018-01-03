@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>使用强大的Chrome开发者工具——HTML篇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天微信上看到一篇文章《专家认为：IE被放弃也是Win帝国毁灭的开始》 ，这对于前端开发同学来说应该是个好消息吧呵呵，不过短时间内IE用户还是大有人在的，权当给小伙伴们一个小惊喜吧。下面进入正题~介绍Chrome开发者工具Elements面板的常用功能。 &amp;nbsp; 那么就顺便拿上面这个页面作例子好了。用Chrome打开这个页面： 一、查看元素盒子概况 我们在这篇文章的标题处，右键-&amp;gt;选择">
+<meta name="keywords" content="chrome,调试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用强大的Chrome开发者工具——HTML篇">
+<meta property="og:url" content="http://cloudstone.space/2015/03/23/使用强大的Chrome开发者工具——HTML篇/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="今天微信上看到一篇文章《专家认为：IE被放弃也是Win帝国毁灭的开始》 ，这对于前端开发同学来说应该是个好消息吧呵呵，不过短时间内IE用户还是大有人在的，权当给小伙伴们一个小惊喜吧。下面进入正题~介绍Chrome开发者工具Elements面板的常用功能。 &amp;nbsp; 那么就顺便拿上面这个页面作例子好了。用Chrome打开这个页面： 一、查看元素盒子概况 我们在这篇文章的标题处，右键-&amp;gt;选择">
+<meta property="og:image" content="http://cloudstone.space/images/QQ20150323-1.png">
+<meta property="og:image" content="http://cloudstone.space/images/QQ20150323-3.png">
+<meta property="og:image" content="http://cloudstone.space/images/QQ20150324-1.png">
+<meta property="og:image" content="http://cloudstone.space/images/QQ20150324-2.png">
+<meta property="og:image" content="http://cloudstone.space/images/QQ20150324-3.png">
+<meta property="og:image" content="http://cloudstone.space/images/QQ20150324-4.png">
+<meta property="og:updated_time" content="2016-02-21T08:29:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用强大的Chrome开发者工具——HTML篇">
+<meta name="twitter:description" content="今天微信上看到一篇文章《专家认为：IE被放弃也是Win帝国毁灭的开始》 ，这对于前端开发同学来说应该是个好消息吧呵呵，不过短时间内IE用户还是大有人在的，权当给小伙伴们一个小惊喜吧。下面进入正题~介绍Chrome开发者工具Elements面板的常用功能。 &amp;nbsp; 那么就顺便拿上面这个页面作例子好了。用Chrome打开这个页面： 一、查看元素盒子概况 我们在这篇文章的标题处，右键-&amp;gt;选择">
+<meta name="twitter:image" content="http://cloudstone.space/images/QQ20150323-1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-使用强大的Chrome开发者工具——HTML篇" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/23/使用强大的Chrome开发者工具——HTML篇/" class="article-date">
+  	<time datetime="2015-03-23T14:26:05.000Z" itemprop="datePublished">2015-03-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用强大的Chrome开发者工具——HTML篇
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chrome/">chrome</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/html/">html</a><a class="article-category-link" href="/categories/html/工具/">工具</a><a class="article-category-link" href="/categories/html/工具/调试/">调试</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天微信上看到一篇文章<a href="http://mp.weixin.qq.com/s?__biz=MjM5MzMyNzg0MA==&amp;mid=203329964&amp;idx=1&amp;sn=3c016a86f47f85bdb48f92a8c5018401#rd" target="_blank" rel="external">《专家认为：IE被放弃也是Win帝国毁灭的开始》</a> ，这对于前端开发同学来说应该是个好消息吧呵呵，不过短时间内IE用户还是大有人在的，权当给小伙伴们一个小惊喜吧。下面进入正题~介绍Chrome开发者工具Elements面板的常用功能。</p>
+<p>&nbsp;</p>
+<p>那么就顺便拿上面这个页面作例子好了。用Chrome打开这个页面：</p>
+<p><strong>一、查看元素盒子概况</strong></p>
+<p>我们在这篇文章的标题处，右键-&gt;选择【审查元素】，如果你当前标签的开发者工具没有开启的话，此操作将开启它，然后Chrome将焦点定位在这个h2元素上，如图：</p>
+<p><a href="/images/QQ20150323-1.png"><img src="/images/QQ20150323-1.png" alt="QQ20150323-1"></a></p>
+<p>我们再将鼠标移到的这个被蓝色高亮的节点上，我们会看到页面中对应的标题会被蓝绿橙三种颜色的背景“包围”了，那么蓝色就是元素自身内容的高宽(不一定是你设置的width属性值，视它的box-sizing而定)，绿色是padding，橙色是margin，如图：</p>
+<p><a href="/images/QQ20150323-3.png"><img src="/images/QQ20150323-3.png" alt="QQ20150323-3"></a></p>
+<p>橙色下方的668 x 44px 意思是此元素的内容高宽 + padding + margin + border 的最终宽度。前面的h2#activity.rich_media_title，如果你会使用css选择器的话，应该很容易理解，即此元素的id是activity，拥有rich_media_title这个class。</p>
+<p>此查看方式可以轻松了解页面上各个元素的和模型概况，之所以是“概况”，因为此时还无法得知内容高宽以及padding和margin的具体值，我们将在CSS篇中介绍如何查看和模型的各个具体数值。</p>
+<p>&nbsp;</p>
+<p><strong>二、删除元素节点</strong></p>
+<p>这个很简单，直接按delete键即可将高亮的节点删除，包括其子孙节点，当然你也可以在需要删除的节点上右键-&gt;选择【Delete】，紧接着页面上相应的节点也消失了，如图：</p>
+<p><a href="/images/QQ20150324-1.png"><img src="/images/QQ20150324-1.png" alt="QQ20150324-1"></a></p>
+<p>&nbsp;</p>
+<p>当然，这个删除操作只是临时性的，刷新页面即可恢复。</p>
+<p><strong>三、修改元素节点</strong></p>
+<p>这个操作，可分为属性修改和节点“outerHTML”的修改。前者其实是可以通过后者实现的。</p>
+<p>a.属性修改</p>
+<p>我们刷新刚才的页面，把文章标题恢复。依然在标题上右键-&gt;选择【审查元素】，在该元素的class属性上双击左键（或右键-&gt;选择【Edit Attribute】），接着该节点的class属性便进入编辑状态，我们把rich_media_title这个class改为rich_media_title11111，甚至删掉，回车，页面上的标题瞬间就变小了，其实是应用在rich_media_title这个class上的css属性消失了，也即css选择器选不到这个节点了，那么相应的css设置便失效了~</p>
+<p>另外，我们双击该节点里的文本节点，也立即进入编辑状态，修改完后回车，页面上就能看到效果，如图：</p>
+<p><a href="/images/QQ20150324-2.png"><img src="/images/QQ20150324-2.png" alt="QQ20150324-2"></a></p>
+<p>b.节点“outerHTML”的修改</p>
+<p>作为web开发的你，对outerHTML应该不陌生。此功能相当于在脚本以外，借助浏览器的力量去修改节点的outerHTML。我们再在该标题节点上右键-&gt;选择【Edit as HTML】，可以看到整个节点的内容变成了编辑状态。你可以随意修改其中的内容，完毕后，在编辑框的外部点击一下（即blur一下），即可生效，如图：</p>
+<p><a href="/images/QQ20150324-3.png"><img src="/images/QQ20150324-3.png" alt="QQ20150324-3"></a></p>
+<p>基于此功能，在Chrome可以造各种“假象”（小小邪恶一下呵呵），当然不建议读者利用此功能干坏事。</p>
+<p><strong>四、移动元素节点</strong></p>
+<p>刷新恢复页面，在文章标题下一行的日期这一行，右键-&gt;选择【审查元素】，em#post-date将被高亮显示，我们点击它的父节点div.rich_media_meta_list,然后向上拖动该节点，在释放鼠标之前，在可以释放的地方都会产生一条水平线，我们将它拖到div.rich_media_title的上面，释放鼠标，这时我们立刻看到页面上，日期的这一行移到了标题上方，zmazing！，如图：</p>
+<p><a href="/images/QQ20150324-4.png"><img src="/images/QQ20150324-4.png" alt="QQ20150324-4"></a></p>
+<p>当然，此操作也可以通过在节点上鼠标右键的【cut】和【paste】结合实现，读者可自行尝试。</p>
+<p><strong>五、使元素节点滚动至当前视图</strong></p>
+<p>在Elements的面板中，继续向下浏览，找到某个P标签，最好是比较下面的未在页面窗口中显示的，然后在该节点上右键-&gt;选择【Scroll into View】，我们可以看到,此节点内容出现在了页面窗口中。</p>
+<p>当然，读者可能觉着这功能是否太鸡肋了？完全可以通过滚动页面打到这个效果啊。</p>
+<p>没错，在这种情况下，是可以通过滚动页面实现。但是当我们在调试js代码的时候，页面是被锁定的，无法进行交互，也即无法进行滚动页面操作。此时这个操作就派上用场啦~</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/28/使用强大的Chrome开发者工具——CSS篇/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          使用强大的Chrome开发者工具——CSS篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/22/使用强大的Chrome开发者工具——序/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用强大的Chrome开发者工具——序</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="使用强大的Chrome开发者工具——HTML篇" data-title="使用强大的Chrome开发者工具——HTML篇" data-url="http://cloudstone.space/2015/03/23/使用强大的Chrome开发者工具——HTML篇/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

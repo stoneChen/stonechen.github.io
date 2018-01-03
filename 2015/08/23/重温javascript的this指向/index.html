@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>重温javascript的this指向</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前几天，听同事讨论起javascript的this指向问题，趁此机会复习一下这个知识点。 翻了下犀牛书，在8.2.2节(第6版p171)提到了this的指向问题：  需要注意的是，this是一个关键字，不是变量，也不是属性名。JavaScript的语法不允许给this赋值。 和变量不同，关键字this没有作用域的限制，嵌套的函数不会从调用它的函数中继承this。如果嵌套函数作为方法调用，其this">
+<meta name="keywords" content="javascript,this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重温javascript的this指向">
+<meta property="og:url" content="http://cloudstone.space/2015/08/23/重温javascript的this指向/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="前几天，听同事讨论起javascript的this指向问题，趁此机会复习一下这个知识点。 翻了下犀牛书，在8.2.2节(第6版p171)提到了this的指向问题：  需要注意的是，this是一个关键字，不是变量，也不是属性名。JavaScript的语法不允许给this赋值。 和变量不同，关键字this没有作用域的限制，嵌套的函数不会从调用它的函数中继承this。如果嵌套函数作为方法调用，其this">
+<meta property="og:image" content="http://cloudstone.space/images/627.png">
+<meta property="og:image" content="http://cloudstone.space/images/986.png">
+<meta property="og:image" content="http://cloudstone.space/images/122.png">
+<meta property="og:image" content="http://cloudstone.space/images/219.png">
+<meta property="og:image" content="http://cloudstone.space/images/395.png">
+<meta property="og:image" content="http://cloudstone.space/images/210.png">
+<meta property="og:image" content="http://cloudstone.space/images/851.png">
+<meta property="og:image" content="http://cloudstone.space/images/862.png">
+<meta property="og:image" content="http://cloudstone.space/images/946.png">
+<meta property="og:image" content="http://cloudstone.space/images/999.png">
+<meta property="og:image" content="http://cloudstone.space/images/390.png">
+<meta property="og:image" content="http://cloudstone.space/images/794.png">
+<meta property="og:image" content="http://cloudstone.space/images/500.png">
+<meta property="og:image" content="http://cloudstone.space/images/357.png">
+<meta property="og:image" content="http://cloudstone.space/images/514.png">
+<meta property="og:image" content="http://cloudstone.space/images/137.png">
+<meta property="og:updated_time" content="2016-02-27T02:53:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重温javascript的this指向">
+<meta name="twitter:description" content="前几天，听同事讨论起javascript的this指向问题，趁此机会复习一下这个知识点。 翻了下犀牛书，在8.2.2节(第6版p171)提到了this的指向问题：  需要注意的是，this是一个关键字，不是变量，也不是属性名。JavaScript的语法不允许给this赋值。 和变量不同，关键字this没有作用域的限制，嵌套的函数不会从调用它的函数中继承this。如果嵌套函数作为方法调用，其this">
+<meta name="twitter:image" content="http://cloudstone.space/images/627.png">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-重温javascript的this指向" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/23/重温javascript的this指向/" class="article-date">
+  	<time datetime="2015-08-23T13:55:11.000Z" itemprop="datePublished">2015-08-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      重温javascript的this指向
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/this/">this</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a><a class="article-category-link" href="/categories/javascript/前端/">前端</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天，听同事讨论起javascript的this指向问题，趁此机会复习一下这个知识点。</p>
+<p>翻了下犀牛书，在8.2.2节(第6版p171)提到了this的指向问题：</p>
+<blockquote>
+<p>需要注意的是，this是一个关键字，不是变量，也不是属性名。JavaScript的语法不允许给this赋值。</p>
+<p>和变量不同，关键字this没有作用域的限制，嵌套的函数不会从调用它的函数中继承this。如果嵌套函数作为方法调用，其this的值指向调用它的对象。如果嵌套函数作为函数调用，其this值不是全局对象（非严格模式下）就是undefined（严格模式下）。很多人误以为调用嵌套函数时this会指向调用外层函数的上下文。如果你想访问这个外部函数的this值，需要将this的值保存在一个变量里，这个变量和内部函数都同在一个作用域内。</p>
+<p>(以上是LD亲手敲的奥，赞一个- -)<br>对着上面这段话提到的场景解释一下：<br>嵌套的函数不会从调用它的函数中继承this<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Outer = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.foo = <span class="string">'outer value'</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fnInner</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.foo)<span class="comment">//如果继承了外层，那么会打印outer value</span></div><div class="line">    &#125;</div><div class="line">    fnInner();</div><div class="line">&#125;;</div><div class="line"><span class="keyword">new</span> Outer();</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p><img src="/images/627.png" alt=""></p>
+<p>答案是undefined，也就是说不会继承外层this，这个应该是最好理解的。那么如何访问外层this下的属性呢？很简单，且看：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Outer = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.foo = <span class="string">'outer value'</span>;</div><div class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;<span class="comment">//将this赋值给一个局部变量</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fnInner</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(that.foo);<span class="comment">//访问that即是外层函数的this</span></div><div class="line">    &#125;</div><div class="line">    fnInner();</div><div class="line">&#125;;</div><div class="line"><span class="keyword">new</span> Outer();</div></pre></td></tr></table></figure></p>
+<p><img src="/images/986.png" alt=""></p>
+<p>说起that，关于这个局部变量的命名有三大党派：</p>
+<ol>
+<li><code>that</code>派</li>
+<li><code>self</code>派</li>
+<li><code>me</code>派<br>你更喜欢哪一派呢？</li>
+</ol>
+<p>再看下一个：</p>
+<blockquote>
+<p>如果嵌套函数作为方法调用，其this的值指向调用它的对象。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Outer = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.foo = <span class="string">'outer value'</span>;</div><div class="line">    <span class="keyword">this</span>.fnInner = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'nested func: '</span> + <span class="keyword">this</span>.foo);<span class="comment">//this即为刚刚创建的Outer实例对象</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">this</span>.fnInner();<span class="comment">//方法调用</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">new</span> Outer();</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p><img src="/images/122.png" alt=""></p>
+<p>理解这个应该也不难。最后一个场景：</p>
+<blockquote>
+<p>如果嵌套函数作为函数调用，其this值不是全局对象（非严格模式下）就是undefined（严格模式下）。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Outer = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="comment">//非严格模式</span></div><div class="line">    <span class="keyword">this</span>.foo = <span class="string">'outer value'</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fnInner</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);<span class="comment">//此this为全局对象，在浏览器中就是window，在node中是一个global全局对象</span></div><div class="line">    &#125;</div><div class="line">    fnInner();<span class="comment">//函数调用</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">new</span> Outer();</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>浏览器：</p>
+<p><img src="/images/219.png" alt=""></p>
+<p>node：</p>
+<p><img src="/images/395.png" alt=""></p>
+<p>再看：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Outer = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="comment">//严格模式</span></div><div class="line"><span class="meta">    'use strict'</span>;</div><div class="line">    <span class="keyword">this</span>.foo = <span class="string">'outer value'</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fnInner</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">    fnInner();</div><div class="line">&#125;;</div><div class="line"><span class="keyword">new</span> Outer();</div></pre></td></tr></table></figure></p>
+<p>浏览器：</p>
+<p><img src="/images/210.png" alt=""></p>
+<p>node：</p>
+<p><img src="/images/851.png" alt=""></p>
+<p>嗯，大致有数了。</p>
+<blockquote>
+<p>PS:严格模式是ES5推出的标准，开启这个模式（函数首行添加’use strict’;），可以防止很多由于javascript本身的设计缺陷导致的隐形bug(比如这里的this指向全局对象,可能导致全局变量污染)，帮助我们及早发现问题。<br>&nbsp;</p>
+</blockquote>
+<p>上述只是犀牛书中提到的关于this的一部分相关内容，其实还远远不够。</p>
+<p>在我理解来看，大致上分为以下四大场景：</p>
+<h2 id="一、函数仅作为函数被调用"><a href="#一、函数仅作为函数被调用" class="headerlink" title="一、函数仅作为函数被调用"></a>一、函数仅作为函数被调用</h2><p>即直接在函数名后加圆括号调用，或在高阶函数里调用函数类型的形参，甚至使用匿名立即执行函数，它们的this都指向全局对象。</p>
+<p>好吧，好像又多出了几个小场景囧。不过无论全局函数还是局部函数，这都成立。上demo：</p>
+<p><img src="/images/862.png" alt=""></p>
+<p><img src="/images/946.png" alt=""></p>
+<h2 id="二、传给setTimeout、setInterval等全局函数的回调"><a href="#二、传给setTimeout、setInterval等全局函数的回调" class="headerlink" title="二、传给setTimeout、setInterval等全局函数的回调"></a>二、传给setTimeout、setInterval等全局函数的回调</h2><p>这些回调内的this也是全局对象，只不过浏览器和node有些区别（我也刚发现- -）。</p>
+<p><img src="/images/999.png" alt=""></p>
+<p><img src="/images/390.png" alt=""></p>
+<h2 id="三、函数作为对象方法被调用"><a href="#三、函数作为对象方法被调用" class="headerlink" title="三、函数作为对象方法被调用"></a>三、函数作为对象方法被调用</h2><p><img src="/images/794.png" alt=""></p>
+<p>这种场景，就属于面向对象编程了，this的指向很好分辨，当前方法的调用者即为this的指向。在这个例子里，this指向刚刚创建的Foo的实例对象，因为是通过这个实例对象“点”someMethod()的，也就是说谁“点”了someMethod()，谁就是this。顺便提一下，这样调用是等价的：</p>
+<p><img src="/images/500.png" alt=""></p>
+<h2 id="四、函数与call，apply，bind结合使用"><a href="#四、函数与call，apply，bind结合使用" class="headerlink" title="四、函数与call，apply，bind结合使用"></a>四、函数与call，apply，bind结合使用</h2><p>这个场景是最复杂的，也是几乎所有框架都会使用的技巧。</p>
+<p>这三者都属于函数的原型方法，都可以改变函数（方法）的this指向（或者叫做改变执行上下文）。</p>
+<p>call与apply更接近，他们会立即执行目标函数；而bind是ES5种新增的标准，用于预处理函数，事先绑定this指向。一图胜千言：</p>
+<p><img src="/images/357.png" alt=""></p>
+<p>另外，我自己也好奇，如果调用<code>boundAdd</code>时，也用call会怎么样呢？如果你也一样好奇的话，就自己动手敲一敲代码吧，我也是希望加深你的印象~</p>
+<p>另外提一下，call与apply的适用场景。个人认为，apply是比call强大一些的，举个复杂一点的栗子：</p>
+<p><img src="/images/514.png" alt=""></p>
+<p>如果你能完全理解这个栗子的话，说明你已经对call和apply理解透彻了（其实还包含了闭包的知识点）。</p>
+<p>至于bind的话，可以在场景二中这样使用：</p>
+<p><img src="/images/137.png" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>关于this的话题，其实还有不少，尤其在面向对象编程的领域，更加重要，需要更加深刻的理解，想要在javascript上有所造诣，这块一定要啃下。</p>
+<blockquote>
+<p>PPS：这是换了Pro之后写的第一篇博客，这屏幕太赞了，回去再看看Air，瞬间变“渣屏”（不过比起一般的windows兼容机还是好得多的）。我用了两年零八个月Air退居二线了，希望新Pro能让我告别卡机死机的日子~科科。<br>&nbsp;</p>
+</blockquote>
+<p>&nbsp;</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/29/软件工程师需要处女座精神/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          软件工程师需要处女座精神
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/16/使用Emmet提高HTML和CSS开发效率/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用Emmet提高HTML和CSS开发效率</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="重温javascript的this指向" data-title="重温javascript的this指向" data-url="http://cloudstone.space/2015/08/23/重温javascript的this指向/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

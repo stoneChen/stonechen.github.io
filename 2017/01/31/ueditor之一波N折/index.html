@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>ueditor之一波多折</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="首先要承认，百度前端团队出品的ueditor可能是所有开源富文本编辑中，功能最全的一款编辑器。虽然2016年百度公司整体的业界口碑有所下滑，但是攻城狮的开源精神始终是值得称赞的。核心源码并没有细看，但从整个库的使用方式来看，模块化方案似乎做的并不是很好，后来百度的echarts这方面就做的好一些，另外它的版本号规范不符合semver规范，不过它本身也不支持npm包的使用方式。">
+<meta name="keywords" content="nodejs,ueditor,koajs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ueditor之一波多折">
+<meta property="og:url" content="http://cloudstone.space/2017/01/31/ueditor之一波N折/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="首先要承认，百度前端团队出品的ueditor可能是所有开源富文本编辑中，功能最全的一款编辑器。虽然2016年百度公司整体的业界口碑有所下滑，但是攻城狮的开源精神始终是值得称赞的。核心源码并没有细看，但从整个库的使用方式来看，模块化方案似乎做的并不是很好，后来百度的echarts这方面就做的好一些，另外它的版本号规范不符合semver规范，不过它本身也不支持npm包的使用方式。">
+<meta property="og:updated_time" content="2017-02-01T03:09:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ueditor之一波多折">
+<meta name="twitter:description" content="首先要承认，百度前端团队出品的ueditor可能是所有开源富文本编辑中，功能最全的一款编辑器。虽然2016年百度公司整体的业界口碑有所下滑，但是攻城狮的开源精神始终是值得称赞的。核心源码并没有细看，但从整个库的使用方式来看，模块化方案似乎做的并不是很好，后来百度的echarts这方面就做的好一些，另外它的版本号规范不符合semver规范，不过它本身也不支持npm包的使用方式。">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-ueditor之一波N折" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/31/ueditor之一波N折/" class="article-date">
+  	<time datetime="2017-01-31T13:15:17.000Z" itemprop="datePublished">2017-01-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ueditor之一波多折
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koajs/">koajs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ueditor/">ueditor</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先要承认，百度前端团队出品的<a href="http://ueditor.baidu.com/" target="_blank" rel="external">ueditor</a>可能是所有开源富文本编辑中，功能最全的一款编辑器。虽然2016年百度公司整体的业界口碑有所下滑，但是攻城狮的开源精神始终是值得称赞的。核心源码并没有细看，但从整个库的使用方式来看，模块化方案似乎做的并不是很好，后来百度的<a href="http://echarts.baidu.com/" target="_blank" rel="external">echarts</a>这方面就做的好一些，另外它的版本号规范不符合semver规范，不过它本身也不支持npm包的使用方式。</p>
+<a id="more"></a>
+<p>说起我与ueditor的历史，最早要追溯到2013年年中的样子，那时我刚刚从后端转为全职前端，这款编辑器还是产品经理推荐的，当时ueditor用的什么版本大约是1.2左右吧。总之，几经波折终于成功用在项目中并发布上线了，感觉好开森~</p>
+<p>然后再次接触ueditor已经是2016年了，在我来到当前东家时，ueditor已经在线上使用了，版本是1.3.6。那是一个老项目，纯jquery时代，没有CSS预处理器，没有模块化加载器，你懂的~由于我并不负责那块，一开始并没有关注。后来2016年年中，这个老项目要用vue重构(前后端彻底分离)，ueditor当然也要用组件封装，于是去瞄了一下老项目里的ueditor配置。我惊讶的发现，它居然能够支持浏览器直传第三方存储(我们用的是又拍云)，当然这也需要第三方存储支持HTTP方式上传。重构当然要选择ueditor的最新版啦，此时已经是1.4.3，发现关键配置项变化巨大。下面开始『折』：</p>
+<h3 id="一折"><a href="#一折" class="headerlink" title="一折"></a>一折</h3><p>经过查阅官方的发布历史以及相关源码，发现从1.3.6到1.4.2，文件上传模块经过大规模重构，相应的用法也是几乎完全不同，更重要的是，1.4.3已经不支持直传第三方服务了！</p>
+<p>那这就不能好好玩耍了，支持第三方直传不是挺好的嘛，不仅减少自有服务器流量，而且加快了上传速度。可是不升级的话，又享受不到后期的升级功能以及一些历史bug修复。</p>
+<p>最后，考虑到，不想麻烦后端开放上传接口，以及希望保留浏览器直传第三方的优势，选择继续使用1.3.6版本。</p>
+<h3 id="二折"><a href="#二折" class="headerlink" title="二折"></a>二折</h3><p>1.3.6版本的第三方直传需要修改<code>dialogs/image/image.html</code>这个文件中的源码(网上有很多文章介绍)，原有的代码里各种全局变量，真是。。。再瞄一眼依赖的js，又是各种全局变量，我也是呵呵了~那代码怎么看怎么不舒服。</p>
+<p>反观1.4.3版本的源码，相应文件全局变量确实少多了。</p>
+<h3 id="三折"><a href="#三折" class="headerlink" title="三折"></a>三折</h3><p>上传附件的对话框，是个iframe(指向<code>dialogs/image/image.html</code>)，而且和父页面有数据交互，这意味<code>dialogs/image/image.html</code>必须和父页面同域。而这次重构是打算把所有静态资源上传到又拍云的。</p>
+<p>然后，就又不能好好玩耍了囧~~~</p>
+<p>最后，为了使我们自己服务器干净整洁，我还是把ueditor静态资源包传到了又拍云，通过nginx代理到又拍云，如此才能使上传功能正常。但是，这么做，其实比把ueditor静态资源包放在我们自己服务器性能要低的，毕竟绕了一圈又回来了。</p>
+<p>其实，iframe跨域确实有解决方案，最方便的跨子域设置domain的方案也觉得不很妥，而且下文会提到放在自己服务器也是可以接受的。</p>
+<h3 id="四折"><a href="#四折" class="headerlink" title="四折"></a>四折</h3><p>上面那个项目重构好以后，后来的新项目，由于时间紧张，ueditor的封装，都拷贝了上个项目的源码。嗯，没错，就是『人肉拷贝』，仔细想想，这么重的组件，一次次的『人肉拷贝』，以后的维护工作将是个灾难。</p>
+<p>鉴于后来，我们很多项目已经在生产环境上了NodeJS(koa2)服务作为中间层，犹豫了好几天，我决定玩把大的，把ueditor(最新版)封装为一个npm包，同时提供前端vue组件以及服务端中间件，减轻了与后端同学的沟通成本。</p>
+<p>说真的，上了NodeJS中间层，任何与业务持久数据无关的，我们都可以自己搞定。</p>
+<p>这里还是要说一下，为什么放弃1.3.6的直传第三方功能。</p>
+<ul>
+<li>因为1.3.6的源码略丑，不忍直视</li>
+<li>之前我们就遇到了XSS等安全问题，新版本已经修复了此问题</li>
+<li>第三方直传是需要后端要提供一个上传秘钥参数给附件上传表单的，我担心这个秘钥如果被恶意劫持到会威胁到我们的第三方存储</li>
+<li>我们用的第三方存储是又拍云，直传又拍云上传返回的数据结构与ueditor要求的并不相符合，需要重定向到另一个接口去做转换，这就需要额外再提供一个接口，增加了维护成本。</li>
+<li>静态资源交给Nodejs，性能并不差，可以接受</li>
+</ul>
+<p>另外，查阅了官方的ueditor文档，似乎可以通过插件重写其自带的上传功能，这让实现直传第三方存储成为可能，但这工作量估计不小，而且即使实现了，也会存在上述的若干问题，于是决定不去尝试了。</p>
+<h3 id="五折"><a href="#五折" class="headerlink" title="五折"></a>五折</h3><p>严格讲，这一折跟第二折是同一个问题，只不过，我是在koa实现的基础上再次尝试解决跨域问题。</p>
+<p>我不死心，为了使ueditor源码能够存放在又拍云，我特地开通了单独的一个又拍云空间存放ueditor源码用于做实验，前端加载的ueditor主模块地址仍然指向同域，通过Nodejs将其重定向到又拍云，其实随便想想应该不能成功的，但还是想试一试，结论果然是失败。然后，将其改为通过node-http-proxy模块代理到又拍云，这个方案是能够解决问题的，但是本质上与通过nginx代理是一样的，有性能问题。</p>
+<p>另外，通过Nodejs提供ueditor源码，还有一个小小的优势，Nodejs可以随意定义缓存时间，而又拍云缓存时间只能是固定的7天多一点。我们可以设置比较大的缓存时间，对于同一个客户端而言，只要访问过一次，很久都不必再次加载ueditor相关资源了。</p>
+<h3 id="六折"><a href="#六折" class="headerlink" title="六折"></a>六折</h3><p>chrome@50左右版本开始，对image/*类型的file元素，弹出文件选择器将会非常慢，需要修改ueditor的源码，使得文件选择器更快弹出</p>
+<h2 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h2><p><a href="https://github.com/stoneChen/koa-ueditor-upyun-demo" target="_blank" rel="external">https://github.com/stoneChen/koa-ueditor-upyun-demo</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/25/cnpmjs.org实战/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          cnpmjs.org实战
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/22/git-log-follow奇遇记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git log --follow奇遇记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ueditor之一波N折" data-title="ueditor之一波多折" data-url="http://cloudstone.space/2017/01/31/ueditor之一波N折/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

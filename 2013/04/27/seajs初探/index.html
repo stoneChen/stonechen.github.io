@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>seajs初探</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="出自大名鼎鼎玉伯之手的seajs在业界引起了广泛的反响,好评如潮,如今我也加入到了其中. 到今天在项目中使用seajs也有几个月了,不久前开始正式研究seajs源码,终于准备发这篇博客了,也是我在博客园的第一篇博客(^__^) .怪鸡冻的.那么接下来进入正题. 一.seajs初步理解(seajs内部执行流程) 1).use或data-main（用户手动） 2).rquest(动态插入script标">
+<meta name="keywords" content="seajs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="seajs初探">
+<meta property="og:url" content="http://cloudstone.space/2013/04/27/seajs初探/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="出自大名鼎鼎玉伯之手的seajs在业界引起了广泛的反响,好评如潮,如今我也加入到了其中. 到今天在项目中使用seajs也有几个月了,不久前开始正式研究seajs源码,终于准备发这篇博客了,也是我在博客园的第一篇博客(^__^) .怪鸡冻的.那么接下来进入正题. 一.seajs初步理解(seajs内部执行流程) 1).use或data-main（用户手动） 2).rquest(动态插入script标">
+<meta property="og:image" content="http://cloudstone.space/images/101.png">
+<meta property="og:image" content="http://cloudstone.space/images/102.png">
+<meta property="og:updated_time" content="2016-02-27T00:49:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="seajs初探">
+<meta name="twitter:description" content="出自大名鼎鼎玉伯之手的seajs在业界引起了广泛的反响,好评如潮,如今我也加入到了其中. 到今天在项目中使用seajs也有几个月了,不久前开始正式研究seajs源码,终于准备发这篇博客了,也是我在博客园的第一篇博客(^__^) .怪鸡冻的.那么接下来进入正题. 一.seajs初步理解(seajs内部执行流程) 1).use或data-main（用户手动） 2).rquest(动态插入script标">
+<meta name="twitter:image" content="http://cloudstone.space/images/101.png">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-seajs初探" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/04/27/seajs初探/" class="article-date">
+  	<time datetime="2013-04-27T04:07:10.000Z" itemprop="datePublished">2013-04-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      seajs初探
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seajs/">seajs</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>出自大名鼎鼎玉伯之手的seajs在业界引起了广泛的反响,好评如潮,如今我也加入到了其中.</p>
+<p>到今天在项目中使用seajs也有几个月了,不久前开始正式研究seajs源码,终于准备发这篇博客了,也是我在博客园的第一篇博客(<em>^__^</em>) .怪鸡冻的.那么接下来进入正题.</p>
+<p><strong>一.seajs初步理解(seajs内部执行流程)</strong></p>
+<p>1).use或data-main（用户手动）</p>
+<p>2).rquest(动态插入script标签)<br>3).扫描模块中的factory.toString(),根据一个很长的正则去查找use进来的模块中rquire的所有模块（即require括号里的那个字符串，也即依赖模块）<br>4).将第三步中查找出来的模块再进行2、3步操作（如果有），直到所有模块（包括所有依赖模块）都加载完毕，在此期间已经做好了依赖分析<br>5).至此所有模块均已就绪，按照之前分析好的依赖关系，按顺序执行各模块中define方法中传入的factory函数<br>小结:<br>1).发现源码中对路径的处理花了很多笔墨，尚需研究</p>
+<p>2).正因为动态插入script标签不会产生阻塞，即可以并行下载模块，通过依赖分析，保证了模块的顺序执行，最终提高了页面性能，当然模块少的时候显示不出其效用（甚至慢了），但是模块越多其作用越明显。</p>
+<p>3).引用拔赤的话：seajs提供“方法和思路”，而jquery、yui等则提供工具。seajs需要“学习”，而jquery更多的则是需要“查阅”<br><strong>二.再理解</strong></p>
+<p>当seajs加载完一个模块时,会立即扫描factory.toString(),这件事如何触发的呢,通过阅读源码发现是利用了节点的onload和onerror事件,<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">node.onload = node.onerror = node.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (READY_STATE_RE.test(node.readyState)) &#123;</div><div class="line">      <span class="comment">//...do something</span></div><div class="line">       callback()<span class="comment">//扫描</span></div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中老的webkit和firefox还有一个问题:当加载css失败,不会触发onerror事件,seajs通过设置定时器不断访问node.sheet判断加载是否完成(包括失败的情况)<br><strong>三.路径研究</strong></p>
+<p>发现它考虑到了base标签的问题，其中有一句代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">baseElement?</div><div class="line">head.insertBefore(node, baseElement) :</div><div class="line">head.appendChild(node)</div></pre></td></tr></table></figure></p>
+<p>根据它的意思，应该是要避开base影响seajs本身的基础路径，但是我经过测试(不使用seajs)，通过js动态在base标签前插入script标签，这个新的script的src还是会带上base标签指定的路径,后用seajs测试,发现script节点的src值是绝对路径(http开头的那种),并以此为前缀动态插入script标签引进新的模块,而绝对路径是不受base标签影响的.那么它考虑base标签是不是有些多余,这个不得而知.准备去社区问问看.</p>
+<p>今天又针对路径的问题进行了一番测试,有这么几种使用方式:</p>
+<ol>
+<li>seajs的data-main</li>
+<li>seajs.use</li>
+<li>define中的require<br>不过它们的参数,也就是模块路径,原理是一致的.上图,大家一看就都明白了</li>
+</ol>
+<p>下面是从官网摘来的片段:</p>
+<p>———————————————我是万恶的分割线———————————————————–</p>
+<p>模块系统的基础路径即 base 的默认值，与 sea.js 的访问路径相关：<br>如果 sea.js 的访问路径是：<br><a href="http://example.com/assets/sea.js" target="_blank" rel="external">http://example.com/assets/sea.js</a></p>
+<p>则 base 路径为：<br><a href="http://example.com/assets/" target="_blank" rel="external">http://example.com/assets/</a><br>除了相对和顶级标识之外的标识都是普通路径。普通路径的解析规则，和 HTML 代码中的&lt;script src=”…”&gt;&lt;/script&gt; 一样，会相对当前页面解析。</p>
+<p>// 假设当前页面是 <a href="http://example.com/path/to/page/index.html" target="_blank" rel="external">http://example.com/path/to/page/index.html</a></p>
+<p>// 绝对路径是普通路径：require.resolve(‘<a href="http://cdn.com/js/a" target="_blank" rel="external">http://cdn.com/js/a</a>‘);<br>// =&gt; <a href="http://cdn.com/js/a.js" target="_blank" rel="external">http://cdn.com/js/a.js</a></p>
+<p>// 根路径是普通路径：require.resolve(‘/js/b’);<br>// =&gt; <a href="http://example.com/js/b.js" target="_blank" rel="external">http://example.com/js/b.js</a></p>
+<p>// use 中的相对路径始终是普通路径：seajs.use(‘./c’);<br>// =&gt; 加载的是 <a href="http://example.com/path/to/page/c.js" target="_blank" rel="external">http://example.com/path/to/page/c.js</a></p>
+<p>seajs.use(‘../d’);<br>// =&gt; 加载的是 <a href="http://example.com/path/to/d.js" target="_blank" rel="external">http://example.com/path/to/d.js</a><br>提示：</p>
+<p>小结:</p>
+<ol>
+<li>顶级标识始终相对 base 基础路径解析。</li>
+<li>绝对路径和根路径始终相对当前页面解析。</li>
+<li>require 和 require.async 中的相对路径相对当前模块路径来解析。</li>
+<li>seajs.use 中的相对路径始终相对当前页面来解析。</li>
+</ol>
+<p>——————————————-我也是万恶的分割线—————————————————<br>下面是我自己的test：<br><a href="/images/101.png"><img src="/images/101.png" alt="101"></a><br>其中，seajs可以是外网的，那么相应地base路径也是外网的，见下图<br><a href="/images/102.png"><img src="/images/102.png" alt="102"></a></p>
+<p>–从以前的cnblogs搬来，写于<span id="post-date">2013-04-27 12:07</span></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2013/09/25/关于IE文档模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          关于IE文档模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/04/27/seajs中define方法的id和dependencies参数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">seajs中define方法的id和dependencies参数</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="seajs初探" data-title="seajs初探" data-url="http://cloudstone.space/2013/04/27/seajs初探/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

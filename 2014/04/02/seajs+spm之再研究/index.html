@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>seajs+spm之再研究</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="好久没有用seajs了,之前对spm也只是一知半解,这些天再次拿起来研究.谈谈我的认识与理解. 声明:本文不适合对seajs完全不了解的同学阅读.对于想知道seajs来龙去脉以及spm相关的同学”可能”有帮助.对于我自己也是个梳理的机会. 一.seajs部分 1.seajs由来: 传统web前端的js开发,主要基于script标签的引入,一个文件一个script标签,或者对他们进行简单的压缩与合并">
+<meta name="keywords" content="seajs,spm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="seajs+spm之再研究">
+<meta property="og:url" content="http://cloudstone.space/2014/04/02/seajs+spm之再研究/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="好久没有用seajs了,之前对spm也只是一知半解,这些天再次拿起来研究.谈谈我的认识与理解. 声明:本文不适合对seajs完全不了解的同学阅读.对于想知道seajs来龙去脉以及spm相关的同学”可能”有帮助.对于我自己也是个梳理的机会. 一.seajs部分 1.seajs由来: 传统web前端的js开发,主要基于script标签的引入,一个文件一个script标签,或者对他们进行简单的压缩与合并">
+<meta property="og:updated_time" content="2016-02-27T01:06:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="seajs+spm之再研究">
+<meta name="twitter:description" content="好久没有用seajs了,之前对spm也只是一知半解,这些天再次拿起来研究.谈谈我的认识与理解. 声明:本文不适合对seajs完全不了解的同学阅读.对于想知道seajs来龙去脉以及spm相关的同学”可能”有帮助.对于我自己也是个梳理的机会. 一.seajs部分 1.seajs由来: 传统web前端的js开发,主要基于script标签的引入,一个文件一个script标签,或者对他们进行简单的压缩与合并">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-seajs+spm之再研究" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/04/02/seajs+spm之再研究/" class="article-date">
+  	<time datetime="2014-04-02T02:44:14.000Z" itemprop="datePublished">2014-04-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      seajs+spm之再研究
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seajs/">seajs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spm/">spm</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a><a class="article-category-link" href="/categories/javascript/seajs/">seajs</a><a class="article-category-link" href="/categories/javascript/seajs/SPM/">SPM</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>好久没有用seajs了,之前对spm也只是一知半解,这些天再次拿起来研究.谈谈我的认识与理解.</p>
+<p>声明:本文不适合对seajs完全不了解的同学阅读.对于想知道seajs来龙去脉以及spm相关的同学”可能”有帮助.对于我自己也是个梳理的机会.</p>
+<p>一.seajs部分</p>
+<p>1.seajs由来:</p>
+<p>传统web前端的js开发,主要基于script标签的引入,一个文件一个script标签,或者对他们进行简单的压缩与合并,以减少http请求.</p>
+<p>没错,我们以前都是这么干的,甚至现在还有很多人这么干.</p>
+<p>随着这些年的发展,前端越来越被重视,逻辑越来越复杂,前端代码的维护变得越来越难.</p>
+<p>2009年,nodejs诞生(nodejs是什么东西,可以自行google),其模块化的编程思想,给攻城师牛人们(包括但不限于前端攻城师)带来了很大的启发.特别是它的模块化依赖管理系统.工程师们想把这个依赖管理机制移植到浏览器端.但是浏览器端目前还没有高度统一的规范,更别说依赖管理机制了.于是工程师们绞尽脑汁,日思夜想.</p>
+<p>不久后,requireJS诞生了,也的确火了,但它所坚持的原则规范并不被前面那些的大部分工程师们接受.</p>
+<p>这时,我国的一位前端大牛也逐渐参与到模块化开发的研究中来.经过不断的虚心学习,借鉴,摸索,seaJS诞生了.他的作者是玉伯(–仰视,尊敬).</p>
+<p>以上历史介绍,只是我简单的整理与理解.详细的可以参考玉伯本人的描述<a href="https://github.com/seajs/seajs/issues/588" target="_blank" rel="external">https://github.com/seajs/seajs/issues/588</a></p>
+<p>2.seajs是什么,能做什么</p>
+<p>它是模块加载器(也即js文件加载器),所有模块都可以通过它加载,而且很重要的是,它可以帮你很好的管理模块依赖.当你的页面上有十几二十个js文件的时候,用了seajs,你就会知道它有多么美妙.</p>
+<p>3.怎么用</p>
+<p>这里只讲个大概,教程随便google就一打.</p>
+<p>所有的模块几乎(下面会讲为什么不是全部)都被define(function(require,exports,module){})这个全局函数包围,require参数用于表明被依赖模块,exports和module用于输出接口,让别的模块可以调用.对于开发者,按照它的规范写代码,就能很好的管理依赖了.</p>
+<p>现在来讲,上面那个”几乎”.其实也是后来看aralejs(aralejs是基于seajs的组件库,其开放程度可以用包罗万象来形容,具体可自行google)上的模块才发现的(只是个别模块这样做).</p>
+<p>对于我们后来写成的模块,seajs官网是推荐上面那种方式的,而且也没有什么问题.之前随着requireJS的推出,一些开源的类库或者框架(比如jquery,backbone等)都纷纷加入了requireJS的行列,后续的新版本默认支持AMD模块规范.这些开源代码为了兼容页面上有无requireJS的情况,并没有将所有代码都包在define函数中,而是判断页面中是否定义了define函数进行模块定义,类似于下面这样</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( <span class="keyword">typeof</span> define === <span class="string">"function"</span> &amp;amp;&amp;amp; define.amd &amp;amp;&amp;amp; define.amd.jQuery ) &#123;</div><div class="line">    define( <span class="string">"jquery"</span>, [], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> jQuery; &#125; );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而arale或者说seajs官方的做法是,可能为了兼容AMD,将其改成了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( <span class="keyword">typeof</span> define === <span class="string">"function"</span> ) &#123;</div><div class="line"></div><div class="line">  define(<span class="string">"jquery/jquery/1.7.2/jquery-debug"</span>, [], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> jQuery; &#125; );</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可能有其他更特殊的原因吧,还有json的模块更简单,直接在最后追加</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">define(<span class="string">"gallery/json/1.0.3/json-debug"</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">     <span class="keyword">return</span> <span class="built_in">window</span>.JSON;</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>而underscore和bockbone就是按照”标准”,在最外层包上define.不是特别清楚为什么有这么些个做法.可以再看看其他被包装过的模块的都是什么样子的.</p>
+<p>4.seajs的原理</p>
+<p>这个可以参考我之前的文章(差不多一年前了囧,现在才来写这篇) : <a href="http://www.cnblogs.com/webstone/articles/3043119.html" target="_blank" rel="external">http://www.cnblogs.com/webstone/articles/3043119.html</a></p>
+<p>5.引出下一节</p>
+<p>其实说到这里,seajs以及它的模块都可以在浏览器里正常运行.那么为什么还要有spm呢? 且继续往下看</p>
+<p>二.spm部分</p>
+<p>1.spm由来:</p>
+<p>各个模块开发测试完毕后,为了进一步提升页面性能,我们还要对代码进行压缩,合并操作.</p>
+<p>于是问题产生了.</p>
+<p>为什么压缩后,被依赖的模块不加载了?</p>
+<p>为什么合并后的模块一个都不执行了?(新版本不执行任何操作,1.3.1及以前会只执行第一个模块)</p>
+<p>对于第一个问题,这涉及到seajs模块依赖处理的原理,对于第一节中谈到的模块组织方式define(factory),seajs寻找依赖是依靠正则判断factory.toString()中的require关键字,如下代码片段</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> REQUIRE_RE = <span class="regexp">/"(?:\\"|[^"])*"|'(?:\\'|[^'])*'|\/\*[\S\s]*?\*\/|\/(?:\\\/|[^\/\r\n])+\/(?=[^\/])|\/\/.*|\.\s*require|(?:^|[^$])\brequire\s*\(\s*(["'])(.+?)\1\s*\)/g</span>;</div><div class="line"></div><div class="line">  ...</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">parseDependencies</span>(<span class="params">code</span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> ret = []</div><div class="line"></div><div class="line">   code.replace(SLASH_RE, <span class="string">""</span>)</div><div class="line"></div><div class="line">       .replace(REQUIRE_RE, <span class="function"><span class="keyword">function</span>(<span class="params">m, m1, m2</span>) </span>&#123;</div><div class="line"></div><div class="line">         <span class="keyword">if</span> (m2) &#123;</div><div class="line"></div><div class="line">           ret.push(m2)</div><div class="line"></div><div class="line">         &#125;</div><div class="line"></div><div class="line">       &#125;)</div><div class="line"></div><div class="line">   <span class="keyword">return</span> ret</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line"> …</div><div class="line"></div><div class="line"> <span class="comment">// Parse dependencies according to the module factory code</span></div><div class="line"></div><div class="line">   <span class="keyword">if</span> (!isArray(deps) &amp;amp;&amp;amp; isFunction(factory)) &#123;</div><div class="line"></div><div class="line">     deps = parseDependencies(factory.toString())</div><div class="line"></div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>而代码经过压缩后,require就不见了,自然就找不到依赖了.还有就是,这种依赖分析很消耗性能.</p>
+<p>第二个问题,涉及到模块标识问题.其实上述的模块组织方式称为”匿名模块”.多个没有名字的模块合并到一起后,各自都返回了输出接口,那么对于这个”大模块”,应该返回哪一个接口呢?所以理想情况下每个模块都需要一个模块标识,这样就可以任何合并了.</p>
+<p>其实seajs支持两种规范:</p>
+<p>第一种就是第一节中的那种,叫做CMD规范,即define(factory)只传入一个callback.</p>
+<p>第二种是给define传入三个参数define(id, deps, factory),id为模块标识,reps为依赖模块数组,第三个factory同上面那个factory.</p>
+<p>这种模块属于<a href="https://github.com/cmdjs/specification/blob/master/draft/transport.md" target="_blank" rel="external">Modules/Transport</a> 规范 ,参考<a href="https://github.com/seajs/seajs/issues/242" target="_blank" rel="external">https://github.com/seajs/seajs/issues/242</a></p>
+<p>第二种方式下,seajs的工作原理略有不同.它不再对factory进行正则依赖分析,直接加载deps中的依赖模块(数组中的字符串即模块标识,要与被依赖模块的id相匹配,或者与seajs.config别名中的映射后相匹配),这样一来,依赖处理的速度更快了,同时所有模块均可以任意压缩合并.</p>
+<p>另外,路径与模块标识的问题可以参考这篇文章: <a href="https://github.com/seajs/seajs/issues/930" target="_blank" rel="external">https://github.com/seajs/seajs/issues/930</a></p>
+<p>所以呢,为了使CMD模块(也即匿名模块),更加便于管理,包括模块的压缩,合并,打包,部署,甚至公用下载安装,spm就应运而生了.</p>
+<p>2.spm是什么,能做什么</p>
+<p>spm是CMD模块管理器,就像npm,其实spm本身就是nodejs的一个模块,负责CMD模块的打包发布删除等操作.当然对外输出的模块已经不是CMD模块了,是<a href="https://github.com/cmdjs/specification/blob/master/draft/transport.md" target="_blank" rel="external">Modules/Transport</a> 模块.</p>
+<p>接着要说的是spm的源,就像npm有个代码集中管理的地方,甚至svn的代码仓库也有些类似.</p>
+<p>当然,这个源可以是官方默认的<a href="https://spmjs.org/" target="_blank" rel="external">https://spmjs.org/</a> ,也可以是私有源,搭建方法参考:<a href="https://github.com/spmjs/spm-yuan" target="_blank" rel="external">https://github.com/spmjs/spm-yuan</a>,然后需要通过修改配置文件中的soucre值来将spm的源地址改为私有源(默认为官方)</p>
+<p>然后我们就可以开发我们的模块了.个人认为,最终生成的模块不一定要发布到源上.具有公共特性的组件类的模块才需要放到源上,业务模块放到项目中就好.只是build出来的id会看起来比较怪异,因为必须要与加载的路径一致.</p>
+<p>3.spm的主要功能</p>
+<p>nodejs和spm及其插件的安装这里就不说了,也是google一大把</p>
+<p>我们从使用的角度,按开发顺序走下来</p>
+<p>A.如果是开发一个公用组件,将来是要上传到spm源的模块,可以这么干(这种情况,除了源配置,我们暂时使用默认的配置信息):</p>
+<p>1)spm init</p>
+<p>打开终端,进入你将要开发组件的那个目录,执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spm init</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;&#123;newModuleName&#125;&#125;/                                                //这一层是你执行spm init前创建的</div><div class="line"></div><div class="line">        src/</div><div class="line"></div><div class="line">                &#123;&#123;newModuleName&#125;&#125;.js </div><div class="line"></div><div class="line">                &#123;&#123;newModuleName&#125;&#125;.css </div><div class="line"></div><div class="line">        examples/ </div><div class="line"></div><div class="line">                index.md </div><div class="line"></div><div class="line">        tests/</div><div class="line"></div><div class="line">                &#123;&#123;newModuleName&#125;&#125;-spec.js        </div><div class="line"></div><div class="line">        dist/                                //这一层现在不会有,后面build完会出现,输出的文件在这一层下 </div><div class="line"></div><div class="line">        README.md </div><div class="line"></div><div class="line">        HISTORY.md </div><div class="line"></div><div class="line">        package.json</div></pre></td></tr></table></figure>
+<p>然后你就可以在src下的js和css里开发组件了,这两个文件初始化了一小部分代码,在src下你可以自由创建文件夹与其他js,css甚至模板文件等,用于被依赖</p>
+<p>2)spm build</p>
+<p>组件开发完成后,在终端下,同样是在上一步的目录下,执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spm build</div></pre></td></tr></table></figure></p>
+<p>然后,就生成了上一步看到的dist目录,下面有打包好的具名模块,其中如果有依赖,默认是会被打包进来的</p>
+<p>3)接着开始测试模块</p>
+<p>官网说,spm test以及spm totoro都是支付宝内部才能使用的插件,不推荐外部使用,我还没有深入研究过.</p>
+<p>所以呢,我们只能暂时自己创建测试环境,不过也不太麻烦啦</p>
+<p>4)spm publish</p>
+<p>测试通过后,我们就可以把它发布到源上了,就像nodejs模块可以通过npm发布一样.</p>
+<p>在终端,同样的目录下执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spm login</div></pre></td></tr></table></figure></p>
+<p>按照提示,登陆你的源账号,如果没有账号则按照提示创建账号登陆</p>
+<p>接着执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spm publish</div></pre></td></tr></table></figure></p>
+<p>如果没有意外,就可以发布成功了</p>
+<p>打开浏览器,访问你的源地址,就能看到你刚刚发布的模块了</p>
+<p>其他同学就可以通过<code>spm install /</code>安装(即下载)你发布的模块了</p>
+<p>B.如果是开发业务模块,按照我个人的观点,业务模块不需要被发布到源上,或者说不需要和公用组件放在一块</p>
+<p>这里我想起一个误区,而且我之前就一直是这么认为的:</p>
+<p>“源上的模块是可以被http访问到的”</p>
+<p>走出误区:简单讲,源只是一个存储模块文件的地方,不提供模块的web服务.于是就有了”部署”这件事情.但是spm deploy也是支付宝内部插件,我也没深入研究.</p>
+<p>通常大型项目,静态资源文件与应用服务是分离的,也即模块文件是存放在另一台服务器上的.</p>
+<p>但是小型项目,放在一起也基本能够满足需求.</p>
+<p>但好像没有看到有人将公用模块与业务模块分离的.经过个人简单试验,这样是行的通的,并打算应用在项目中.</p>
+<p>之前一直在探索如何使用spm构建业务模块,但总找不到合适的资料,尤其是它要求的目录结构以及生成的id让我束手无策.后来看到有大牛使用grunt-cmd-transport构建模块,自己跟着试了一下,的确可行.但似乎有些问题,比如:依赖的css没有被打包进来.在咨询了官方的人员后,并没有给出我这些问题的答案,而是建议我用spm,并给出了一些方案.我又重新拿起spm开始尝试.终于研究出了可行的方案,相对公用组件的开发方式,只需要修改package.json中的一些配置即可,而grunt的配置实在太多,看的人眼花.再次感谢支付宝贯高(github @<a href="https://github.com/popomore" target="_blank" rel="external"><strong>popomore</strong></a>)给我的建议</p>
+<p>由于需要比较多的笔墨,我将在下一篇讲述如何使用spm构建业务模块.</p>
+<p>–从cnblogs搬来，写于2014-04-02 10:44</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/04/07/构建seajs业务模块之grunt/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          构建seajs业务模块之grunt VS spm build
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/09/25/关于IE文档模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于IE文档模式</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="seajs+spm之再研究" data-title="seajs+spm之再研究" data-url="http://cloudstone.space/2014/04/02/seajs+spm之再研究/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

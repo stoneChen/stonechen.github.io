@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>重新认识LESS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用LESS已有2年，但大部分情况下使用的都是比较基础的功能，比如嵌套，变量，继承，混合，加减px/颜色值，偶尔才用函数。 今天就来重新复习一下LESS。   一、LESS是什么LESS是一种 动态 样式语言，它的任务是将符合LESS语法的代码编译成CSS文件，简化手写传统CSS，提高样式开发的效率。 LESS 将 CSS 赋予了动态语言的特性，如 变量， 继承， 运算， 函数。LESS 既可以在">
+<meta name="keywords" content="css,less">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重新认识LESS">
+<meta property="og:url" content="http://cloudstone.space/2015/06/01/重新认识LESS/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="使用LESS已有2年，但大部分情况下使用的都是比较基础的功能，比如嵌套，变量，继承，混合，加减px/颜色值，偶尔才用函数。 今天就来重新复习一下LESS。   一、LESS是什么LESS是一种 动态 样式语言，它的任务是将符合LESS语法的代码编译成CSS文件，简化手写传统CSS，提高样式开发的效率。 LESS 将 CSS 赋予了动态语言的特性，如 变量， 继承， 运算， 函数。LESS 既可以在">
+<meta property="og:image" content="http://cloudstone.space/images/jpg">
+<meta property="og:image" content="http://cloudstone.space/images/QQ20150601-1@2x.png">
+<meta property="og:image" content="http://cloudstone.space/images/QQ20150601-2@2x.png">
+<meta property="og:image" content="http://cloudstone.space/images/243.png">
+<meta property="og:image" content="http://cloudstone.space/images/505.png">
+<meta property="og:image" content="http://cloudstone.space/images/779.png">
+<meta property="og:image" content="http://cloudstone.space/images/392.png">
+<meta property="og:image" content="http://cloudstone.space/images/256.png">
+<meta property="og:image" content="http://cloudstone.space/images/775.png">
+<meta property="og:image" content="http://cloudstone.space/images/132.png">
+<meta property="og:image" content="http://cloudstone.space/images/227.png">
+<meta property="og:image" content="http://cloudstone.space/images/871.png">
+<meta property="og:image" content="http://cloudstone.space/images/732.png">
+<meta property="og:image" content="http://cloudstone.space/images/9841.png">
+<meta property="og:image" content="http://cloudstone.space/images/726.png">
+<meta property="og:image" content="http://cloudstone.space/images/521.png">
+<meta property="og:image" content="http://cloudstone.space/images/283.png">
+<meta property="og:image" content="http://cloudstone.space/images/463.png">
+<meta property="og:image" content="http://cloudstone.space/images/857.png">
+<meta property="og:updated_time" content="2016-02-27T02:06:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重新认识LESS">
+<meta name="twitter:description" content="使用LESS已有2年，但大部分情况下使用的都是比较基础的功能，比如嵌套，变量，继承，混合，加减px/颜色值，偶尔才用函数。 今天就来重新复习一下LESS。   一、LESS是什么LESS是一种 动态 样式语言，它的任务是将符合LESS语法的代码编译成CSS文件，简化手写传统CSS，提高样式开发的效率。 LESS 将 CSS 赋予了动态语言的特性，如 变量， 继承， 运算， 函数。LESS 既可以在">
+<meta name="twitter:image" content="http://cloudstone.space/images/jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-重新认识LESS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/01/重新认识LESS/" class="article-date">
+  	<time datetime="2015-06-01T14:51:22.000Z" itemprop="datePublished">2015-06-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      重新认识LESS
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/css/">css</a><a class="article-category-link" href="/categories/css/LESS/">LESS</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用LESS已有2年，但大部分情况下使用的都是比较基础的功能，比如嵌套，变量，继承，混合，加减px/颜色值，偶尔才用函数。</p>
+<p>今天就来重新复习一下LESS。</p>
+<p><a href="/images/jpg"><img src="/images/jpg" alt="less1"></a><a href="/images/jpg">
+</a></p>
+<h2 id="一、LESS是什么"><a href="#一、LESS是什么" class="headerlink" title="一、LESS是什么"></a>一、LESS是什么</h2><p>LESS是一种 <strong>动态</strong> 样式语言，它的任务是将符合LESS语法的代码编译成CSS文件，简化手写传统CSS，提高样式开发的效率。</p>
+<p>LESS 将 CSS 赋予了动态语言的特性，如 变量， 继承， 运算， 函数。LESS 既可以在 客户端 上运行 (支持IE 6+, Webkit, Firefox，动态编译LESS文件)，也可以借助Node.js或者Rhino在服务端运行（输出CSS文件，页面直接引用输出的CSS文件）。</p>
+<p>举个栗子:</p>
+<p>1.客户端版：</p>
+<p>html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet/less"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"styles.less"</span>&gt;</span><span class="comment">&lt;!--注意是rel的值，引入的是less文件--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/cloudstone/bower_components/less/dist/less.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="comment">&lt;!--将less代码转换为css代码的类库--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span>LESS Header<span class="tag">&lt;/<span class="name">header</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>LESS Example<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>styles.less:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@color:</span> <span class="number">#4D926F</span>;</div><div class="line"><span class="selector-tag">header</span> &#123;</div><div class="line">  <span class="attribute">color</span>: <span class="variable">@color</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-tag">h2</span> &#123;</div><div class="line">  <span class="attribute">color</span>: <span class="variable">@color</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>执行结果（注意，需要在服务器的环境打开html）：</p>
+<p><a href="/images/QQ20150601-1@2x.png"><img src="/images/QQ20150601-1@2x.png" alt="QQ20150601-1@2x"></a></p>
+<p>可以看到，有一段被style标签包裹的css代码被插入到了文档中，所以header标签和h2标签中的文本呈现了绿色。</p>
+<p>2.NodeJS版：</p>
+<p>首先需要安装less编译器，在终端执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g less</div></pre></td></tr></table></figure></p>
+<p>还是用上个栗子中的styles.less，在其所在目录执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lessc styles.less &amp;gt; styles.css</div></pre></td></tr></table></figure></p>
+<p>会在同目录下生成 styles.css，查看内容：</p>
+<p><a href="/images/QQ20150601-2@2x.png"><img src="/images/QQ20150601-2@2x.png" alt="QQ20150601-2@2x"></a></p>
+<p>然后，在html中直接引用这个生成的styles.css即可，效果与上个栗子一样。</p>
+<hr>
+<p>&nbsp;</p>
+<p>对比一下两种方式：</p>
+<p>客户端方式：</p>
+<p>优点：简单</p>
+<p>缺点：LESS编译库会读取本script标签前的所有less文件，并发起ajax读取less内容，动态地将其编译并插入到文档head中，所以当这个过程比较慢的时候（比如less内容很大，ajax响应慢等），页面会出现“无样式”的一个短暂画面，使得用户体验变得糟糕。因为在ajax发出后，文档将继续往下解析，解析文档的速度比ajax响应快的多，在ajax响应之前，被解析的文档内容都是安装浏览器原生样式显示的。</p>
+<p>服务端方式：</p>
+<p>优点：不会出现客户端方式的“无样式”短暂画面，用户体验好，因为是直接引用css文件。</p>
+<p>缺点：需要额外执行编译脚本（在不引入自动化脚本的情况下，需要反复编译less文件，比较繁琐），对开发者提出了新的要求。对此，业界有一种文件监听的策略来减轻开发者的负担，即监听less文件的变动，一旦less文件有变动立即自动编译less文件生成新的css文件。比较常用的node模块有【grunt的watch插件配合grunt的less插件】，与【gulp的watch插件配合gulp的less插件】。</p>
+<h2 id="二、LESS的语法"><a href="#二、LESS的语法" class="headerlink" title="二、LESS的语法"></a>二、LESS的语法</h2><p>LESS 做为 CSS 的一种形式的扩展，它并没有阉割 CSS 的功能，而是在现有的 CSS 语法上，添加了很多额外的功能。也就是说，LESS完全兼容CSS的语法，你在LESS里写CSS代码一点问题也没有。</p>
+<p>以下先列个表，未完待续。。。</p>
+<h3 id="1-变量"><a href="#1-变量" class="headerlink" title="1.变量"></a>1.变量</h3><p>很简单：</p>
+<p>使用<code>@</code>声明变量，然后在需要的地方使用。</p>
+<p><img src="/images/243.png" alt=""></p>
+<h3 id="2-混合"><a href="#2-混合" class="headerlink" title="2.混合"></a>2.混合</h3><p>某种程度上，相当于高级别的“变量”；</p>
+<p><img src="/images/505.png" alt=""></p>
+<h3 id="3-带参数混合"><a href="#3-带参数混合" class="headerlink" title="3.带参数混合"></a>3.带参数混合</h3><p>你还可以像函数一样定义一个带参数的属性集合:</p>
+<p><img src="/images/779.png" alt=""></p>
+<p>我们还可以像这样给参数设置默认值:</p>
+<p><img src="/images/392.png" alt=""></p>
+<p>你也可以定义不带参数属性集合,如果你想隐藏这个属性集合，不让它暴露到CSS中去，但是你还想在其他的属性集合中引用，你会发现这个方法非常的好用:</p>
+<p><img src="/images/256.png" alt=""></p>
+<p><code>&lt;span class=&quot;variable&quot;&gt;@arguments&lt;/span&gt;</code>包含了所有传递进来的参数. 如果你不想单独处理每一个参数的话就可以像这样写:</p>
+<p><img src="/images/775.png" alt=""></p>
+<p>有些情况下，我们想根据传入的参数来改变混合的默认呈现:</p>
+<p><img src="/images/132.png" alt=""></p>
+<p>当我们想根据表达式进行匹配，而非根据值和参数匹配时，导引就显得非常有用:</p>
+<p><img src="/images/227.png" alt=""></p>
+<p>导引序列使用逗号‘<code>,</code>’分割，当且仅当所有条件都符合时，才会被视为匹配成功:</p>
+<p><img src="/images/871.png" alt=""></p>
+<p>如果想基于值的类型进行匹配，我们就可以使用is*函式：</p>
+<pre>.mixin (@a, @b: 0) when (isnumber(@b)) { ... }
+.mixin (@a, @b: black) when (iscolor(@b)) { ... }</pre>
+以下为常见的检测函式：
+
+*   `iscolor`
+*   `isnumber`
+*   `isstring`
+*   `iskeyword`
+*   `isurl`
+如果你想判断一个值是纯数字，还是某个单位量，可以使用下列函式：
+
+*   `ispixel`
+*   `ispercentage`
+*   `isem`
+最后，在导引序列中可以使用**`and`**关键字实现“与”条件：
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.mixin</span> (<span class="variable">@a</span>) <span class="keyword">when</span> (isnumber(<span class="variable">@a</span>)) <span class="keyword">and</span> (<span class="variable">@a</span> &amp;gt; <span class="number">0</span>) &#123; ... &#125;</div></pre></td></tr></table></figure>
+
+使用not关键字实现“非”条件：
+<pre>.mixin (@b) when not (@b &gt; 0) { ... }
+</pre>
+
+<h3 id="4-嵌套规则"><a href="#4-嵌套规则" class="headerlink" title="4.嵌套规则"></a>4.嵌套规则</h3><p>这是我个人认为最实用的特性之一：</p>
+<p><img src="/images/732.png" alt=""></p>
+<p>注意 <code>&amp;amp;</code> 符号的使用—如果你想写串联选择器，而不是写后代选择器，就可以用到<code>&amp;amp;</code>了. 这点对伪类尤其有用如<code>:hover</code> 和 <code>:focus</code><br>再如：</p>
+<p><img src="/images/9841.png" alt=""></p>
+<h3 id="5-运算"><a href="#5-运算" class="headerlink" title="5.运算"></a>5.运算</h3><p>任何数字、颜色或者变量都可以参与运算. 来看一组例子:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@base:</span> <span class="number">5%</span>;</div><div class="line"><span class="variable">@filler:</span> <span class="variable">@base</span> * <span class="number">2</span>;</div><div class="line"><span class="variable">@other:</span> <span class="variable">@base</span> + <span class="variable">@filler</span>;</div><div class="line"></div><div class="line"><span class="attribute">color</span>: <span class="number">#888</span> / <span class="number">4</span>;</div><div class="line"><span class="attribute">background-color</span>: <span class="variable">@base-color</span> + <span class="number">#111</span>;</div><div class="line"><span class="attribute">height</span>: <span class="number">100%</span> / <span class="number">2</span> + <span class="variable">@filler</span>;</div><div class="line"></div><div class="line"><span class="variable">@var:</span> <span class="number">1px</span> + <span class="number">5</span>;  <span class="comment">//6px</span></div><div class="line"></div><div class="line"><span class="attribute">width</span>: (<span class="variable">@var</span> + <span class="number">5</span>) * <span class="number">2</span>;</div><div class="line"><span class="attribute">border</span>: (<span class="variable">@width</span> * <span class="number">2</span>) solid black;</div></pre></td></tr></table></figure></p>
+<h3 id="6-Color-函数"><a href="#6-Color-函数" class="headerlink" title="6.Color 函数"></a>6.Color 函数</h3><p>LESS 提供了一系列的颜色运算函数. 颜色会先被转化成 <em>HSL</em> 色彩空间, 然后在通道级别操作:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">lighten</span>(<span class="variable">@color</span>, <span class="number">10%</span>);     <span class="comment">// return a color which is 10% *lighter* than @color</span></div><div class="line"><span class="selector-tag">darken</span>(<span class="variable">@color</span>, <span class="number">10%</span>);      <span class="comment">// return a color which is 10% *darker* than @color</span></div><div class="line"></div><div class="line"><span class="selector-tag">saturate</span>(<span class="variable">@color</span>, <span class="number">10%</span>);    <span class="comment">// return a color 10% *more* saturated than @color</span></div><div class="line"><span class="selector-tag">desaturate</span>(<span class="variable">@color</span>, <span class="number">10%</span>);  <span class="comment">// return a color 10% *less* saturated than @color</span></div><div class="line"></div><div class="line"><span class="selector-tag">fadein</span>(<span class="variable">@color</span>, <span class="number">10%</span>);      <span class="comment">// return a color 10% *less* transparent than @color</span></div><div class="line"><span class="selector-tag">fadeout</span>(<span class="variable">@color</span>, <span class="number">10%</span>);     <span class="comment">// return a color 10% *more* transparent than @color</span></div><div class="line"><span class="selector-tag">fade</span>(<span class="variable">@color</span>, <span class="number">50%</span>);        <span class="comment">// return @color with 50% transparency</span></div><div class="line"></div><div class="line"><span class="selector-tag">spin</span>(<span class="variable">@color</span>, <span class="number">10</span>);         <span class="comment">// return a color with a 10 degree larger in hue than @color</span></div><div class="line"><span class="selector-tag">spin</span>(<span class="variable">@color</span>, -<span class="number">10</span>);        <span class="comment">// return a color with a 10 degree smaller hue than @color</span></div><div class="line"></div><div class="line"><span class="selector-tag">mix</span>(<span class="variable">@color1</span>, <span class="variable">@color2</span>);    <span class="comment">// return a mix of @color1 and @color2</span></div></pre></td></tr></table></figure></p>
+<p>使用起来相当简单:</p>
+<p><img src="/images/726.png" alt=""></p>
+<p>你还可以提取颜色信息:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">hue</span>(<span class="variable">@color</span>);        <span class="comment">// returns the `hue` channel of @color</span></div><div class="line"><span class="selector-tag">saturation</span>(<span class="variable">@color</span>); <span class="comment">// returns the `saturation` channel of @color</span></div><div class="line"><span class="selector-tag">lightness</span>(<span class="variable">@color</span>);  <span class="comment">// returns the 'lightness' channel of @color</span></div></pre></td></tr></table></figure></p>
+<p>如果你想在一种颜色的通道上创建另一种颜色，这些函数就显得那么的好用，例如:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@new:</span> hsl(hue(<span class="variable">@old</span>), <span class="number">45%</span>, <span class="number">90%</span>);<span class="comment">//`&lt;span class="variable"&gt;@new&lt;/span&gt;` 将会保持 `&lt;span class="variable"&gt;@old&lt;/span&gt;`的 _色调_, 但是具有不同的饱和度和亮度.</span></div></pre></td></tr></table></figure></p>
+<h3 id="7-Math-函数"><a href="#7-Math-函数" class="headerlink" title="7.Math 函数"></a>7.Math 函数</h3><p>LESS提供了一组方便的数学函数，你可以使用它们处理一些数字类型的值:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">round</span>(<span class="number">1.67</span>); <span class="comment">// returns `2`</span></div><div class="line"><span class="selector-tag">ceil</span>(<span class="number">2.4</span>);   <span class="comment">// returns `3`</span></div><div class="line"><span class="selector-tag">floor</span>(<span class="number">2.6</span>);  <span class="comment">// returns `2`</span></div><div class="line"><span class="selector-tag">percentage</span>(<span class="number">0.5</span>); <span class="comment">// returns `50%`</span></div></pre></td></tr></table></figure></p>
+<h3 id="8-命名空间"><a href="#8-命名空间" class="headerlink" title="8.命名空间"></a>8.命名空间</h3><p>有时候，你可能为了更好组织CSS或者单纯是为了更好的封装，将一些变量或者混合模块打包起来, 你可以像下面这样在<code>#bundle</code>中定义一些属性集之后可以重复使用:</p>
+<p><img src="/images/521.png" alt=""></p>
+<h3 id="9-作用域"><a href="#9-作用域" class="headerlink" title="9.作用域"></a>9.作用域</h3><p>LESS 中的作用域跟其他编程语言非常类似，首先会从本地查找变量或者混合模块，如果没找到的话会去父级作用域中查找，直到找到为止：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@var:</span> red;</div><div class="line"><span class="selector-id">#page</span> &#123;</div><div class="line">  <span class="variable">@var:</span> white;</div><div class="line">  <span class="selector-id">#header</span> &#123;</div><div class="line">    <span class="attribute">color</span>: <span class="variable">@var</span>; <span class="comment">// white</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#footer</span> &#123;</div><div class="line">  <span class="attribute">color</span>: <span class="variable">@var</span>; <span class="comment">// red  </span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="10-注释"><a href="#10-注释" class="headerlink" title="10.注释"></a>10.注释</h3><p>CSS 形式的注释在 LESS 中是依然保留的:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* Hello, I'm a CSS-style comment */</span></div><div class="line">   <span class="selector-class">.class</span> &#123; <span class="attribute">color</span>: black &#125;</div></pre></td></tr></table></figure></p>
+<p>LESS 同样也支持双斜线的注释, 但是编译成 CSS 的时候自动过滤掉:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Hi, I'm a silent comment, I won't show up in your CSS</span></div><div class="line"><span class="selector-class">.class</span> &#123; <span class="attribute">color</span>: white &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="11-Importing"><a href="#11-Importing" class="headerlink" title="11. Importing"></a>11. Importing</h3><p>你可以在main文件中通过下面的形势引入 <code>.less</code> 文件, <code>.less</code> 后缀可带可不带:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@import</span> <span class="string">"lib.less"</span>;</div><div class="line"><span class="keyword">@import</span> <span class="string">"lib"</span>;</div></pre></td></tr></table></figure></p>
+<p>如果你想导入一个CSS文件而且不想LESS对它进行处理，只需要使用<code>.css</code>后缀就可以:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@import &quot;lib.css&quot;;</div></pre></td></tr></table></figure></p>
+<p>这样LESS就会跳过它不去处理它.</p>
+<h3 id="12-字符串插值"><a href="#12-字符串插值" class="headerlink" title="12.字符串插值"></a>12.字符串插值</h3><p>变量可以用类似ruby和php的方式嵌入到字符串中，像<code>@{name}</code>这样的结构:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@base-url:</span> <span class="string">"http://assets.fnord.com"</span>;</div><div class="line"><span class="attribute">background-image</span>: url(<span class="string">"@&#123;base-url&#125;/images/bg.png"</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="13-避免编译"><a href="#13-避免编译" class="headerlink" title="13.避免编译"></a>13.避免编译</h3><p>有时候我们需要输出一些“不正确”的CSS语法或者使用一些 LESS不认识的专有语法.</p>
+<p>要输出这样的值我们可以在字符串前加上一个 <code>~</code>,我们可以将要避免编译的值用 “”包含起来:</p>
+<p><img src="/images/283.png" alt=""></p>
+<h3 id="14-JavaScript-表达式"><a href="#14-JavaScript-表达式" class="headerlink" title="14.JavaScript 表达式"></a>14.JavaScript 表达式</h3><p>JavaScript 表达式也可以在.less 文件中使用. 可以通过反引号的方式使用:</p>
+<p><img src="/images/463.png" alt=""></p>
+<p>你也可以同时使用字符串插值和避免编译:</p>
+<p><img src="/images/857.png" alt=""></p>
+<p>它也可以访问JavaScript环境，不过我个人并不推荐，此处略过。</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>以上大部分栗子，摘自LESS中文网，个别栗子作了部分修改/修正。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上为LESS的全部内容，也不算太多，经历过一个项目的使用就可以熟练了。与LESS起名的还有Sass和Stylus，据我目前的了解，他们在使用方式上一致，只是在语法上各有各的特点，以后有时间去体会一下Sass和Stylus。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/07/使用强大的Chrome开发者工具——性能测试分析篇/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          使用强大的Chrome开发者工具——性能测试分析篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/31/AngularJS如何做SEO/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">AngularJS如何做SEO</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="重新认识LESS" data-title="重新认识LESS" data-url="http://cloudstone.space/2015/06/01/重新认识LESS/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

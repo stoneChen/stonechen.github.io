@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>我的前端MVC之路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="大约十几个月前，了解到时下前端MVC之火爆，同事推荐我了解一下angular。当时也不是特别在意，只是稍稍阅读了一遍官方文档，并尝试了文档上的例子。其实当时也颇有震惊之感的，原来代码还可以这么写！看完之后，很兴奋，也确实想在实际项目中运用一下，但可能我对它的理解不够深入，真到了项目里不知如何下手。后来也就不了了之了。又过了不久，另一个同事推荐我了解一下backbone，我找了一份中文文档来阅读。在">
+<meta name="keywords" content="seajs,spm,angular,backbone,generator,yeoman,yo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的前端MVC之路">
+<meta property="og:url" content="http://cloudstone.space/2015/01/25/我的前端MVC之路/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="大约十几个月前，了解到时下前端MVC之火爆，同事推荐我了解一下angular。当时也不是特别在意，只是稍稍阅读了一遍官方文档，并尝试了文档上的例子。其实当时也颇有震惊之感的，原来代码还可以这么写！看完之后，很兴奋，也确实想在实际项目中运用一下，但可能我对它的理解不够深入，真到了项目里不知如何下手。后来也就不了了之了。又过了不久，另一个同事推荐我了解一下backbone，我找了一份中文文档来阅读。在">
+<meta property="og:updated_time" content="2016-02-27T01:24:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的前端MVC之路">
+<meta name="twitter:description" content="大约十几个月前，了解到时下前端MVC之火爆，同事推荐我了解一下angular。当时也不是特别在意，只是稍稍阅读了一遍官方文档，并尝试了文档上的例子。其实当时也颇有震惊之感的，原来代码还可以这么写！看完之后，很兴奋，也确实想在实际项目中运用一下，但可能我对它的理解不够深入，真到了项目里不知如何下手。后来也就不了了之了。又过了不久，另一个同事推荐我了解一下backbone，我找了一份中文文档来阅读。在">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-我的前端MVC之路" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/01/25/我的前端MVC之路/" class="article-date">
+  	<time datetime="2015-01-25T04:38:47.000Z" itemprop="datePublished">2015-01-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      我的前端MVC之路
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/backbone/">backbone</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/generator/">generator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seajs/">seajs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spm/">spm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yeoman/">yeoman</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yo/">yo</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Essays/">Essays</a><a class="article-category-link" href="/categories/Essays/前端/">前端</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大约十几个月前，了解到时下前端MVC之火爆，同事推荐我了解一下angular。当时也不是特别在意，只是稍稍阅读了一遍官方文档，并尝试了文档上的例子。其实当时也颇有震惊之感的，原来代码还可以这么写！看完之后，很兴奋，也确实想在实际项目中运用一下，但可能我对它的理解不够深入，真到了项目里不知如何下手。后来也就不了了之了。又过了不久，另一个同事推荐我了解一下backbone，我找了一份中文文档来阅读。在当时看来，我更喜欢backbone的代码组织风格，有条不紊，比较好理解。同样也手痒，想要找个实际项目试试手。但由于当时基本都是基于老代码做更新维护，没有实践的机会。于是我的mvc之路便暂时搁浅了。</p>
+<p>直到2014年3月换到了现在的公司，一切都可以重新来过了。新公司头一件事是进一步研究seajs+spm，之前仅仅是用seajs，没有配合其使用打包工具spm。</p>
+<p>从2014年3月到4月底，我疯狂地在网上查资料，学习的过程也是很坎坷，官方的文档不够全面，网上的资料还穿插着历史的各种版本，很容易搞混API。由于跟官方的构建方案不大一样，所以官方的教程行不通。后来我甚至直接通过旺旺联系官方支付宝的spm维护人员，好消息是，他点到了其中一个关键配置，使得整个构建行的通，我之前的博客里也有提到他。再之后的一系列摸索，都顺利的多了，非常感谢。后来通过与backbone配合，真正实现了我所设想的构建方案，并发布到了github上。</p>
+<p>2014年4月底，来了一个电商类的新项目，正好是个机会拿我刚提炼出来的spm构建方案试试手。没有经过实践的东西始终还是会有缺陷的呀，进入到了实际项目，有许多问题就暴露出来了，经过不断的摸索，基本都逐个击破了。</p>
+<p>电商项目告一段落后，另外一个平台类的项目接踵而至。这个项目的重量级更高，需要更加重视。此时我又开始考虑是否要使用Angular，查了很多资料，想起之前对Angular的了解，有一个阻断我选择它的观点是，“Anagular不能与其他库并存？！”（后来发现这是错误的观点！有可能当时误解了）那岂不是所有组件都要自己写？！但是一方面又对很酷的编程体验很是向往。最终考虑到浏览器兼容，放弃了Angular（对IE8及以下支持不好），选择了Backbone。网上说，其实backbone提供的东西并不多，只是在代码结构组织方面有一定积极的作用。在数据绑定，页面渲染等方面都需要开发者自己搞定。于是在网上找是否有合适的基于backbone的框架可用。后来找到了marionette，跟着教程做了一个页面，发现有各种layout，感觉用起来好累，也许是当初用错了方法。</p>
+<p>后来想起了arale组件库，当初在支付宝的时候，用过一些组件，感觉蛮方便，而且arale也是以seajs为模块加载器。我把widget进步一包装作为我们的基类按需扩展，派生出了很多常用组件，而backbone仅仅作为业务单元的路由工具使用（想想有点对不起它- -）。在技术选型确定以后，以这套方案开发了几个月后，越发觉得arale的基类很强大，兼具继承，混入和AOP特性，而且代码里发现很多backbone的影子。</p>
+<p>之后来了一个手机端项目，相对简单。正好大漠的《用AngularJS开发下一代web应用》看的差不多了，想来正好是个实践的机会。试用了一下yo官网的generator-angular，很给力！这次尝试给了我前所未有的编程体验，一个字~爽！</p>
+<p>generator-angular是一个用于生成angular工程脚手架的工具，包括初始化工程，和在开发过程中新建指定的模块，比如可以根据指定名称生成directive，controller，filter等。另外它还提供了一个完备的gruntfile构建流程，基本能够应对很多项目类型，不过开发者可以根据自己需要进行更改，我就大大小小增删改了很多流程，这个gruntfile对其他项目也具有很大的借鉴意义。</p>
+<p>之后又有一个之前已经开发好的后台管理系统，我们决定把它用angular重构一遍。这个项目就复杂一些了，不过我还是继续使用generator-angular</p>
+<p>generator-angular引入的angular模块都是angular官方的，很可能满足不了业务需求，这时候需要我们自己找第三方的模块，或者自己开发组件。我找到了angular-bootstrap作为基本组件库，很好用，而且通过阅读它的源代码，我也了解了很多angular的原理。之后花了一些时间开了form组件和datagrid表格组件，过程确实比较艰难坎坷，指令的确是angular最难的部分。</p>
+<p>随着此项目的进行，业务需求越来越复杂，form组件和datagrid组件也越来越庞大臃肿，这还可以忍受。我看到controller里一大段一大段的配置对象代码（比如200行的代码，有120行是form组件和datagrid组件的配置代码），着实有些不爽，而且对有些需求真的很难扩展。这是，倒是对当初不用组件开发的方式有点留恋了，优势是思路简单，复杂需求可以较方便的实现。但是手写那么庞大的视图（尤其是form），而且经常是重复或近似的代码也挺无力。于是我终于下定决心想写一个自己的generator，用“代码写代码”，完成乏味的重复劳动，实有一种“返璞归真”的赶脚！</p>
+<p>花了一个多星期的时间，参照generator-angular，各种踩坑与摸索后，酝酿出了generator-ngstone（以我自己的外号命名- -），算是实现了我之前的想法，尤其是根据配置文件生成form代码与datagrid代码（包括view与controller）。下面这个是我的项目地址：</p>
+<p><a href="https://github.com/stoneChen/generator-ngstone" target="_blank" rel="external">https://github.com/stoneChen/generator-ngstone</a></p>
+<p>欢迎使用，欢迎关注，更欢迎提出宝贵意见！</p>
+<p>这一路走来，也有一年的时间了，感觉自己还是有一番提升的，这一年没有白过~<br>未来，HTML5应用会更加火爆，特别是微信SDK的发布，或许应该在这方面下点功夫了。<br>另外对iOS也是有一番兴趣，尚未深入了解，不知以后的路会怎样。</p>
+<p>–从cnblogs搬来，写于 2015-01-25 12:38</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/06/推荐一款非常好用的chrome番茄插件“红杏出墙”/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          推荐一款非常好用的chrome番茄插件“红杏出墙”
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/04/28/三个css3趣玩小试/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">三个css3趣玩小试</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="我的前端MVC之路" data-title="我的前端MVC之路" data-url="http://cloudstone.space/2015/01/25/我的前端MVC之路/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

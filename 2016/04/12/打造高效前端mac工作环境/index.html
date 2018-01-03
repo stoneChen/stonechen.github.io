@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>打造高效前端mac工作环境</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="打造高效的Mac工作环境 Mac简直是为程序员量身打造的开发利器,华丽丽的外观以及内置的一系列开发工具与编程语言,最重要的是,OS X基于unix系统,命令行与GUI的完美结合体.但是Mac仍然需要经过geek们的不断”折腾”才会变得更加得心应手,于是就有了这篇文章,欢迎每个读者不断补充内容! 本文参考https://github.com/macdao/ocds-guide-to-setting-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打造高效前端mac工作环境">
+<meta property="og:url" content="http://cloudstone.space/2016/04/12/打造高效前端mac工作环境/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="打造高效的Mac工作环境 Mac简直是为程序员量身打造的开发利器,华丽丽的外观以及内置的一系列开发工具与编程语言,最重要的是,OS X基于unix系统,命令行与GUI的完美结合体.但是Mac仍然需要经过geek们的不断”折腾”才会变得更加得心应手,于是就有了这篇文章,欢迎每个读者不断补充内容! 本文参考https://github.com/macdao/ocds-guide-to-setting-">
+<meta property="og:updated_time" content="2016-04-12T04:32:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="打造高效前端mac工作环境">
+<meta name="twitter:description" content="打造高效的Mac工作环境 Mac简直是为程序员量身打造的开发利器,华丽丽的外观以及内置的一系列开发工具与编程语言,最重要的是,OS X基于unix系统,命令行与GUI的完美结合体.但是Mac仍然需要经过geek们的不断”折腾”才会变得更加得心应手,于是就有了这篇文章,欢迎每个读者不断补充内容! 本文参考https://github.com/macdao/ocds-guide-to-setting-">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 11.11px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-打造高效前端mac工作环境" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/12/打造高效前端mac工作环境/" class="article-date">
+  	<time datetime="2016-04-12T04:24:45.000Z" itemprop="datePublished">2016-04-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      打造高效前端mac工作环境
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="打造高效的Mac工作环境"><a href="#打造高效的Mac工作环境" class="headerlink" title="打造高效的Mac工作环境"></a>打造高效的Mac工作环境</h1><blockquote>
+<p>Mac简直是为程序员量身打造的开发利器,华丽丽的外观以及内置的一系列开发工具与编程语言,最重要的是,OS X基于unix系统,命令行与GUI的完美结合体.但是Mac仍然需要经过geek们的不断”折腾”才会变得更加得心应手,于是就有了这篇文章,欢迎每个读者不断补充内容!</p>
+<p>本文参考<a href="https://github.com/macdao/ocds-guide-to-setting-up-mac/blob/master/README.md#spotlight-%E5%BF%AB%E6%8D%B7%E9%94%AE" target="_blank" rel="external">https://github.com/macdao/ocds-guide-to-setting-up-mac/blob/master/README.md#spotlight-%E5%BF%AB%E6%8D%B7%E9%94%AE</a><br>感谢飞哥分享</p>
+</blockquote>
+<h2 id="一-触控板篇"><a href="#一-触控板篇" class="headerlink" title="一.触控板篇"></a>一.触控板篇</h2><h3 id="设置单击为轻点"><a href="#设置单击为轻点" class="headerlink" title="设置单击为轻点"></a>设置单击为轻点</h3><p>默认情况下按下触摸板才是单击，设置单击为轻点：<br>系统偏好设置-&gt;触控板-&gt;光标与点按：勾选『轻点来点按』</p>
+<h3 id="双指滚屏"><a href="#双指滚屏" class="headerlink" title="双指滚屏"></a>双指滚屏</h3><p>双指滚屏比起鼠标，那是爽快的不是一点点。但你可能不知道的是，双指滚屏支持横向滚屏！当你双指在触控板上移动时，好比在触屏手机上，用一个手指在在屏幕上移动，360度随意滚动页面，快试试吧~</p>
+<h3 id="设置三指拖动"><a href="#设置三指拖动" class="headerlink" title="设置三指拖动"></a>设置三指拖动</h3><p>使用三指一起在触控板上移动即为拖动效果：<br>系统偏好设置-&gt;辅助功能-&gt;鼠标与触控板-&gt;触控板选项-&gt;勾选『启用拖移』-&gt;选择『三指拖移』。<br>用于拖动窗口或选中文本非常方便！</p>
+<h3 id="查看当前工作空间所有子窗口"><a href="#查看当前工作空间所有子窗口" class="headerlink" title="查看当前工作空间所有子窗口"></a>查看当前工作空间所有子窗口</h3><p>四指上划，感受一下华丽丽的动画。。。</p>
+<h3 id="四指切换工作空间"><a href="#四指切换工作空间" class="headerlink" title="四指切换工作空间"></a>四指切换工作空间</h3><p>四指水平滑动，全屏切换桌面，装逼不错。</p>
+<h3 id="Force-Touch"><a href="#Force-Touch" class="headerlink" title="Force Touch"></a>Force Touch</h3><ul>
+<li>点击chrome网页中的单词 ，可用于查看字典 </li>
+<li>点击dock中的图标，可查看当前应用下的所有子窗口</li>
+</ul>
+<h3 id="更多。。。"><a href="#更多。。。" class="headerlink" title="更多。。。"></a>更多。。。</h3><h2 id="二-快捷键篇"><a href="#二-快捷键篇" class="headerlink" title="二.快捷键篇"></a>二.快捷键篇</h2><p>⌘ = Command<br>⌃ = Ctrl<br>⇧ = Shift<br>⎇ = option  </p>
+<h3 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>快捷键</th>
+<th>实用指数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>⌘ + tab</code></td>
+<td>★★★★★</td>
+<td>切换应用程序，类似win的alt + tab</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>⌘ + ~</code></td>
+<td>★★★★★</td>
+<td>切换应用下的不同子窗口</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>⌘ + H</code></td>
+<td>★★</td>
+<td>隐藏应用程序</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>⌘ + M</code></td>
+<td>★★</td>
+<td>最小化应用程序子窗口</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>⌘ + N</code></td>
+<td>★★★★</td>
+<td>新建应用程序子窗口</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>⌘ + O</code></td>
+<td>★★★★</td>
+<td>打开文件</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>⌘ + P</code></td>
+<td>★★</td>
+<td>打印</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>⌘ + W</code></td>
+<td>★★★★★</td>
+<td>关闭子窗口</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>⌘ + Q</code></td>
+<td>★★★★★</td>
+<td>退出应用程序，finder不可退出</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>⌘ + 空格</code></td>
+<td>★★★★★</td>
+<td>切换输入法</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>快捷键</th>
+<th>实用指数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>⌘ + C</code></td>
+<td>★★★★★</td>
+<td>复制</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>⌘ + V</code></td>
+<td>★★★★★</td>
+<td>粘贴</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>⌘ + X</code></td>
+<td>★★★★★</td>
+<td>剪切</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>⌘ + S</code></td>
+<td>★★★★★</td>
+<td>保存</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>option + →</code></td>
+<td>★★★★★</td>
+<td>跳至下一个单词</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>option + ←</code></td>
+<td>★★★★★</td>
+<td>跳至上一个单词</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>⌘ + →</code></td>
+<td>★★★★★</td>
+<td>跳至行末</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>⌘ + ←</code></td>
+<td>★★★★★</td>
+<td>跳至行首</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>⌘ + fn + ←</code></td>
+<td>★★★</td>
+<td>跳至文件首字符</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>⌘ + fn + →</code></td>
+<td>★★★</td>
+<td>跳至文件末字符</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>⇧ + 以上5-10</code></td>
+<td>★★★★</td>
+<td>区域选择文本</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>⎇ + delete</code></td>
+<td>★★★★</td>
+<td>删除光标前一个单词</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>⌘ + delete</code></td>
+<td>★★★★</td>
+<td>删除光标到行首的内容</td>
+</tr>
+</tbody>
+</table>
+<h3 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h3><p><code>⌘ + ⌃ + A</code>   QQ截图可满足大部分需求</p>
+<h3 id="Finder"><a href="#Finder" class="headerlink" title="Finder"></a>Finder</h3><p>Finder是OS X的资源管理器，为常驻程序</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>快捷键</th>
+<th>实用指数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>空格</code></td>
+<td>★★★★★</td>
+<td>快速预览文件内容</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>⌘ + A</code></td>
+<td>★★★★</td>
+<td>全选当前目录下的文件or目录</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>⌘ + I</code></td>
+<td>★★</td>
+<td>显示简介</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>⌘ + N</code></td>
+<td>★★★★</td>
+<td>新建文件夹</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>⌘ + C</code></td>
+<td>★★★★★</td>
+<td>复制</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>⌘ + V</code></td>
+<td>★★★★★</td>
+<td>粘贴（需先复制）</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>⌘ + ⎇ + V</code></td>
+<td>★★★★★</td>
+<td>移动文件（需先复制）</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>⌘ + delete</code></td>
+<td>★★★★★</td>
+<td>移动到废纸篓，如果在废纸篓中，则是放回原处</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>⌘ + ⇧ + delete</code></td>
+<td>★★★★★</td>
+<td>清空废纸篓</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>方向键</code></td>
+<td>★★★★</td>
+<td>切换选中的文件or目录，切换方式视具体视图类型而定</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h3><p>Chrome是我们使用最多的浏览器，掌握它的快捷键能使工作效率大大提高。</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>快捷键</th>
+<th>实用指数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>⌘ + T</code></td>
+<td>★★★★★</td>
+<td>新建tab页</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>⌘ + W</code></td>
+<td>★★★★★</td>
+<td>关闭tab页</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>⌘ + R</code></td>
+<td>★★★★★</td>
+<td>刷新</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>⌘ + ⇧ + R</code></td>
+<td>★★★</td>
+<td>强制刷新</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>⌘ + ⎇ + →</code></td>
+<td>★★★★★</td>
+<td>向右切换tab页</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>⌘ + ⎇ + →</code></td>
+<td>★★★★★</td>
+<td>向右切换tab页</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>⌘ + ⇧ + T</code></td>
+<td>★★★★</td>
+<td>恢复刚刚关闭的tab页</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>⌘ + ⇧ + N</code></td>
+<td>★★★★</td>
+<td>新建隐身窗口</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>⌘ + L</code></td>
+<td>★★★★★</td>
+<td>聚焦地址栏</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>⌘ + D</code></td>
+<td>★★★★★</td>
+<td>添加当前页面至收藏夹</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>⌘ + ⇧ + U</code></td>
+<td>★★★★★</td>
+<td>查看页面源代码</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>⌘ + ←</code></td>
+<td>★★★</td>
+<td>后退（触摸板手势同样可实现）</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>⌘ + →</code></td>
+<td>★★★</td>
+<td>前进（触摸板手势同样可实现）</td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>⌘ + ⇧ + I</code></td>
+<td>★★★★★</td>
+<td>开发者工具</td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>⌘ + ⇧ + J</code></td>
+<td>★★★★★</td>
+<td>javascript控制台</td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>⌘ + ⇧ + C</code></td>
+<td>★★★★★</td>
+<td>抓取元素</td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>⌘ + ⇧ + M</code></td>
+<td>★★★</td>
+<td>（聚焦开发者工具）切换移动端模式</td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>⌘ + [</code></td>
+<td>★★</td>
+<td>（聚焦开发者工具）向左切换工具栏</td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>⌘ + ]</code></td>
+<td>★★</td>
+<td>（聚焦开发者工具）向右切换工具栏</td>
+</tr>
+<tr>
+<td>20</td>
+<td><code>Esc</code></td>
+<td>★★★★</td>
+<td>（聚焦开发者工具）切换底部工具栏，尤其是全局搜索</td>
+</tr>
+<tr>
+<td>21</td>
+<td><code>⌘ + =</code></td>
+<td>★★★★</td>
+<td>放大页面</td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>⌘ + -</code></td>
+<td>★★★★</td>
+<td>缩小页面</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三-工具篇"><a href="#三-工具篇" class="headerlink" title="三.工具篇"></a>三.工具篇</h2><h3 id="命令行类"><a href="#命令行类" class="headerlink" title="命令行类"></a>命令行类</h3><h4 id="1-homebrew"><a href="#1-homebrew" class="headerlink" title="1. homebrew"></a>1. homebrew</h4><p>实用指数：★★★★★<br><a href="http://brew.sh/" target="_blank" rel="external">http://brew.sh/</a><br>命令行软件包管理器，自动管理依赖，mac必备工具<br>一行命令安装命令行软件，比如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install nodejs</div></pre></td></tr></table></figure></p>
+<h4 id="2-brew-cask"><a href="#2-brew-cask" class="headerlink" title="2. brew-cask"></a>2. brew-cask</h4><p>实用指数：★★★★★<br><a href="https://caskroom.github.io/" target="_blank" rel="external">https://caskroom.github.io/</a><br>brew-cask是brew的插件，用于管理GUI软件，一行命令安装GUI软件，比如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew cask install qq</div></pre></td></tr></table></figure></p>
+<p>省去搜索-下载-打开-拖动的繁琐过程<br>缺点是，下载速度可能会慢，有些软件的版本跟不上官方下载</p>
+<h4 id="3-oh-my-zsh"><a href="#3-oh-my-zsh" class="headerlink" title="3.oh-my-zsh"></a>3.oh-my-zsh</h4><p>实用指数：★★★★★<br><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">https://github.com/robbyrussell/oh-my-zsh</a><br><a href="http://macshuo.com/?p=676" target="_blank" rel="external">http://macshuo.com/?p=676</a><br>zsh本身比bash等shell优秀，但是难于配置，所以就有大神开发了oh-my-zsh这么个工具，实现简单完成zsh的配置。有了它，我们就可以驰骋在彩色的世界里，主题随心换，命令行插件(比如git,sudo,npm)多的不要不要的~</p>
+<h4 id="4-VIM"><a href="#4-VIM" class="headerlink" title="4.VIM"></a>4.VIM</h4><p>实用指数：★★★★★<br>管理Linux服务器必备编辑器，不必多说<br>可通过brew安装</p>
+<h4 id="5-Vundle"><a href="#5-Vundle" class="headerlink" title="5.Vundle"></a>5.Vundle</h4><p>实用指数：★★★★★<br><a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external">https://github.com/VundleVim/Vundle.vim</a><br>VIM插件包管理工具</p>
+<h4 id="6-wget"><a href="#6-wget" class="headerlink" title="6.wget"></a>6.wget</h4><p>实用指数：★★★★<br>命令行下的下载工具，mac居然没有自带这个工具，很奇怪，不过用的也不多<br>可通过brew安装</p>
+<h4 id="7-tree"><a href="#7-tree" class="headerlink" title="7.tree"></a>7.tree</h4><p>实用指数：★★★<br>通过制表符的形式展示目录结构，有时候写文档蛮有用<br>可通过brew安装</p>
+<h4 id="8-tldr"><a href="#8-tldr" class="headerlink" title="8.tldr"></a>8.tldr</h4><p>实用指数：★★★<br><a href="https://www.npmjs.com/package/tldr" target="_blank" rel="external">https://www.npmjs.com/package/tldr</a><br>有时候不记得一个命令的用法，但又不想看又长又啰嗦的manpage，可以使用这个命令查看<br>可通过npm安装</p>
+<h4 id="9-nginx"><a href="#9-nginx" class="headerlink" title="9.nginx"></a>9.nginx</h4><p>实用指数：★★★★★<br><a href="http://nginx.org/" target="_blank" rel="external">http://nginx.org/</a><br>这可能不算工具，但绝对是web世界中的好软件，不管前后端，都应该好好学习它！</p>
+<h4 id="10-autojump"><a href="#10-autojump" class="headerlink" title="10.autojump"></a>10.autojump</h4><p>实用指数：★★★★★<br><a href="https://github.com/wting/autojump" target="_blank" rel="external">https://github.com/wting/autojump</a><br>快速cd到常用目录，可通过brew安装</p>
+<h3 id="GUI类"><a href="#GUI类" class="headerlink" title="GUI类"></a>GUI类</h3><h4 id="0-alfred"><a href="#0-alfred" class="headerlink" title="0.alfred"></a>0.alfred</h4><p>实用指数：★★★★★★★★★★<br>这款首推，以至于序号都得是0才行，实用指数爆表！！！<br>它是mac上提升效率的神器，可以是一切的入口，比如打开软件，搜索文件，执行命令，粘贴板历史。更叼炸天的是它的workflow，这通常来自第三方开发者，当然你也可以自己手动开发workflow来定制属于自己的workflow，可以去 <a href="http://www.alfredworkflow.com/" target="_blank" rel="external">这里</a> 挑选适合自己的workflow。<br>强烈推荐购买<br>可通过brew cask安装  </p>
+<h4 id="1-appcleaner"><a href="#1-appcleaner" class="headerlink" title="1.appcleaner"></a>1.appcleaner</h4><p>实用指数：★★★★★<br>有的软件可能会在电脑的很多目录下都创建文件，导致卸载不干净，通过它可以帮我们找出想卸载软件涉及到的所有文件，有洁癖同学的利器。<br>可通过brew cask安装</p>
+<h4 id="2-bbedit"><a href="#2-bbedit" class="headerlink" title="2.bbedit"></a>2.bbedit</h4><p>实用指数：★★★<br>一个轻量级的文本编辑器<br>可通过brew cask安装</p>
+<h4 id="3-beyond-compare"><a href="#3-beyond-compare" class="headerlink" title="3.beyond-compare"></a>3.beyond-compare</h4><p>实用指数：★★★<br>一个比较工具，win上很火，但收费很贵，个人认为webstorm自带的比较工具也不错<br>可通过brew cask安装</p>
+<h4 id="4-charles"><a href="#4-charles" class="headerlink" title="4.charles"></a>4.charles</h4><p>实用指数：★★★★★<br>一款优秀的抓包工具，收费比较贵，一直没舍得买，试用版每半个小时会退出一次<br>可通过brew cask安装</p>
+<h4 id="5-cheatsheet"><a href="#5-cheatsheet" class="headerlink" title="5.cheatsheet"></a>5.cheatsheet</h4><p>实用指数：★★★★<br>长按⌘即可查看当前应用的所有快捷键<br>可通过brew cask安装</p>
+<h4 id="6-cyberduck"><a href="#6-cyberduck" class="headerlink" title="6.cyberduck"></a>6.cyberduck</h4><p>实用指数：★★★<br>与linux服务器，传输文件，比较直观<br>可通过brew cask安装</p>
+<h4 id="7-daisydisk"><a href="#7-daisydisk" class="headerlink" title="7.daisydisk"></a>7.daisydisk</h4><p>实用指数：★★★<br>收费，可试用，分析你的mac的磁盘情况，比较详细，偶尔用用也可以<br>可通过brew cask安装</p>
+<h4 id="8-dash"><a href="#8-dash" class="headerlink" title="8.dash"></a>8.dash</h4><p>实用指数：★★★★<br>收费，可试用，开源技术文档本地化工具，与alfred结合很好用<br>可通过brew cask安装</p>
+<h4 id="9-evernote"><a href="#9-evernote" class="headerlink" title="9.evernote"></a>9.evernote</h4><p>实用指数：★★★★★<br>高级功能收费，记笔记的利器，多端同步<br>可通过brew cask安装</p>
+<h4 id="10-filezilla"><a href="#10-filezilla" class="headerlink" title="10.filezilla"></a>10.filezilla</h4><p>实用指数：★★★★★<br>ftp工具，蛮好用<br>可通过brew cask安装</p>
+<h4 id="11-firefox"><a href="#11-firefox" class="headerlink" title="11.firefox"></a>11.firefox</h4><p>实用指数：★★★★★<br>就是火狐浏览器啦，有的人喜欢<br>可通过brew cask安装</p>
+<h4 id="12-foxmail"><a href="#12-foxmail" class="headerlink" title="12.foxmail"></a>12.foxmail</h4><p>实用指数：★★★★★<br>对QQ邮箱支持比较友好，几乎免配置<br>可通过brew cask安装</p>
+<h4 id="13-ghostlab"><a href="#13-ghostlab" class="headerlink" title="13.ghostlab"></a>13.ghostlab</h4><p>实用指数：★★★★★<br>收费，可试用7天，移动端多设备同步测试很叼<br>可通过brew cask安装</p>
+<h4 id="14-haroopad"><a href="#14-haroopad" class="headerlink" title="14.haroopad"></a>14.haroopad</h4><p>实用指数：★★★★<br>一款比较好的markdown编辑器<br>可通过brew cask安装</p>
+<h4 id="15-hosts"><a href="#15-hosts" class="headerlink" title="15.hosts"></a>15.hosts</h4><p>实用指数：★★★★<br>用于方便的修改hosts文件<br>可通过brew cask安装</p>
+<h4 id="15-istat-menus"><a href="#15-istat-menus" class="headerlink" title="15.istat-menus"></a>15.istat-menus</h4><p>实用指数：★★★★★<br>实时监测你的mac情况，比如温度，cpu，内存，ip等<br>可通过brew cask安装</p>
+<h4 id="16-iterm2"><a href="#16-iterm2" class="headerlink" title="16.iterm2"></a>16.iterm2</h4><p>实用指数：★★★★★<br>加强版终端，每天都在用啊，尤其喜欢它的全局调用方式<br>可通过brew cask安装</p>
+<h4 id="17-macdown"><a href="#17-macdown" class="headerlink" title="17.macdown"></a>17.macdown</h4><p>实用指数：★★★★<br>也是一款不错的markdown编辑器<br>可通过brew cask安装</p>
+<h4 id="18-macvim"><a href="#18-macvim" class="headerlink" title="18.macvim"></a>18.macvim</h4><p>实用指数：★★★★★<br>客户端VIM，编辑器之神<br>可通过brew cask安装</p>
+<h4 id="19-manico"><a href="#19-manico" class="headerlink" title="19.manico"></a>19.manico</h4><p>实用指数：★★★★<br>通过功能键+数字快捷切换常用程序<br>可通过brew cask安装</p>
+<h4 id="20-mindnode-pro"><a href="#20-mindnode-pro" class="headerlink" title="20.mindnode-pro"></a>20.mindnode-pro</h4><p>实用指数：★★★★<br>用于画导图，用的比较少<br>可通过brew cask安装</p>
+<h4 id="21-mou"><a href="#21-mou" class="headerlink" title="21.mou"></a>21.mou</h4><p>实用指数：★★★★<br>鼻祖级的markdown编辑器<br>可通过brew cask安装</p>
+<h4 id="22-qq"><a href="#22-qq" class="headerlink" title="22.qq"></a>22.qq</h4><p>实用指数：★★★★★<br>不必多说，每天在用<br>可通过brew cask安装</p>
+<h4 id="23-scroll-reverser"><a href="#23-scroll-reverser" class="headerlink" title="23.scroll-reverser"></a>23.scroll-reverser</h4><p>实用指数：★★★★★<br>单独调整鼠标和触控板的滚动方向，系统自带的只能两者同时调整<br>可通过brew cask安装</p>
+<h4 id="24-shadowsocksx"><a href="#24-shadowsocksx" class="headerlink" title="24.shadowsocksx"></a>24.shadowsocksx</h4><p>实用指数：★★★★★<br>shadowsocks客户端，轻量级的梯子，每天在用啦<br>可通过brew cask安装</p>
+<h4 id="25-sizeup"><a href="#25-sizeup" class="headerlink" title="25.sizeup"></a>25.sizeup</h4><p>实用指数：★★★★★<br>快速调整窗口大小，位置，外接显示器时，更加好用！<br>可通过brew cask安装</p>
+<h4 id="26-vmware-fusion"><a href="#26-vmware-fusion" class="headerlink" title="26.vmware-fusion"></a>26.vmware-fusion</h4><p>实用指数：★★★★★<br>一款强大的虚拟机软件<br>可通过brew cask安装</p>
+<h4 id="27-xtrafinder"><a href="#27-xtrafinder" class="headerlink" title="27.xtrafinder"></a>27.xtrafinder</h4><p>实用指数：★★★★★<br>增强Finder的功能，例如剪切文件，新建文件，复制文件路径<br>可通过brew cask安装</p>
+<h4 id="28-photoshop"><a href="#28-photoshop" class="headerlink" title="28.photoshop"></a>28.photoshop</h4><p>实用指数：★★★★★<br>前端必备</p>
+<h4 id="27-office-2016"><a href="#27-office-2016" class="headerlink" title="27.office 2016"></a>27.office 2016</h4><p>实用指数：★★★★★<br>办公必备</p>
+<h4 id="28-google-chrome"><a href="#28-google-chrome" class="headerlink" title="28.google-chrome"></a>28.google-chrome</h4><p>实用指数：★★★★★<br>前端必备<br>可通过brew cask安装</p>
+<h4 id="29-RAR-Export"><a href="#29-RAR-Export" class="headerlink" title="29.RAR Export"></a>29.RAR Export</h4><p>实用指数：★★★★★<br>优秀加解压软件，兼容rar,zip等格式</p>
+<h4 id="30-Teamviewer"><a href="#30-Teamviewer" class="headerlink" title="30.Teamviewer"></a>30.Teamviewer</h4><p>实用指数：★★★★★<br>优秀远程桌面软件</p>
+<h4 id="31-webstorm"><a href="#31-webstorm" class="headerlink" title="31.webstorm"></a>31.webstorm</h4><p>实用指数：★★★★★<br>前端开发神器，个人偏爱</p>
+<h4 id="32-微信web开发者工具"><a href="#32-微信web开发者工具" class="headerlink" title="32.微信web开发者工具"></a>32.微信web开发者工具</h4><p>实用指数：★★★★<br>用于调试微信一些接口，还可以</p>
+<h4 id="33-sublime-text-3"><a href="#33-sublime-text-3" class="headerlink" title="33.sublime text 3"></a>33.sublime text 3</h4><p>实用指数：★★★★<br>号称最优雅的编辑器</p>
+<h4 id="34-sourceTree"><a href="#34-sourceTree" class="headerlink" title="34.sourceTree"></a>34.sourceTree</h4><p>实用指数：★★★★★<br>git的GUI应用，非常直观</p>
+<h4 id="35-zeplin"><a href="#35-zeplin" class="headerlink" title="35.zeplin"></a>35.zeplin</h4><p>实用指数：★★★★★<br>读取sketch设计文件中的标注</p>
+<h3 id="Chrome插件"><a href="#Chrome插件" class="headerlink" title="Chrome插件"></a>Chrome插件</h3><h4 id="一键管理所有扩展"><a href="#一键管理所有扩展" class="headerlink" title="一键管理所有扩展"></a>一键管理所有扩展</h4><p>实用指数：★★★★<br>你没看错,它就是这个中文名，作用如其名！</p>
+<h4 id="Vimium"><a href="#Vimium" class="headerlink" title="Vimium"></a>Vimium</h4><p>实用指数：★★★★<br>有了它你几乎可以实现全键盘上网！</p>
+<h4 id="HTML5高清二维码生成器"><a href="#HTML5高清二维码生成器" class="headerlink" title="HTML5高清二维码生成器"></a>HTML5高清二维码生成器</h4><p>实用指数：★★★★★<br>对于移动端开发，还是很方便的</p>
+<h4 id="有道词典"><a href="#有道词典" class="headerlink" title="有道词典"></a>有道词典</h4><p>实用指数：★★★★★<br>在网页上划词翻译，很好用</p>
+<h4 id="Chrono下载管理器"><a href="#Chrono下载管理器" class="headerlink" title="Chrono下载管理器"></a>Chrono下载管理器</h4><p>实用指数：★★★★★<br>下载管理，好用</p>
+<h4 id="Google文档、表格及幻灯片的Office编辑扩展程序"><a href="#Google文档、表格及幻灯片的Office编辑扩展程序" class="headerlink" title="Google文档、表格及幻灯片的Office编辑扩展程序"></a>Google文档、表格及幻灯片的Office编辑扩展程序</h4><p>实用指数：★★★★★<br>google doc必备</p>
+<h4 id="JSONView"><a href="#JSONView" class="headerlink" title="JSONView"></a>JSONView</h4><p>实用指数：★★★★★<br>美化json格式数据</p>
+<h4 id="LastPass"><a href="#LastPass" class="headerlink" title="LastPass"></a>LastPass</h4><p>实用指数：★★★★★<br>管理表单密码</p>
+<h4 id="AngularJS-Batarang"><a href="#AngularJS-Batarang" class="headerlink" title="AngularJS Batarang"></a>AngularJS Batarang</h4><p>实用指数：★★★★★<br>调试angularjs应用必备</p>
+<h4 id="React-Developer-Tools"><a href="#React-Developer-Tools" class="headerlink" title="React Developer Tools"></a>React Developer Tools</h4><p>实用指数：★★★★★<br>调试reactjs应用必备</p>
+<h4 id="Vue-js-devtools"><a href="#Vue-js-devtools" class="headerlink" title="Vue.js devtools"></a>Vue.js devtools</h4><p>实用指数：★★★★★<br>调试vuejs应用必备</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/10/ubuntu初始化并搭建Shadowsocks攻略/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          ubuntu初始化并搭建Shadowsocks攻略
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/25/前后端分离实践/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前后端分离实践</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="打造高效前端mac工作环境" data-title="打造高效前端mac工作环境" data-url="http://cloudstone.space/2016/04/12/打造高效前端mac工作环境/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
