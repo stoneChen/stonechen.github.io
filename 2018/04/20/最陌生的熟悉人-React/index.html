@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>最陌生的熟悉人--React</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最陌生的熟悉人？嗯，你没看错。 何谓『最陌生』？截止2018春节前，我从来没有在正式项目里用过react。 何谓『熟悉人』？自打我第一次接触React（2015年初），以及随之而来的ES6, Webpack, Flux等众多新奇工具和概念让我措手不及。然后开始疯狂阅读文档，甚至默写例子（现在想来，着实有点crazy）。虽然在很长的时间里没有正式启用react，但它从未在我的世界里消失，每隔三差五就">
+<meta name="keywords" content="react,typescript,vue,koa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最陌生的熟悉人--React">
+<meta property="og:url" content="http://cloudstone.space/2018/04/20/最陌生的熟悉人-React/index.html">
+<meta property="og:site_name" content="CloudStone">
+<meta property="og:description" content="最陌生的熟悉人？嗯，你没看错。 何谓『最陌生』？截止2018春节前，我从来没有在正式项目里用过react。 何谓『熟悉人』？自打我第一次接触React（2015年初），以及随之而来的ES6, Webpack, Flux等众多新奇工具和概念让我措手不及。然后开始疯狂阅读文档，甚至默写例子（现在想来，着实有点crazy）。虽然在很长的时间里没有正式启用react，但它从未在我的世界里消失，每隔三差五就">
+<meta property="og:image" content="http://cloudstone.space/images/20180420/children-render-prop.png">
+<meta property="og:image" content="http://cloudstone.space/images/20180420/SCU-analyze.png">
+<meta property="og:image" content="http://cloudstone.space/images/20180420/SCU-tip.png">
+<meta property="og:updated_time" content="2018-04-22T15:29:05.361Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最陌生的熟悉人--React">
+<meta name="twitter:description" content="最陌生的熟悉人？嗯，你没看错。 何谓『最陌生』？截止2018春节前，我从来没有在正式项目里用过react。 何谓『熟悉人』？自打我第一次接触React（2015年初），以及随之而来的ES6, Webpack, Flux等众多新奇工具和概念让我措手不及。然后开始疯狂阅读文档，甚至默写例子（现在想来，着实有点crazy）。虽然在很长的时间里没有正式启用react，但它从未在我的世界里消失，每隔三差五就">
+<meta name="twitter:image" content="http://cloudstone.space/images/20180420/children-render-prop.png">
+  
+    <link rel="alternative" href="/atom.xml" title="CloudStone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner" >
+		<a href="/" class="profilepic" style="display: block">
+			
+			<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">CloudStone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Tech Yard</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about-me">About Me</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DOCTYPE/" style="font-size: 10px;">DOCTYPE</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/angular-touch/" style="font-size: 10px;">angular-touch</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/chrome/" style="font-size: 18.89px;">chrome</a> <a href="/tags/chrome，调试/" style="font-size: 10px;">chrome，调试</a> <a href="/tags/commonjs/" style="font-size: 10px;">commonjs</a> <a href="/tags/csd/" style="font-size: 15.56px;">csd</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/css3/" style="font-size: 14.44px;">css3</a> <a href="/tags/disabled/" style="font-size: 10px;">disabled</a> <a href="/tags/emmet/" style="font-size: 10px;">emmet</a> <a href="/tags/es6/" style="font-size: 11.11px;">es6</a> <a href="/tags/essays/" style="font-size: 10px;">essays</a> <a href="/tags/finder/" style="font-size: 10px;">finder</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 11.11px;">git</a> <a href="/tags/grunt/" style="font-size: 14.44px;">grunt</a> <a href="/tags/hammer/" style="font-size: 10px;">hammer</a> <a href="/tags/html/" style="font-size: 12.22px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/koajs/" style="font-size: 10px;">koajs</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/mac/" style="font-size: 11.11px;">mac</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/module-system/" style="font-size: 10px;">module system</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/nodejs/" style="font-size: 16.67px;">nodejs</a> <a href="/tags/nodejs-npm-cnpm/" style="font-size: 10px;">nodejs npm cnpm</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/os-x/" style="font-size: 14.44px;">os x</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 12.22px;">react</a> <a href="/tags/seajs/" style="font-size: 17.78px;">seajs</a> <a href="/tags/seajs-debug/" style="font-size: 10px;">seajs-debug</a> <a href="/tags/seo/" style="font-size: 11.11px;">seo</a> <a href="/tags/shadowsocks/" style="font-size: 11.11px;">shadowsocks</a> <a href="/tags/spm/" style="font-size: 12.22px;">spm</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/surge/" style="font-size: 10px;">surge</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/translate/" style="font-size: 11.11px;">translate</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/typescript/" style="font-size: 11.11px;">typescript</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/ueditor/" style="font-size: 10px;">ueditor</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/vue/" style="font-size: 11.11px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webpack/" style="font-size: 11.11px;">webpack</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a> <a href="/tags/weinre/" style="font-size: 10px;">weinre</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a> <a href="/tags/yeoman/" style="font-size: 11.11px;">yeoman</a> <a href="/tags/yo/" style="font-size: 11.11px;">yo</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/在线IDE/" style="font-size: 10px;">在线IDE</a> <a href="/tags/定位/" style="font-size: 10px;">定位</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/断点调试/" style="font-size: 10px;">断点调试</a> <a href="/tags/百分比/" style="font-size: 10px;">百分比</a> <a href="/tags/移动端/" style="font-size: 14.44px;">移动端</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/联调/" style="font-size: 10px;">联调</a> <a href="/tags/调试/" style="font-size: 18.89px;">调试</a> <a href="/tags/转盘/" style="font-size: 10px;">转盘</a> <a href="/tags/远程开发/" style="font-size: 10px;">远程开发</a> <a href="/tags/附件上传/" style="font-size: 10px;">附件上传</a> <a href="/tags/雪碧图/" style="font-size: 10px;">雪碧图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">CloudStone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://en.gravatar.com/userimage/91074425/b7ac595a69ff4b9745e1931047ca4b7c.jpg?size=256" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">CloudStone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Tech Yard</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about-me">About Me</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/stoneChen" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cloud-stone" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/baby31529@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-最陌生的熟悉人-React" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/04/20/最陌生的熟悉人-React/" class="article-date">
+  	<time datetime="2018-04-20T14:19:33.000Z" itemprop="datePublished">2018-04-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      最陌生的熟悉人--React
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/">typescript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最陌生的熟悉人？<br>嗯，你没看错。</p>
+<p>何谓『最陌生』？<br>截止2018春节前，我从来没有在正式项目里用过react。</p>
+<p>何谓『熟悉人』？<br>自打我第一次接触React（2015年初），以及随之而来的ES6, Webpack, Flux等众多新奇工具和概念让我措手不及。然后开始疯狂阅读文档，甚至默写例子（现在想来，着实有点crazy）。虽然在很长的时间里没有正式启用react，但它从未在我的世界里消失，每隔三差五就会出现在我的视野里，比如Angular，React，Vue经常同台出现。</p>
+<a id="more"></a>
+<p>2018年春节后，公司的脚手架（基于Vue）等基础设施也基本稳定了，我终于决定真刀真枪的来一次React实战了。基于这么几个原因：</p>
+<ol>
+<li>Vue的核心思想以及用法，以及较复杂场景也经历过一些了，官方继续迭代基本就是加入一些新的API，继续使用Vue栈的话，视野可能不够</li>
+<li>近大半年来，我开始看好ts，之前用ts写过几个node模块，感觉还不错，然后想进一步体验用ts开发前端，但Vue对ts支持力度不够（虽然已经有一些方案），但tsx更成熟</li>
+<li>我觉着react的开发方式更加贴近javascript自身，而Vue更加DSL化（主要指模板），我想深入体验一下react，看看能不能结合两者爆出什么火花（包括工程化方面）。</li>
+</ol>
+<p>首先，全面复习了一下react官方文档，温故而知新，发现确实比3年前完善了许多，尤其提到了第三方的优秀周边。<br>在看文档的同时，借助<a href="https://github.com/facebook/create-react-app" target="_blank" rel="external">create-react-app</a>, <a href="https://github.com/wmonk/create-react-app-typescript" target="_blank" rel="external">create-react-app-typescript</a>,<a href="https://github.com/zeit/next.js" target="_blank" rel="external">next</a> + typescript插件，敲了蛮多demo。<br>另外，还记录了一些比较入门级别的笔记：</p>
+<ol>
+<li>对于多个类似表单项的change事件，可绑定同一handler，然后通过name属性来区分不同表单项</li>
+<li>jsx的自定义组件名必须大写开头，HTML内置组件必须小写开头</li>
+<li><code>import React from &#39;react&#39;</code> 必须写在组件模块顶部, 可借助<a href="https://github.com/vslinko/babel-plugin-react-require" target="_blank" rel="external">babel-plugin-react-require</a> 简化</li>
+<li>可使用 transform-class-properties 使用es6 class的静态属性定义defaultProps：<br><code>static defaultProps = {name: &#39;stranger&#39;}</code>,  defaultProps先生效，然后再校验propTypes</li>
+<li>propTypes使用prop-types这个包</li>
+<li>使用ref的场景<ul>
+<li>Managing focus, text selection, or media playback.</li>
+<li>Triggering imperative animations.</li>
+<li>Integrating with third-party DOM libraries.</li>
+<li>附件上传</li>
+</ul>
+</li>
+<li>ref callbacks are invoked before componentDidMount or componentDidUpdate lifecycle hooks.</li>
+<li>ref使用方式(字符串式<code>ref=&quot;textInput&quot;</code>不被推荐)：<br><code>ref={input =&gt; this.textInput = input}</code>. input为DOM或组件实例</li>
+<li>不能对函数式组件使用ref，因为它没有实例</li>
+<li>当组件更新时，ref的callback会执行两次</li>
+<li>React Virtualized 是一个大列表虚拟化的优秀组件</li>
+<li>如果能确保组件的更新只受props和state影响，可以选择继承React.PureComponent</li>
+<li>React.PureComponent 会跳过子节点的prop更新，所以要确保其子节点也都是pureComponent</li>
+<li>调用setState, 如需访问前一状态时，应传入一个函数方式来调用<code>this.setState(prevState =&gt; ({ words: [...prevState.words, &#39;marker&#39;]})</code></li>
+<li>使用高阶组件代替mixins：<a href="https://reactjs.org/docs/higher-order-components.html,http://egorsmirnov.me/2015/09/30/react-and-es6-part4.html" target="_blank" rel="external">https://reactjs.org/docs/higher-order-components.html,http://egorsmirnov.me/2015/09/30/react-and-es6-part4.html</a></li>
+<li><code>&lt;Component {...this.props} /&gt;</code> 这个<code>...</code>很棒</li>
+<li>慎用contextTypes，它只是用于把祖先的props传递给子孙</li>
+<li><code>React.Fragment</code> 是个好东西，有了它，render函数就不需要返回数组了</li>
+<li><code>ReactDOM.createPortal</code>可用于渲染组件至任意DOM内的场景，比如对话框,而且事件可以冒泡到父组件</li>
+<li>render prop是一种模式，就是把『render』作为一个prop传给子组件，由子组件去调用，有点像vue的作用域插槽，『反向渲染』</li>
+<li>render prop还可以这样用：<br><img src="/images/20180420/children-render-prop.png" alt=""></li>
+<li>render prop 对于React.PureComponent, 需要注意：传给render这个prop的函数，需要是<code>&lt;SomeComponent render={this.renderProp}/&gt;</code>这种形式，以保证shouldComponentUpdate不会总是返回true</li>
+<li>Keeping render() pure makes components easier to think about. 确保render方法是纯函数</li>
+<li>componentWillMount 是唯一一个在服务端渲染时被执行的生命周期方法</li>
+<li>在componentDidMount中发起数据请求</li>
+<li>可以在componentWillReceiveProps中调用setState，但是有可能触发此方法时props并没有改变，组件mounting过程并不会触发此方法</li>
+<li>We do not recommend doing deep equality checks or using JSON.stringify() in shouldComponentUpdate(). It is very inefficient and will harm performance.</li>
+<li>不可以在componentWillUpdate中调用setState</li>
+<li><code>setState(updater[, callback])</code> callback执行时，re-render已经完毕，updater使用函数方式，能够保证prevState和props是最新的</li>
+<li>仅在state和props之外的变化因素导致需要重新渲染时调用forceUpdate</li>
+<li>defaultProps用于undefined的情况， 而非null</li>
+<li><code>shouldComponentUpdate</code>逻辑：<br><img src="/images/20180420/SCU-analyze.png" alt=""><br>————我是图片分割线——-<br><img src="/images/20180420/SCU-tip.png" alt=""><br>这两句话，看似矛盾，其实不然。上一句是指对于顶层组件的这一次re-render而言，如果C2的SCU返回false，则其子孙节点并不需要继续检查SCU。而下面这句话表示，当子孙节点自己的state变化时父组件并不会阻止他们re-render。</li>
+<li>defaultValue和defaultChecked等是被非受控组件用的</li>
+<li>DOM事件都是React合成的，跨浏览器的，如果需要访问原始事件对象，可用event.nativeEvent. React event被在handler触发后将会被置空，如果需要在handler触发后，可以被继续访问，需要调用event.persist()</li>
+<li>componentWillReceiveProps被执行的前提是组件不能被销毁。</li>
+</ol>
+<h2 id="开战"><a href="#开战" class="headerlink" title="开战"></a>开战</h2><p>首先要说一下我们这个项目的性质，都是展示型页面，是另一个老项目的功能补充，提交表单等相关业务已经由Vue实现。最初打算顺带把服务端渲染做了，于是优先考虑<code>next.js</code>,看了文档，对其路由的可扩展性表示堪忧，还有部署等方面与我司的基本情况有所不匹配。又考虑到我们这个项目是比较依赖用户端定位的，服务端渲染就打折扣了。于是放弃<code>next.js</code>, 又考虑了<code>create-react-app-typescript</code>, 发现其内置的配置虽然已经比较丰富，但仍然与我司的环境不匹配。</p>
+<p>出于种种原因，最终我决定自己从头打造一套react的配置，好歹我折腾vue配置也折腾了一年多，移植过来应该不会花太多时间。</p>
+<p>然而，我还是太乐观了，因为这次加入了ts，以及react的css方案，与之前vue的配置还是有蛮大的不同，主要时间都是花在这两方面。</p>
+<p>接下来直接说结果吧, 整个工程目录是这样的（『客户端』均指『浏览器端』相关的代码）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">├── client // 客户端代码，大部分代码在这里</div><div class="line">│   ├── assets // 图片以及全局stylus/css</div><div class="line">│   ├── components // 全局组件</div><div class="line">│   ├── pages  // 页面级的container组件</div><div class="line">│   ├── store  // redux相关</div><div class="line">│   ├── types  // typescript的全局类型定义，包括window扩展和业务实体类型定义</div><div class="line">│   ├── utils  // 全局工具</div><div class="line">│   ├── config.tsx  // 全局配置，比如axios拦截器，全局loading，以及为react原型添加log方法</div><div class="line">│   ├── index.tsx  // 客户端入口，渲染App到页面根容器等</div><div class="line">│   └── tsconfig.json // 客户端tsconfig.json</div><div class="line">├── server // node端代码</div><div class="line">│   ├── middlewares // 中间件</div><div class="line">│   ├── routes // 路由定义</div><div class="line">│   ├── utils // 全局工具</div><div class="line">│   ├── app.ts // node服务启动ts入口模块</div><div class="line">│   ├── dev.js // 开发时专用的入口模块</div><div class="line">│   ├── index.js // node服务入口，注意是js，这里使用了`ts-node`</div><div class="line">│   ├── tsconfig.json // node端的tsconfig.json</div><div class="line">│   └── webpack.dev.server.js // 本地开发时webpack-dev-server的启动入口</div><div class="line">├── babel-presets.js // babel配置</div><div class="line">├── dev-constants.js // 本地开发时的常量，比如后端同学本地服务地址</div><div class="line">├── favicon.ico // 网站图标</div><div class="line">├── index.template.ejs // 单页应用入口模板</div><div class="line">├── nodemon.json // nodemon配置，用于本地开发，watch node代码自动重启node服务</div><div class="line">├── package-lock.json // 不解释了</div><div class="line">├── package.json // 不解释了</div><div class="line">├── pm2.yml // 服务器上部署时，读取的pm2配置文件</div><div class="line">├── postcss.config.js // postcss配置文件</div><div class="line">├── server.config.example.js // 服务器配置文件的例子</div><div class="line">├── server.config.js // 服务器配置文件，不同环境不一样，通过配置中心拉取</div><div class="line">├── tslint.json // tslint配置，客户端服务端公用</div><div class="line">├── upyun.config.js // CDN配置，这里是又拍云，可替换</div><div class="line">├── webpack.base.conf.js // webpack基础配置</div><div class="line">├── webpack.client.dev.conf.js // webpack 客户端开发配置</div><div class="line">└── webpack.client.prod.conf.js // webpack 生产环境配置</div></pre></td></tr></table></figure></p>
+<p>着重说以下几点：</p>
+<h3 id="ts相关配置"><a href="#ts相关配置" class="headerlink" title="ts相关配置"></a>ts相关配置</h3><p>由于浏览器端配置和node端配置，还是有一些区别的，所以建了两份<code>tsconfig.json</code>。比如<code>lib</code>字段，客户端 需要包含<code>dom</code>, 以及一些ES6垫片，而node端，v8.x对ES6的支持已经比较完善了。还有模块系统是不一样的。</p>
+<h5 id="客户端baseUrl字段与webpack别名"><a href="#客户端baseUrl字段与webpack别名" class="headerlink" title="客户端baseUrl字段与webpack别名"></a>客户端baseUrl字段与webpack别名</h5><p>即便不用ts，我们对webpack别名也有强烈的需求，然而当我们想导入某个模块的时候（比如<code>client/components/tab</code>）,编辑器通常不能给出准确的智能提示，通过ts我们可以实现。</p>
+<p><code>baseUrl</code>默认指向<code>tsconfig.json</code>所在的目录，在这里我们需要把它配置为<code>../</code>（即告诉ts编译器我们的根目录在整个工程的根目录）, 然后当我们写下<code>client/</code>时，client下的所有目录都被智能提示出来了，继续遍历下去仍然会有提示（至少vscode和webstorm是能做到的）。然后，需要为webpack配置别名:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">resolve: &#123;</div><div class="line">  alias: &#123;</div><div class="line">    client: path.join(<span class="string">'/path/to/client'</span>),</div><div class="line">  &#125;,</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<p>然后我们就可以在任何客户端模块通过<code>client/</code>这个前缀，导入其他客户端模块。</p>
+<h5 id="module字段"><a href="#module字段" class="headerlink" title="module字段"></a>module字段</h5><p>node目前还没有实现ES模块，所以node端的ts配置，<code>module</code>字段需要设置为<code>commonjs</code>。<br>浏览器端把模块的转换交给webpack，<code>module</code>字段设置为<code>esnext</code>。</p>
+<h5 id="target字段与jsx字段"><a href="#target字段与jsx字段" class="headerlink" title="target字段与jsx字段"></a>target字段与jsx字段</h5><p>对于node端，<code>target</code>设置为<code>es5</code>或<code>es6</code>(node版本&gt;=8.x), <code>jsx</code>字段无需设置。<br>重点是客户端，原本这俩字段不值得一说，<code>target</code>为<code>es5</code>, <code>jsx</code>设置为<code>react</code>，并且无需babel介入，就可以让工程跑起来。然而自打我研究react的css方案，这里就开始让我抓狂了。我们这里先说结论：『客户端』<code>target</code>设置为<code>es6</code>, <code>jsx</code>设置为<code>preserve</code>（或不设置，默认值就是<code>preserve</code>, 只是为了强调），即保留jsx语法不编译，下文会提到CSS方案的问题。</p>
+<h3 id="CSS方案"><a href="#CSS方案" class="headerlink" title="CSS方案"></a>CSS方案</h3><p>现代化的前端工程，大多数CSS方案都需要解决class名冲突的问题。<br>在react社区，css in js的方案有好多种，然而我个人并不喜欢这种与js/ts耦合的方案，css modules也比较难接受。回想起vue的CSS方案还是比较优雅的，尤其是直接支持scoped css。在研究next.js的时候，它内置的<a href="https://github.com/zeit/styled-jsx" target="_blank" rel="external">styled-jsx</a>让我眼前一亮。</p>
+<p>简单讲，它巧妙的使用style标签『骗过jsx编译器』，再通过babel插件导入它自己的组件并生成scoped class随机数，结合运行时，将css字符串随style标签插入文档头。</p>
+<p>它同时具备了vue方案与css in js方案的优点：<br>既不与js/ts耦合，而且能够在运行时读取js/ts变量，动态创建样式。同时，它还支持less,sass,stylus预处理器插件与postcss插件。</p>
+<p>遗憾的是，它需要借助babel使用。在我之前的概念里，有了ts，就不需要babel了。但是现在看来，如果要使用<code>styled-jsx</code>，我的ts工程就要被『污染』了，oh no…</p>
+<p>后来又思想斗争了一下，发现<a href="https://github.com/s-panferov/awesome-typescript-loader" target="_blank" rel="external">awesome-typescript-loader</a> 文档已经明确有babel选项，说明ts与babel混用并没有不合理，虽然直觉上两者有功能上的重复，但的确babel的扩展性强的多，于是第二天就打了鸡血般的把<code>styled-jsx</code>方案加上工程里了，蛮爽~</p>
+<p>但在打包环节还是踩坑了，webpack打包执行的命令是<code>webpack --progress --hide-modules --config webpack.client.prod.conf.js</code>, 居然报了一个让人很摸不着头脑的错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TypeError: Invalid PostCSS Plugin found: [0]</div></pre></td></tr></table></figure></p>
+<p>初步排查了一下，styled-jsx-postcss插件拿到的居然是webpack的插件，WTF?!<br>花了一下午慢慢断点调试，发现就是调用<code>postcss-load-plugins</code>时，少传了一个参数<code>argv</code>, 这个参数默认为<code>true</code>，即postcss会从命令行参数里读取配置文件的路径，这里显然应该为<code>false</code>。然后发现github上已经有人提出这个issue了，似乎那个guy也排查了很久这个bug。于是本着为开源世界做贡献的精神，果断开 <a href="https://github.com/giuseppeg/styled-jsx-plugin-postcss/pull/13" target="_blank" rel="external">PR</a>。 作者好像很忙，大约半个月后才合并。</p>
+<h3 id="webpack与主服务解耦"><a href="#webpack与主服务解耦" class="headerlink" title="webpack与主服务解耦"></a>webpack与主服务解耦</h3><p>在此之前，公司其他大多数项目webpack方案都是作为koa中间件存在的，需要通过环境变量来区分是否需要use，虽然能用，但代码组织上比较耦合。</p>
+<p>这次来个小创新~<br>如果不耦合为中间件，我希望在主服务外或者是另一个进程启动webpack-dev-server。</p>
+<p>首先要说一说我们单页应用的形态，并没有上服务端渲染，路由使用的是html5模式。在node端需要判断当前请求是否为『页面请求』，这个逻辑需要结合项目的路由设计，请求path，请求后缀以及请求头判断，这里不展开细节了。如果不是『页面请求』（应该就是接口请求了），就该干嘛干嘛。如果是『页面请求』，则需要返回那个单页应用的『页面骨架』，如果是生产环境模式，那么读取已经build出来的index.html就好了；如果是本地开发环境，我们需要从已经启动好的webppack-dev-server那读取。</p>
+<p>约定好webpack-dev-server端口, 我突发奇想，实践出了以下方案：</p>
+<p>负责输出单页应用骨架的koa中间件<code>server/middlewares/spa.ts</code>:<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">async function spa(ctx: Koa.Context, next: () =&gt; void) &#123;</div><div class="line">    <span class="comment">// ...通过种种逻辑判断确认需要输出单页应用骨架</span></div><div class="line">    ctx.set(<span class="string">'Content-Type'</span>, <span class="string">'text/html; charset=utf-8'</span>);</div><div class="line">    <span class="keyword">if</span> (!isDev) &#123;</div><div class="line">      ctx.body = indexHTML; <span class="comment">// indexHTML为已经读取出来的build过的inde.html内容</span></div><div class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve();</div><div class="line">    &#125;</div><div class="line">    logger.info(<span class="string">'Request html from webpack dev server...'</span>);</div><div class="line">    <span class="comment">// 从webpack-dev-server拉取index.html</span></div><div class="line">    <span class="comment">// 端口的约定比较粗暴哈哈</span></div><div class="line">    <span class="keyword">return</span> axios.get(<span class="string">`http://localhost:<span class="subst">$&#123;serverConfig.port + 100&#125;</span>/public/index.html`</span>)</div><div class="line">      .then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">        ctx.body = response.data;</div><div class="line">      &#125;)</div><div class="line">      .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</div><div class="line">        ctx.body =</div><div class="line">          <span class="string">'Can not find the page.&lt;br/&gt;'</span> +</div><div class="line">          <span class="string">'Maybe your app has not been compliled successfully. &lt;br/&gt;'</span> +</div><div class="line">          <span class="string">'Please check your codebase, fix the error(s) and refresh the page. &lt;/br&gt;'</span> +</div><div class="line">          <span class="string">'&lt;hr/&gt;'</span> +</div><div class="line">          <span class="string">'Error Details: &lt;/br&gt;'</span> +</div><div class="line">          error.stack.replace(<span class="regexp">/\n/g</span>, <span class="string">'&lt;/br&gt;'</span>);</div><div class="line">      &#125;);</div><div class="line">  &#125;;</div></pre></td></tr></table></figure></p>
+<p>另一关键部分server/dev.js(你没看错是js)：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> &#123; spawn &#125; = <span class="built_in">require</span>(<span class="string">'child_process'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 必须用异步spawn，否则等nodemon起来后，webpack-dev-server的代码就不能执行了</span></div><div class="line"><span class="keyword">const</span> runSpawn = <span class="function">(<span class="params">cmd, cmdArgs</span>) =&gt;</span> &#123;</div><div class="line">  spawn(cmd, cmdArgs, &#123;</div><div class="line">    stdio: <span class="string">'inherit'</span>,</div><div class="line">    shell: <span class="literal">true</span>,</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> &#123; <span class="attr">start</span>: startWDS &#125; = <span class="built_in">require</span>(<span class="string">'./webpack.dev.server'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 通过promise防止上述中间件请求webpack-dev-server时出服务级别的错</span></div><div class="line">startWDS()</div><div class="line">  .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    runSpawn(<span class="string">'./node_modules/.bin/nodemon'</span>, [<span class="string">'server/index.js'</span>]);</div><div class="line">  &#125;)</div></pre></td></tr></table></figure></p>
+<p>首先启动webpack-dev-server, 然后通过spawn启动nodemon<br>最终实现client和server代码一有改动浏览器都会自动刷新(server代码改动后node服务自动重启，主服务重启会通过applescript刷新浏览器)。开发体验还是不错的~</p>
+<p>本来打算把刚刚做完的这个项目整理一下，去除业务相关代码，发到github，发现环境相关的代码，工作量比较大，下次抽空发上来。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/02/从ES6复习Javascript继承/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">从ES6复习javascript继承</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="最陌生的熟悉人-React" data-title="最陌生的熟悉人--React" data-url="http://cloudstone.space/2018/04/20/最陌生的熟悉人-React/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cloudstone"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 CloudStone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74090133-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
