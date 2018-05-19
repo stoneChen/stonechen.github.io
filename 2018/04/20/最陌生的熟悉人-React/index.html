@@ -16,7 +16,7 @@
 <meta property="og:image" content="http://cloudstone.space/images/20180420/children-render-prop.png">
 <meta property="og:image" content="http://cloudstone.space/images/20180420/SCU-analyze.png">
 <meta property="og:image" content="http://cloudstone.space/images/20180420/SCU-tip.png">
-<meta property="og:updated_time" content="2018-04-22T15:29:05.361Z">
+<meta property="og:updated_time" content="2018-05-19T16:43:06.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最陌生的熟悉人--React">
 <meta name="twitter:description" content="最陌生的熟悉人？嗯，你没看错。 何谓『最陌生』？截止2018春节前，我从来没有在正式项目里用过react。 何谓『熟悉人』？自打我第一次接触React（2015年初），以及随之而来的ES6, Webpack, Flux等众多新奇工具和概念让我措手不及。然后开始疯狂阅读文档，甚至默写例子（现在想来，着实有点crazy）。虽然在很长的时间里没有正式启用react，但它从未在我的世界里消失，每隔三差五就">
@@ -78,7 +78,7 @@
 						<li>Tags</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -299,6 +299,7 @@
 <p>另一关键部分server/dev.js(你没看错是js)：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> &#123; spawn &#125; = <span class="built_in">require</span>(<span class="string">'child_process'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 必须用异步spawn，否则等nodemon起来后，webpack-dev-server的代码就不能执行了</span></div><div class="line"><span class="keyword">const</span> runSpawn = <span class="function">(<span class="params">cmd, cmdArgs</span>) =&gt;</span> &#123;</div><div class="line">  spawn(cmd, cmdArgs, &#123;</div><div class="line">    stdio: <span class="string">'inherit'</span>,</div><div class="line">    shell: <span class="literal">true</span>,</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> &#123; <span class="attr">start</span>: startWDS &#125; = <span class="built_in">require</span>(<span class="string">'./webpack.dev.server'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 通过promise防止上述中间件请求webpack-dev-server时出服务级别的错</span></div><div class="line">startWDS()</div><div class="line">  .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    runSpawn(<span class="string">'./node_modules/.bin/nodemon'</span>, [<span class="string">'server/index.js'</span>]);</div><div class="line">  &#125;)</div></pre></td></tr></table></figure></p>
 <p>首先启动webpack-dev-server, 然后通过spawn启动nodemon<br>最终实现client和server代码一有改动浏览器都会自动刷新(server代码改动后node服务自动重启，主服务重启会通过applescript刷新浏览器)。开发体验还是不错的~</p>
 <p>本来打算把刚刚做完的这个项目整理一下，去除业务相关代码，发到github，发现环境相关的代码，工作量比较大，下次抽空发上来。</p>
+<p>—–update: 2018年05月20日00:42:04<br>简化版工程已整理完毕，请移步 <a href="https://github.com/stoneChen/react-typescript-mobile-seed" target="_blank" rel="external">https://github.com/stoneChen/react-typescript-mobile-seed</a></p>
 
       
     </div>
